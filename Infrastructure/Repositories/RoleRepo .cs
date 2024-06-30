@@ -61,13 +61,15 @@ namespace Infrastructure.Repositories
             return roleModels;
         }
 
-        public DeleteRoleViewModel GetDeleteModel(RoleViewModel roleModel)
+        public DeleteRoleViewModel GetDeleteModel(int id)
         {
+            var roleModel = GetRoleById(id);
             return _mapper.Map<DeleteRoleViewModel>(roleModel);
         }
 
-        public UpdateRoleViewModel GetEditModel(RoleViewModel roleModel)
+        public UpdateRoleViewModel GetEditModel(int id)
         {
+            var roleModel = GetRoleById(id);
             return _mapper.Map<UpdateRoleViewModel>(roleModel);
         }
 

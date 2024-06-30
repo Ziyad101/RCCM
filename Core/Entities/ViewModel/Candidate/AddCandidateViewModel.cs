@@ -1,4 +1,5 @@
 ﻿using Core.Entities.Model;
+using Core.Entities.ViewModel.Major;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,5 +22,6 @@ namespace Core.Entities.ViewModel.Candidate
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
         public int NationalityId { get; set; }
         public int MajorId { get; set; }
+        public List<MajorViewModel> Majors { get; set; }
     }
 }

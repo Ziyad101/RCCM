@@ -16,8 +16,8 @@ namespace Core.Interfaces
         public void AddRole(AddRoleViewModel roleModel);
         public void DeleteRole(DeleteRoleViewModel roleModel);
         public void EditRole(UpdateRoleViewModel roleModel);
-        public DeleteRoleViewModel GetDeleteModel(RoleViewModel roleModel);
-        public UpdateRoleViewModel GetEditModel(RoleViewModel roleModel);
+        public DeleteRoleViewModel GetDeleteModel(int id);
+        public UpdateRoleViewModel GetEditModel(int id);
 
     }
 }

@@ -13,11 +13,11 @@ namespace Core.Interfaces
     {
         List<UserViewModel> GetAllUsers();
         UserViewModel GetUserById(int id);
-        void EditUser(UpdateUserViewModel updateUser);
+        void EditUser(UpdateUserViewModel userModel);
         void AddUser(AddUserViewModel user);
         void DeleteUser(DeleteUserViewModel userModel);
-        UpdateUserViewModel GetEditModel(UserViewModel userModel);
-        DeleteUserViewModel GetDeleteModel(UserViewModel userModel);
+        UpdateUserViewModel GetEditModel(int id);
+        DeleteUserViewModel GetDeleteModel(int id);
 
 
 

@@ -2,6 +2,7 @@
 using Core.Entities.Model;
 using Core.Entities.ViewModel;
 using Core.Entities.ViewModel.Candidate;
+using Core.Entities.ViewModel.Major;
 using Core.Entities.ViewModel.Request;
 using Core.Entities.ViewModel.Role;
 using System;
@@ -16,9 +17,9 @@ namespace Infrastructure.Mappers
     {
         public Mapping()
         {
+            //User Mappers
             CreateMap<User, UserViewModel>().IncludeMembers(x => x.Role).ReverseMap();
             
-
             CreateMap<Role, UserViewModel>().ReverseMap();
 
             CreateMap<User, AddUserViewModel>().ReverseMap();
@@ -31,6 +32,7 @@ namespace Infrastructure.Mappers
 
             CreateMap<UserViewModel, UpdateUserViewModel>().ReverseMap();
 
+            //Role Mappers
             CreateMap<Role, RoleViewModel>().ReverseMap();
 
             CreateMap<Role, AddRoleViewModel>().ReverseMap();
@@ -43,9 +45,26 @@ namespace Infrastructure.Mappers
 
             CreateMap<RoleViewModel, UpdateRoleViewModel>().ReverseMap();
 
+            //Request Mappers
             CreateMap<Request, RequestViewModel>().ReverseMap();
 
+            //Candidate Mappers
             CreateMap<Candidate,CandidateViewModel>().ReverseMap();
+
+            //Major Mappers
+            CreateMap<Major, MajorViewModel>().ReverseMap();
+
+            CreateMap<Major,AddMajorViewModel>().ReverseMap();
+
+            CreateMap<Major,UpdateMajorViewModel>().ReverseMap();
+
+            CreateMap<Major,DeleteMajorViewModel>().ReverseMap();
+
+            CreateMap<MajorViewModel,AddMajorViewModel>().ReverseMap();
+
+            CreateMap<MajorViewModel,UpdateMajorViewModel>().ReverseMap();
+
+            CreateMap<MajorViewModel,DeleteMajorViewModel>().ReverseMap();
 
 
 

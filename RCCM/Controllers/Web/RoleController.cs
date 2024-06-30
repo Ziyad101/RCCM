@@ -65,8 +65,7 @@ namespace RCCM.Controllers.Web
         {
             try
             {
-                var role = _roleRepo.GetRoleById(roleId);
-                var editRole = _roleRepo.GetEditModel(role);
+                var editRole = _roleRepo.GetEditModel(roleId);
                 return View(editRole);
             }
             catch (Exception)
@@ -97,8 +96,7 @@ namespace RCCM.Controllers.Web
         {
             try
             {
-                var role = _roleRepo.GetRoleById(roleId);
-                var deleteRole = _roleRepo.GetDeleteModel(role);
+                var deleteRole = _roleRepo.GetDeleteModel(roleId);
                 return View(deleteRole);
             }
             catch (Exception)
@@ -113,9 +111,7 @@ namespace RCCM.Controllers.Web
         {
             try
             {
-                var role = _roleRepo.GetRoleById(roleModel.RoleId);
-                var deleteRole = _roleRepo.GetDeleteModel(role);
-                _roleRepo.DeleteRole(deleteRole);
+                _roleRepo.DeleteRole(roleModel);
                 return RedirectToAction("Index");
             }
             catch (Exception)

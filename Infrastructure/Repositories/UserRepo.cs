@@ -99,15 +99,17 @@ namespace Infrastructure.Repositories
 
         }
 
-        public UpdateUserViewModel GetEditModel(UserViewModel userModel)
+        public UpdateUserViewModel GetEditModel(int id)
         {
+            var userModel = GetUserById(id);
             UpdateUserViewModel model = _mapper.Map<UpdateUserViewModel>(userModel);
             return model;
 
         }
 
-        public DeleteUserViewModel GetDeleteModel(UserViewModel userModel)
+        public DeleteUserViewModel GetDeleteModel(int id)
         {
+            var userModel = GetUserById(id);
             DeleteUserViewModel model = _mapper.Map<DeleteUserViewModel>(userModel);
 
             return model;

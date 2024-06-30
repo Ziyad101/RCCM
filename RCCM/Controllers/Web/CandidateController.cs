@@ -9,10 +9,12 @@ namespace RCCM.Controllers.Web
     public class CandidateController : Controller
     {
         private readonly ICandidateRepo _candidateRepo;
+        private readonly IMajorRepo _majorRepo;
 
-        public CandidateController(ICandidateRepo candidateRepo)
+        public CandidateController(ICandidateRepo candidateRepo, IMajorRepo majorRepo)
         {
             _candidateRepo = candidateRepo;
+            _majorRepo = majorRepo;
         }
         public IActionResult Index()
         {
@@ -25,8 +27,9 @@ namespace RCCM.Controllers.Web
         {
             try
             {
-                
-                return View(new AddCandidateViewModel());
+                var candidateModel = new AddCandidateViewModel();
+                candidateModel.Majors = _majorRepo.GetAllMajors();
+                return View(candidateModel);
             }
             catch (Exception)
             {

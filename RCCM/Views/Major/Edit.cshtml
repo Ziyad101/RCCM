@@ -1,0 +1,19 @@
+﻿@model UpdateMajorViewModel
+@{
+    ViewData["Title"] = "Edit Major Data";
+}
+
+<h2>تحديث تخصص</h2>
+
+<form class=" " asp-action="EditMajor" method="post">
+    <div class="form-group">
+        <label asp-for="MajorName">اسم التخصص</label>
+        <input asp-for="MajorName" class="form-control form-text" value="@Model.MajorName" />
+    </div>
+
+    <input hidden asp-for="MajorId" />
+    <div class="d-flex justify-content-evenly mt-5">
+        <button type="submit" class="btn btn-success">تحديث بيانات التخصص</button>
+        <a class="text-decoration-none btn btn-primary" asp-action="Index">العودة لقائمة التخصصات</a>
+    </div>
+</form>

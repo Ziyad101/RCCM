@@ -8,6 +8,7 @@
 <form asp-action="DeleteRole" method="post">
     <p><strong>اسم الصلاحية:</strong> @Model.RoleName</p>
     <input type="hidden"  asp-for="RoleId" />
+    <input type="hidden"  asp-for="RoleName" />
     <div class="d-flex justify-content-evenly mt-5">
         <button type="submit" class="btn btn-danger">حذف الصلاحية</button>
         <a class="text-decoration-none btn btn-primary" asp-action="Index">العودة لقائمة الصلاحية</a>

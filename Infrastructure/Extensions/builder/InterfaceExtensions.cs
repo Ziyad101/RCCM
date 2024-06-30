@@ -21,6 +21,7 @@ namespace Infrastructure.Extensions.builder
             services.AddScoped<IRoleRepo, RoleRepo>();
             services.AddScoped<IRequestRepo, RequestRepo>();
             services.AddScoped<ICandidateRepo, CandidateRepo>();
+            services.AddScoped<IMajorRepo, MajorRepo>();
 
 
 
