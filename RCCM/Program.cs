@@ -8,3 +8,4 @@ builder.Services.ServicesCollection(builder.Configuration);
 var app = builder.Build();
 
 app.AppConfigure();
+//Git Demo Test.
