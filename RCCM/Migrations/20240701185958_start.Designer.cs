@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace RCCM.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240701134800_start")]
+    [Migration("20240701185958_start")]
     partial class start
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

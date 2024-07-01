@@ -13,7 +13,9 @@ namespace Infrastructure.Persistence
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
+            
         }
+       
         public DbSet<Candidate> Candidate { get; set; }
         public DbSet<CandidateStatus> CandidateStatus { get; set; }
         public DbSet<ExamResult> ExamResult { get; set; }

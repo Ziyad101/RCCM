@@ -1,16 +1,54 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Core.Entities.ViewModel;
+using Core.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace RCCM.Controllers.Web
 {
     public class UserController : Controller
     {
-        
-        public ActionResult Index()
+        private readonly IUserRepo _userRepo;
+
+        public UserController(IUserRepo userRepo)
         {
-            return View();
+            _userRepo = userRepo;
         }
 
-      
+        public IActionResult Index()
+        {
+            try
+            {
+                var users = _userRepo.GetUsers();
+                return View(users);
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
+        public IActionResult Details(int id)
+        {
+            try
+            {
+                var userModel = _userRepo.GetById(id);
+
+                if (userModel == null)
+                {
+                    return NotFound();
+                }
+
+                return View(userModel);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
     }
 }

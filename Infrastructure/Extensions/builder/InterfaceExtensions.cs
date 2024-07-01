@@ -17,7 +17,8 @@ namespace Infrastructure.Extensions.builder
         public static IServiceCollection Interfaces(this IServiceCollection services, IConfiguration config)
         {
             services.AddScoped<IHomeRepo, HomeRepo>();
-            
+            services.AddScoped<IUserRepo, UserRepo>();
+
             return services;
         }
 
