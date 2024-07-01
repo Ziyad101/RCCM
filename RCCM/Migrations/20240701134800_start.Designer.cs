@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace RCCM.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240627071817_start")]
+    [Migration("20240701134800_start")]
     partial class start
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,10 +33,6 @@ namespace RCCM.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CandidateId"), 1L, 1);
 
                     b.Property<string>("CandidateName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CandidateStatus")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -365,8 +361,7 @@ namespace RCCM.Migrations
 
                     b.HasKey("InterviewResultId");
 
-                    b.HasIndex("InterviewId")
-                        .IsUnique();
+                    b.HasIndex("InterviewId");
 
                     b.ToTable("InterviewResult");
                 });
@@ -566,7 +561,7 @@ namespace RCCM.Migrations
             modelBuilder.Entity("Core.Entities.Model.CandidateStatus", b =>
                 {
                     b.HasOne("Core.Entities.Model.Candidate", "Candidate")
-                        .WithOne("CandidateStatusDetails")
+                        .WithOne("CandidateStatus")
                         .HasForeignKey("Core.Entities.Model.CandidateStatus", "CandidateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -648,8 +643,8 @@ namespace RCCM.Migrations
             modelBuilder.Entity("Core.Entities.Model.InterviewResult", b =>
                 {
                     b.HasOne("Core.Entities.Model.Interview", "Interview")
-                        .WithOne("InterviewResult")
-                        .HasForeignKey("Core.Entities.Model.InterviewResult", "InterviewId")
+                        .WithMany()
+                        .HasForeignKey("InterviewId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -691,7 +686,7 @@ namespace RCCM.Migrations
 
             modelBuilder.Entity("Core.Entities.Model.Candidate", b =>
                 {
-                    b.Navigation("CandidateStatusDetails")
+                    b.Navigation("CandidateStatus")
                         .IsRequired();
 
                     b.Navigation("ExamResults");
@@ -713,12 +708,6 @@ namespace RCCM.Migrations
                     b.Navigation("CreatorExamTypeConf");
 
                     b.Navigation("ExamResults");
-                });
-
-            modelBuilder.Entity("Core.Entities.Model.Interview", b =>
-                {
-                    b.Navigation("InterviewResult")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Core.Entities.Model.Major", b =>

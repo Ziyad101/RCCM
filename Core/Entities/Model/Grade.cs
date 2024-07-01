@@ -12,8 +12,6 @@ namespace Core.Entities.Model
     {
         [Key]
         public int GradeId { get; set; }
-
-       
         public int GradeValue { get; set; }
         public bool IsActive { get; set; }
         public DateTime CreatedAt { get; set; }

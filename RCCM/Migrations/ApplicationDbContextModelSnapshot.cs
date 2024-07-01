@@ -34,10 +34,6 @@ namespace RCCM.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CandidateStatus")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -363,8 +359,7 @@ namespace RCCM.Migrations
 
                     b.HasKey("InterviewResultId");
 
-                    b.HasIndex("InterviewId")
-                        .IsUnique();
+                    b.HasIndex("InterviewId");
 
                     b.ToTable("InterviewResult");
                 });
@@ -564,7 +559,7 @@ namespace RCCM.Migrations
             modelBuilder.Entity("Core.Entities.Model.CandidateStatus", b =>
                 {
                     b.HasOne("Core.Entities.Model.Candidate", "Candidate")
-                        .WithOne("CandidateStatusDetails")
+                        .WithOne("CandidateStatus")
                         .HasForeignKey("Core.Entities.Model.CandidateStatus", "CandidateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -646,8 +641,8 @@ namespace RCCM.Migrations
             modelBuilder.Entity("Core.Entities.Model.InterviewResult", b =>
                 {
                     b.HasOne("Core.Entities.Model.Interview", "Interview")
-                        .WithOne("InterviewResult")
-                        .HasForeignKey("Core.Entities.Model.InterviewResult", "InterviewId")
+                        .WithMany()
+                        .HasForeignKey("InterviewId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -689,7 +684,7 @@ namespace RCCM.Migrations
 
             modelBuilder.Entity("Core.Entities.Model.Candidate", b =>
                 {
-                    b.Navigation("CandidateStatusDetails")
+                    b.Navigation("CandidateStatus")
                         .IsRequired();
 
                     b.Navigation("ExamResults");
@@ -711,12 +706,6 @@ namespace RCCM.Migrations
                     b.Navigation("CreatorExamTypeConf");
 
                     b.Navigation("ExamResults");
-                });
-
-            modelBuilder.Entity("Core.Entities.Model.Interview", b =>
-                {
-                    b.Navigation("InterviewResult")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Core.Entities.Model.Major", b =>

@@ -28,7 +28,6 @@ namespace Infrastructure.Persistence
         public DbSet<Request> Request { get; set; }
         public DbSet<Role> Role { get; set; }
         public DbSet<User> User { get; set; }
-
         public DbSet<CreatorExamTypeConf> CreatorExamTypeConf { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
