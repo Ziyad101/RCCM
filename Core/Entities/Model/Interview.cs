@@ -22,9 +22,5 @@ namespace Core.Entities.Model
         public int CandidateId { get; set; }
         public Candidate Candidate { get; set; }
 
-        [ForeignKey("InterviewResult")]
-        public int InterviewResultId { get; set; }
-
-        public InterviewResult InterviewResult { get; set; }
     }
 }
