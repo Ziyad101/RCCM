@@ -75,7 +75,7 @@ namespace RCCM.Migrations
 
                     b.HasIndex("NationalityId");
 
-                    b.ToTable("Candidate");
+                    b.ToTable("Candidate", (string)null);
                 });
 
             modelBuilder.Entity("Core.Entities.Model.CandidateStatus", b =>
@@ -107,7 +107,7 @@ namespace RCCM.Migrations
                     b.HasIndex("CandidateId")
                         .IsUnique();
 
-                    b.ToTable("CandidateStatus");
+                    b.ToTable("CandidateStatus", (string)null);
                 });
 
             modelBuilder.Entity("Core.Entities.Model.CreatorExamTypeConf", b =>
@@ -139,7 +139,7 @@ namespace RCCM.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("CreatorExamTypeConf");
+                    b.ToTable("CreatorExamTypeConf", (string)null);
                 });
 
             modelBuilder.Entity("Core.Entities.Model.ExamResult", b =>
@@ -181,7 +181,7 @@ namespace RCCM.Migrations
 
                     b.HasIndex("ExamTypeConfId");
 
-                    b.ToTable("ExamResult");
+                    b.ToTable("ExamResult", (string)null);
                 });
 
             modelBuilder.Entity("Core.Entities.Model.ExamTypeConf", b =>
@@ -219,7 +219,7 @@ namespace RCCM.Migrations
 
                     b.HasKey("ExamTypeConfId");
 
-                    b.ToTable("ExamTypeConf");
+                    b.ToTable("ExamTypeConf", (string)null);
                 });
 
             modelBuilder.Entity("Core.Entities.Model.Experience", b =>
@@ -269,7 +269,7 @@ namespace RCCM.Migrations
 
                     b.HasIndex("CandidateId");
 
-                    b.ToTable("Experience");
+                    b.ToTable("Experience", (string)null);
                 });
 
             modelBuilder.Entity("Core.Entities.Model.Grade", b =>
@@ -299,7 +299,7 @@ namespace RCCM.Migrations
 
                     b.HasIndex("ExperienceId");
 
-                    b.ToTable("Grade");
+                    b.ToTable("Grade", (string)null);
                 });
 
             modelBuilder.Entity("Core.Entities.Model.Interview", b =>
@@ -330,7 +330,7 @@ namespace RCCM.Migrations
                     b.HasIndex("CandidateId")
                         .IsUnique();
 
-                    b.ToTable("Interview");
+                    b.ToTable("Interview", (string)null);
                 });
 
             modelBuilder.Entity("Core.Entities.Model.InterviewResult", b =>
@@ -361,7 +361,7 @@ namespace RCCM.Migrations
 
                     b.HasIndex("InterviewId");
 
-                    b.ToTable("InterviewResult");
+                    b.ToTable("InterviewResult", (string)null);
                 });
 
             modelBuilder.Entity("Core.Entities.Model.JobOffer", b =>
@@ -412,7 +412,7 @@ namespace RCCM.Migrations
                     b.HasIndex("CandidateId")
                         .IsUnique();
 
-                    b.ToTable("JobOffer");
+                    b.ToTable("JobOffer", (string)null);
                 });
 
             modelBuilder.Entity("Core.Entities.Model.Major", b =>
@@ -438,7 +438,7 @@ namespace RCCM.Migrations
 
                     b.HasKey("MajorId");
 
-                    b.ToTable("Major");
+                    b.ToTable("Major", (string)null);
                 });
 
             modelBuilder.Entity("Core.Entities.Model.Nationality", b =>
@@ -464,7 +464,7 @@ namespace RCCM.Migrations
 
                     b.HasKey("NationalityId");
 
-                    b.ToTable("Nationality");
+                    b.ToTable("Nationality", (string)null);
                 });
 
             modelBuilder.Entity("Core.Entities.Model.Request", b =>
@@ -495,7 +495,7 @@ namespace RCCM.Migrations
                     b.HasIndex("CandidateId")
                         .IsUnique();
 
-                    b.ToTable("Request");
+                    b.ToTable("Request", (string)null);
                 });
 
             modelBuilder.Entity("Core.Entities.Model.Role", b =>
@@ -512,7 +512,7 @@ namespace RCCM.Migrations
 
                     b.HasKey("RoleId");
 
-                    b.ToTable("Role");
+                    b.ToTable("Role", (string)null);
                 });
 
             modelBuilder.Entity("Core.Entities.Model.User", b =>
@@ -534,7 +534,7 @@ namespace RCCM.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("User");
+                    b.ToTable("User", (string)null);
                 });
 
             modelBuilder.Entity("Core.Entities.Model.Candidate", b =>
