@@ -35,12 +35,12 @@ namespace RCCM.Controllers.Web
             {
                 var userModel = _userRepo.GetById(id);
 
-                if (userModel == null)
+                if (!userModel.IsValid)
                 {
                     return NotFound();
                 }
 
-                return View(userModel);
+                return View(userModel.Model);
             }
             catch (Exception)
             {

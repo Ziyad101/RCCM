@@ -10,10 +10,10 @@ namespace Core.Entities.ViewModel
     public class UserViewModel
     {
         public string UserName { get; set; }
-        public string UserRole { get; set; }
+        public string RoleName { get; set; }
+        public int RoleId { get; set; }
 
-        public Role Role { get; set; }
-       
+
     }
 
 

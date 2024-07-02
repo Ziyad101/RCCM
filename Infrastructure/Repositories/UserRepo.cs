@@ -1,54 +1,61 @@
-﻿using Core.Entities.Model;
+﻿using AutoMapper;
+using Core.Entities.Generic;
+using Core.Entities.Model;
 using Core.Entities.ViewModel;
 using Core.Interfaces;
 using Infrastructure.Persistence;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Infrastructure.Repositories
 {
     public class UserRepo : IUserRepo
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public UserRepo(ApplicationDbContext context)
+        public UserRepo(ApplicationDbContext context, IMapper mapper)
         {
-            this._context = context;
+            _context = context;
+            _mapper = mapper;
         }
 
-        
-
-        public UserViewModel GetById(int id)
+        public  GenericResult<UserViewModel> GetById(int id)
         {
-            var userViewModel = new UserViewModel();
-            User user = _context.User.Include(u => u.Role).FirstOrDefault(u => u.UserId == id);
-            userViewModel.UserName = user.UserName;
-            if (user.Role != null)
+            try
             {
-                userViewModel.UserRole = user.Role.RoleName;
-                userViewModel.Role = user.Role;
+                var user = _context.User.Include(u => u.Role).Where(x => x.UserId == id && x.RoleId ==1).FirstOrDefault();
+                
+                if (user == null)
+                    return GenericResult<UserViewModel>.Fail();
+                
+                var userViewModel = _mapper.Map<UserViewModel>(user);
+
+
+
+                return GenericResult<UserViewModel>.Success(userViewModel);
+
             }
-            return userViewModel;
+            catch (Exception)
+            {
+
+                return GenericResult<UserViewModel>.Fail();
+            }
+
         }
 
         public List<UserViewModel> GetUsers()
         {
             var UserViewModels = new List<UserViewModel>();
-            var users = _context.User.Include(u => u.Role).ToList();
+            
+
+            var users = _context.User.Include(x=>x.Role).ToList();
             
             foreach (var user in users)
             {
-                UserViewModel userViewModel = new UserViewModel();
-                userViewModel.UserName = user.UserName;
-                if (user.Role != null)
-                {
-                    userViewModel.UserRole = user.Role.RoleName;
-                    userViewModel.Role = user.Role;
-                }
+                var userViewModel = _mapper.Map<UserViewModel>(user);
+                
                 UserViewModels.Add(userViewModel);
             }
 
