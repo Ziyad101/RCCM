@@ -1,9 +1,10 @@
 ﻿@model UserViewModel
 
-<h1>User Details</h1>
+<h1>بيانات المستخدم</h1>
 
 <div>
-    <h4>User Name: @Model.UserName</h4>
+    <h4>اسم المستخدم: @Model.UserName</h4>
+    <h4>صلاحيات المستخدم: @Model.RoleName</h4>
 </div>
+<a class="text-decoration-none text-black btn btn-primary" asp-controller="User" asp-action="Index">العودة لقائمة المستخدمين</a>
 
-<a asp-action="Index">Back to List</a>

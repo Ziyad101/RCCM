@@ -25,7 +25,7 @@ namespace Infrastructure.Repositories
         {
             try
             {
-                var user = _context.User.Include(u => u.Role).Where(x => x.UserId == id && x.RoleId ==1).FirstOrDefault();
+                var user = _context.User.Include(u => u.Role).Where(x => x.UserId == id).FirstOrDefault();
                 
                 if (user == null)
                     return GenericResult<UserViewModel>.Fail();
