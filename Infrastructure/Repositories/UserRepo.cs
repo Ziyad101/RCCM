@@ -1,4 +1,5 @@
-﻿using Core.Entities.Model;
+﻿
+using Core.Entities.Model;
 using Core.Entities.ViewModel;
 using Core.Interfaces;
 using Infrastructure.Persistence;
