@@ -1,4 +1,5 @@
-﻿using Core.Entities.Model;
+﻿using Core.Entities.Generic;
+using Core.Entities.Model;
 using Core.Entities.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,6 @@ namespace Core.Interfaces
     public interface IUserRepo
     {
         public List<UserViewModel> GetUsers();
-        public UserViewModel GetById(int id);
-
+        GenericResult<UserViewModel> GetById(int id);
     }
 }
