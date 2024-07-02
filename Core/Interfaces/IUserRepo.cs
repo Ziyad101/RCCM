@@ -10,10 +10,8 @@ namespace Core.Interfaces
 {
     public interface IUserRepo
     {
-        UserViewModel GetUserViewModel();
+        public List<UserViewModel> GetUsers();
+        public UserViewModel GetById(int id);
 
-
-
-
-}
+    }
 }

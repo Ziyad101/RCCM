@@ -1,4 +1,6 @@
-﻿using Core.Interfaces;
+﻿using Core.Entities.ViewModel;
+using Core.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace RCCM.Controllers.Web
@@ -11,17 +13,42 @@ namespace RCCM.Controllers.Web
         {
             _userRepo = userRepo;
         }
-        [Route("login/a")]
+
         public IActionResult Index()
         {
-            var userModel = _userRepo.GetUserViewModel();
-            
-            return View(userModel);
+            try
+            {
+                var users = _userRepo.GetUsers();
+                return View(users);
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
         }
-        public IActionResult Dashboard()
+
+        public IActionResult Details(int id)
         {
-            return View();
+            try
+            {
+                var userModel = _userRepo.GetById(id);
+
+                if (userModel == null)
+                {
+                    return NotFound();
+                }
+
+                return View(userModel);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
+
 
     }
 }

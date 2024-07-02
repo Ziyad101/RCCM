@@ -12,7 +12,6 @@ namespace Core.Entities.Model
     {
         [Key]
         public int InterviewId { get; set; }
-
         public DateTime InterviewDate { get; set; }
         public bool IsActive { get; set; }
         public DateTime CreatedAt { get; set; }
@@ -21,6 +20,5 @@ namespace Core.Entities.Model
         [ForeignKey("Candidate")]
         public int CandidateId { get; set; }
         public Candidate Candidate { get; set; }
-
     }
 }

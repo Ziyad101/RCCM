@@ -34,10 +34,6 @@ namespace RCCM.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CandidateStatus")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -563,7 +559,7 @@ namespace RCCM.Migrations
             modelBuilder.Entity("Core.Entities.Model.CandidateStatus", b =>
                 {
                     b.HasOne("Core.Entities.Model.Candidate", "Candidate")
-                        .WithOne("CandidateStatusDetails")
+                        .WithOne("CandidateStatus")
                         .HasForeignKey("Core.Entities.Model.CandidateStatus", "CandidateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -688,7 +684,7 @@ namespace RCCM.Migrations
 
             modelBuilder.Entity("Core.Entities.Model.Candidate", b =>
                 {
-                    b.Navigation("CandidateStatusDetails")
+                    b.Navigation("CandidateStatus")
                         .IsRequired();
 
                     b.Navigation("ExamResults");
