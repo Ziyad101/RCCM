@@ -1,4 +1,5 @@
-﻿using Core.Entities.ViewModel;
+﻿using Core.Entities.Model;
+using Core.Entities.ViewModel;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,7 @@ namespace RCCM.Controllers.Web
             _userRepo = userRepo;
         }
 
+        //
         public IActionResult Index()
         {
             try
@@ -48,6 +50,38 @@ namespace RCCM.Controllers.Web
                 throw;
             }
         }
+
+        /////
+
+
+       
+
+        public IActionResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Add(AddUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new User
+                {
+                    UserName = model.UserName,
+                    RoleId = model.RoleId
+                };
+                _userRepo.AddUser(user);
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
+
+
+
+
+
+
 
 
     }
