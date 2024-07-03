@@ -1,6 +1,7 @@
 ﻿using Core.Entities.Model;
 using Core.Entities.ViewModel;
 using Core.Interfaces;
+using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,10 +10,14 @@ namespace RCCM.Controllers.Web
     public class UserController : Controller
     {
         private readonly IUserRepo _userRepo;
+        private readonly IRoleRepo _roleRepo;
 
-        public UserController(IUserRepo userRepo)
+
+        public UserController(IUserRepo userRepo, IRoleRepo roleRepo)
         {
             _userRepo = userRepo;
+            _roleRepo = roleRepo;
+
         }
 
         //
@@ -54,11 +59,18 @@ namespace RCCM.Controllers.Web
         /////
 
 
-       
+
+
+
+
 
         public IActionResult Add()
         {
-            return View();
+            var model = new AddUserViewModel
+            {
+                Roles = _roleRepo.GetAllRoles() // Assuming GetAllRoles returns a list of roles
+            };
+            return View(model);
         }
 
         [HttpPost]
@@ -74,10 +86,11 @@ namespace RCCM.Controllers.Web
                 _userRepo.AddUser(user);
                 return RedirectToAction("Index");
             }
+
+            // If the model state is not valid, repopulate the roles
+            model.Roles = _roleRepo.GetAllRoles();
             return View(model);
         }
-
-
 
 
 

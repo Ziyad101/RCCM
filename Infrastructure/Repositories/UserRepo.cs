@@ -90,6 +90,8 @@ namespace Infrastructure.Repositories
             _context.SaveChanges();
         }
 
+
+        /*
         public void UpdateUser(User user)
         {
             _context.User.Update(user);
@@ -105,7 +107,7 @@ namespace Infrastructure.Repositories
                 _context.SaveChanges();
             }
         }
-
+        */
 
 
 
