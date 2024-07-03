@@ -29,7 +29,7 @@ namespace RCCM.Controllers.Web
 
         }
 
-        public IActionResult Details(int id)
+        public IActionResult Update(int id)
         {
             try
             {
@@ -48,6 +48,20 @@ namespace RCCM.Controllers.Web
                 throw;
             }
         }
+        [HttpPost]
+        public IActionResult UpdateUser(string UserName,int RoleId,int UserId)
+        {
+            var updateUserViewModel = new UpdateUserViewModel();
+            updateUserViewModel.UserName = UserName;
+            updateUserViewModel.UserId = UserId;
+            updateUserViewModel.RoleId = RoleId;
+            if (_userRepo.UpdateUser(updateUserViewModel))
+            {
+                return RedirectToAction("Index");
+            }
+            return NotFound();
+        }
+
 
 
     }

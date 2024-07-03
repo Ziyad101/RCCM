@@ -13,6 +13,7 @@ namespace Core.Interfaces
     {
         public List<UserViewModel> GetUsers();
         GenericResult<UserViewModel> GetById(int id);
+        bool UpdateUser(UpdateUserViewModel user);
 
     }
 }

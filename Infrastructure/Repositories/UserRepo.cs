@@ -21,15 +21,15 @@ namespace Infrastructure.Repositories
             _mapper = mapper;
         }
 
-        public  GenericResult<UserViewModel> GetById(int id)
+        public GenericResult<UserViewModel> GetById(int id)
         {
             try
             {
                 var user = _context.User.Include(u => u.Role).Where(x => x.UserId == id).FirstOrDefault();
-                
+
                 if (user == null)
                     return GenericResult<UserViewModel>.Fail();
-                
+
                 var userViewModel = _mapper.Map<UserViewModel>(user);
 
 
@@ -48,20 +48,33 @@ namespace Infrastructure.Repositories
         public List<UserViewModel> GetUsers()
         {
             var UserViewModels = new List<UserViewModel>();
-            
 
-            var users = _context.User.Include(x=>x.Role).ToList();
-            
+
+            var users = _context.User.Include(x => x.Role).ToList();
+
             foreach (var user in users)
             {
                 var userViewModel = _mapper.Map<UserViewModel>(user);
-                
+
                 UserViewModels.Add(userViewModel);
             }
 
             return UserViewModels;
         }
 
+        public bool UpdateUser(UpdateUserViewModel User)
+        {
+            var existingUser = _context.User.Include(u => u.Role).FirstOrDefault(u => u.UserId == User.UserId);
+            if (existingUser == null)
+            { return false; }
 
+            existingUser.UserName = User.UserName;
+            existingUser.Role.RoleId = User.RoleId;
+            _context.User.Update(existingUser);
+            _context.SaveChanges(); 
+            return true;
+
+            throw new NotImplementedException();
+        }
     }
 }
