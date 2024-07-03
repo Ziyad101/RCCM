@@ -5,6 +5,11 @@ using Core.Entities.ViewModel;
 using Core.Interfaces;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+///
+using System.Collections.Generic;
+using System.Linq;
+
+
 
 
 
@@ -20,6 +25,7 @@ namespace Infrastructure.Repositories
             _context = context;
             _mapper = mapper;
         }
+        public GenericResult<UserViewModel> GetById(int id)
 
         public GenericResult<UserViewModel> GetById(int id)
         {
@@ -62,11 +68,45 @@ namespace Infrastructure.Repositories
             return UserViewModels;
         }
 
+        ////
+        ///
+
+
+        public IEnumerable<User> GetAllUsers()
+        {
+            return _context.User.ToList();
+        }
+
+        public User GetUserById(int userId)
+        {
+            return _context.User.Find(userId);
+        }
+
+        public void AddUser(User user)
+        {
+            _context.User.Add(user);
+            _context.SaveChanges();
+        }
+
+        public void UpdateUser(User user)
+        {
+            _context.User.Update(user);
+            _context.SaveChanges();
+        }
         public bool UpdateUser(UpdateUserViewModel User)
         {
             var existingUser = _context.User.Include(u => u.Role).FirstOrDefault(u => u.UserId == User.UserId);
             if (existingUser == null)
             { return false; }
+            public void DeleteUser(int userId)
+            {
+                var user = _context.User.Find(userId);
+                if (user != null)
+                {
+                    _context.User.Remove(user);
+                    _context.SaveChanges();
+                }
+            }
 
             existingUser.UserName = User.UserName;
             existingUser.Role.RoleId = User.RoleId;
