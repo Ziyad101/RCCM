@@ -32,6 +32,3 @@ namespace Core.Interfaces
 
  
 
-
-
-}
