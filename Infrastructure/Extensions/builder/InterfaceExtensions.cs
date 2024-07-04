@@ -18,6 +18,8 @@ namespace Infrastructure.Extensions.builder
         {
             services.AddScoped<IHomeRepo, HomeRepo>();
             services.AddScoped<IUserRepo, UserRepo>();
+            services.AddScoped<IRoleRepo, RoleRepo>();
+
 
             return services;
         }

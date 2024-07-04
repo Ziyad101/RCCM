@@ -15,6 +15,15 @@ namespace Core.Interfaces
         GenericResult<UserViewModel> GetById(int id);
        
 
-    }
 
+
+        //
+        IEnumerable<User> GetAllUsers();
+        User GetUserById(int userId);
+        void AddUser(User user);
+
+       /* void UpdateUser(User user);
+        void DeleteUser(int userId);
+       */
+    }
 }
