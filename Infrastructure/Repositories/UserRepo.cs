@@ -25,7 +25,7 @@ namespace Infrastructure.Repositories
             _context = context;
             _mapper = mapper;
         }
-        
+
 
         public GenericResult<UserViewModel> GetById(int id)
         {
@@ -72,7 +72,7 @@ namespace Infrastructure.Repositories
         ///
 
 
-        
+
 
         public void AddUser(User user)
         {
@@ -84,26 +84,38 @@ namespace Infrastructure.Repositories
             var existingUser = _context.User.Include(u => u.Role).FirstOrDefault(u => u.UserId == User.UserId);
             if (existingUser == null)
             { return false; }
-          
+
+            var role = _context.Role.Where(r => r.RoleId == User.RoleId).SingleOrDefault();
 
             existingUser.UserName = User.UserName;
-            existingUser.Role.RoleId = User.RoleId;
+            existingUser.Role = role;
             _context.User.Update(existingUser);
-            _context.SaveChanges(); 
+            _context.SaveChanges();
             return true;
 
-        /*
-        public void UpdateUser(User user)
-        {
-            _context.User.Update(user);
-            _context.SaveChanges();
+            /*
+            public void UpdateUser(User user)
+            {
+                _context.User.Update(user);
+                _context.SaveChanges();
+            }
+
+                throw new NotImplementedException();
+            }
+            */
+
+
+
         }
 
+        public IEnumerable<User> GetAllUsers()
+        {
             throw new NotImplementedException();
         }
-        */
 
-
-
+        public User GetUserById(int userId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

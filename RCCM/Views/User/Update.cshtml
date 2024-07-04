@@ -5,9 +5,8 @@
 <div>
     <form asp-action="UpdateUser" asp-controller="User" method="post">
         <input type="text" asp-for="UserName" value=@Model.UserName />
-        <input type="text" asp-for="RoleName" value=@Model.RoleName />
-        <input type="hidden" asp-for="RoleId" value=@Model.RoleId/>
-        <input type="hidden" asp-for="UserId" value=@Model.UserId />
+        <label asp-for="RoleId">Role</label>
+        <select asp-for="RoleId" class="form-control" asp-items="@(new SelectList(Model.Roles, "RoleId", "RoleName"))"></select>
         <input type="submit" name="Submit" value="Update" />
     </form>
 </div>
