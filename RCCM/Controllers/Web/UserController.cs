@@ -76,16 +76,17 @@ namespace RCCM.Controllers.Web
         [HttpPost]
         public IActionResult Add(AddUserViewModel model)
         {
-            if (ModelState.IsValid)
-            {
+            
                 var user = new User
                 {
                     UserName = model.UserName,
-                    RoleId = model.RoleId
+                    RoleId = model.RoleId,
+                    IsActive = model.IsActive
+
                 };
                 _userRepo.AddUser(user);
                 return RedirectToAction("Index");
-            }
+            
 
             // If the model state is not valid, repopulate the roles
             model.Roles = _roleRepo.GetAllRoles();
