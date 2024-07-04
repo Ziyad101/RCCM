@@ -92,7 +92,18 @@ namespace Infrastructure.Repositories
             _context.SaveChanges(); 
             return true;
 
+        /*
+        public void UpdateUser(User user)
+        {
+            _context.User.Update(user);
+            _context.SaveChanges();
+        }
+
             throw new NotImplementedException();
         }
+        */
+
+
+
     }
 }
