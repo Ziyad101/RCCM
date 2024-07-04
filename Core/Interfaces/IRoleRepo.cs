@@ -10,6 +10,6 @@ namespace Core.Interfaces
 {
     public interface IRoleRepo
     {
-        IEnumerable<Role> GetAllRoles();
+        List<Role> GetAllRoles();
     }
 }

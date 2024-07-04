@@ -8,6 +8,7 @@
             <th>اسم المستخدم</th>
             <th>صلاحيات المستخدم</th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -17,7 +18,11 @@
                 <td>@user.UserName</td>
                 <td>@user.RoleName</td>
                 <td><a class="nav-link text-black "  asp-controller="User" asp-action="Update" asp-route-id="@user.RoleId">عرض بيانات المستخدم</a></td>
+                
             </tr>
         }
+        
     </tbody>
 </table>
+
+<a class="nav-link text-black btn btn-primary" asp-controller="User" asp-action="Add"> إضافة مستخدم</a>

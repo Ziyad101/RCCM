@@ -5,7 +5,6 @@ using Core.Entities.ViewModel;
 using Core.Interfaces;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-///
 using System.Collections.Generic;
 using System.Linq;
 
@@ -68,8 +67,6 @@ namespace Infrastructure.Repositories
             return UserViewModels;
         }
 
-        ////
-        ///
 
 
 

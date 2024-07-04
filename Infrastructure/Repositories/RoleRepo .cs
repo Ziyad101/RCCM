@@ -21,7 +21,7 @@ namespace Infrastructure.Repositories
 
         }
 
-        public IEnumerable<Role> GetAllRoles()
+        public List<Role> GetAllRoles()
         {
             return _context.Role.ToList();
         }

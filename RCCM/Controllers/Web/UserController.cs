@@ -82,7 +82,7 @@ namespace RCCM.Controllers.Web
         {
             var model = new AddUserViewModel
             {
-                Roles = _roleRepo.GetAllRoles() // Assuming GetAllRoles returns a list of roles
+                Roles = _roleRepo.GetAllRoles()
             };
             return View(model);
         }
@@ -100,9 +100,7 @@ namespace RCCM.Controllers.Web
                 };
                 _userRepo.AddUser(user);
                 return RedirectToAction("Index");
-            
-
-            // If the model state is not valid, repopulate the roles
+           
             model.Roles = _roleRepo.GetAllRoles();
             return View(model);
         }

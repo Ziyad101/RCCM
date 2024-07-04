@@ -13,6 +13,7 @@ namespace Core.Entities.ViewModel
         public string UserName { get; set; }
         public int RoleId { get; set; }
         public string RoleName { get; set; }
+        public List<Role> Roles { get; set; }
 
 
 

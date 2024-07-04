@@ -14,7 +14,7 @@ namespace Core.Entities.ViewModel
         public bool IsActive { get; set; }
 
         public int RoleId { get; set; }
-        public IEnumerable<Role> Roles { get; set; }
+        public List<Role> Roles { get; set; }
 
     }
 
