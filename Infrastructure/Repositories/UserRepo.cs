@@ -5,9 +5,6 @@ using Core.Entities.ViewModel;
 using Core.Interfaces;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-///
-using System.Collections.Generic;
-using System.Linq;
 
 
 
@@ -26,18 +23,15 @@ namespace Infrastructure.Repositories
             _mapper = mapper;
         }
 
-
-        //
-
-        public  GenericResult<UserViewModel> GetById(int id)
+        public GenericResult<UserViewModel> GetById(int id)
         {
             try
             {
-                var user = _context.User.Include(u => u.Role).Where(x => x.UserId == id && x.RoleId ==1).FirstOrDefault();
-                
+                var user = _context.User.Include(u => u.Role).Where(x => x.UserId == id && x.RoleId == 1).FirstOrDefault();
+
                 if (user == null)
                     return GenericResult<UserViewModel>.Fail();
-                
+
                 var userViewModel = _mapper.Map<UserViewModel>(user);
 
 
@@ -56,22 +50,19 @@ namespace Infrastructure.Repositories
         public List<UserViewModel> GetUsers()
         {
             var UserViewModels = new List<UserViewModel>();
-            
 
-            var users = _context.User.Include(x=>x.Role).ToList();
-            
+
+            var users = _context.User.Include(x => x.Role).Where(u => u.IsActive == true).ToList();
+
             foreach (var user in users)
             {
                 var userViewModel = _mapper.Map<UserViewModel>(user);
-                
+
                 UserViewModels.Add(userViewModel);
             }
 
             return UserViewModels;
         }
-
-        ////
-        ///
 
 
         public IEnumerable<User> GetAllUsers()
@@ -90,26 +81,13 @@ namespace Infrastructure.Repositories
             _context.SaveChanges();
         }
 
-
-        /*
-        public void UpdateUser(User user)
+        public void Delete(int id)
         {
-            _context.User.Update(user);
+            var user = _context.User.SingleOrDefault(u=>u.UserId==id);
+
+            user.IsActive = false;
             _context.SaveChanges();
+            
         }
-
-        public void DeleteUser(int userId)
-        {
-            var user = _context.User.Find(userId);
-            if (user != null)
-            {
-                _context.User.Remove(user);
-                _context.SaveChanges();
-            }
-        }
-        */
-
-
-
     }
 }
