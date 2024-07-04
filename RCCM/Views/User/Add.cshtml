@@ -2,24 +2,20 @@
 @{
     ViewData["Title"] = "Add User";
 }
-<h2>Add User</h2>
+<h2>إضافة مستخدم</h2>
 
 <form asp-action="Add" method="post">
     <div class="form-group">
-        <label asp-for="UserName"></label>
+        <label asp-for="UserName">اسم المستخدم</label>
         <input asp-for="UserName" class="form-control" />
         <span asp-validation-for="UserName" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="RoleId">Role</label>
+        <label asp-for="RoleId">صلاحية المستخدم</label>
         <select asp-for="RoleId" class="form-control" asp-items="@(new SelectList(Model.Roles, "RoleId", "RoleName"))"></select>
         <span asp-validation-for="RoleId" class="text-danger"></span>
     </div>
-    <button type="submit" class="btn btn-primary">Add User</button>
+    <button type="submit" class="btn btn-primary">إضافة مستخدم</button>
 </form>
 
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}
+

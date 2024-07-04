@@ -56,19 +56,12 @@ namespace RCCM.Controllers.Web
             }
         }
 
-        /////
-
-
-
-
-
-
 
         public IActionResult Add()
         {
             var model = new AddUserViewModel
             {
-                Roles = _roleRepo.GetAllRoles() // Assuming GetAllRoles returns a list of roles
+                Roles = _roleRepo.GetAllRoles() 
             };
             return View(model);
         }
@@ -88,12 +81,17 @@ namespace RCCM.Controllers.Web
                 return RedirectToAction("Index");
             
 
-            // If the model state is not valid, repopulate the roles
-            model.Roles = _roleRepo.GetAllRoles();
-            return View(model);
+            //model.Roles = _roleRepo.GetAllRoles();
+            //return View(model);
         }
 
-
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            _userRepo.Delete(id);
+            return RedirectToAction("Index");
+            
+        }
 
 
 
