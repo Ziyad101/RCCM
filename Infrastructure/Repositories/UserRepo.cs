@@ -25,7 +25,7 @@ namespace Infrastructure.Repositories
         {
             try
             {
-                var user = _context.User.Include(u => u.Role).Where(x => x.UserId == id && x.RoleId ==1).FirstOrDefault();
+                var user = _context.User.Include(u => u.Role).Where(x => x.UserId == id ).FirstOrDefault();
                 
                 if (user == null)
                     return GenericResult<UserViewModel>.Fail();
@@ -62,6 +62,26 @@ namespace Infrastructure.Repositories
             return UserViewModels;
         }
 
+        public bool DeleteUser(int id)
+        {
+            try
+            {
+                var user = _context.User.Find(id);
+                if (user == null)
+                    return false;
+
+                _context.User.Remove(user);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+      
+        }
+
 
     }
-}
+
