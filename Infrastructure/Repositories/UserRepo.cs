@@ -5,8 +5,7 @@ using Core.Entities.ViewModel;
 using Core.Interfaces;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
+using Microsoft.IdentityModel.Tokens;
 
 
 
@@ -25,55 +24,62 @@ namespace Infrastructure.Repositories
             _mapper = mapper;
         }
 
-
-        public GenericResult<UserViewModel> GetById(int id)
+        public UserViewModel GetById(int id)
         {
             try
             {
-                var user = _context.User.Include(u => u.Role).Where(x => x.UserId == id).FirstOrDefault();
+                var user = _context.User.Include(u => u.Role).AsNoTracking().Where(x => x.UserId == id).FirstOrDefault();
 
-                if (user == null)
-                    return GenericResult<UserViewModel>.Fail();
+
 
                 var userViewModel = _mapper.Map<UserViewModel>(user);
 
 
 
-                return GenericResult<UserViewModel>.Success(userViewModel);
+                return userViewModel;
 
             }
             catch (Exception)
             {
 
-                return GenericResult<UserViewModel>.Fail();
+                return new UserViewModel();
             }
 
         }
 
         public List<UserViewModel> GetUsers()
         {
-            var UserViewModels = new List<UserViewModel>();
-
-
-            var users = _context.User.Include(x => x.Role).ToList();
-
-            foreach (var user in users)
+            try
             {
-                var userViewModel = _mapper.Map<UserViewModel>(user);
+                var UserViewModels = new List<UserViewModel>();
 
-                UserViewModels.Add(userViewModel);
+
+                var users = _context.User.Include(x => x.Role).AsNoTracking().Where(u => u.IsActive).ToList();
+
+
+                foreach (var user in users)
+                {
+                    var userViewModel = _mapper.Map<UserViewModel>(user);
+
+                    UserViewModels.Add(userViewModel);
+                }
+
+                return UserViewModels;
             }
+            catch (Exception)
+            {
 
-            return UserViewModels;
+                return new List<UserViewModel> { };
+            }
         }
 
 
 
 
-
-        public void AddUser(User user)
+        public void AddUser(AddUserViewModel user)
         {
-            _context.User.Add(user);
+            var addUser = _mapper.Map<User>(user);
+            _context.User.Add(addUser);
             _context.SaveChanges();
         }
         public bool UpdateUser(UpdateUserViewModel User)
@@ -82,37 +88,20 @@ namespace Infrastructure.Repositories
             if (existingUser == null)
             { return false; }
 
-            var role = _context.Role.Where(r => r.RoleId == User.RoleId).SingleOrDefault();
-
-            existingUser.UserName = User.UserName;
-            existingUser.Role = role;
-            _context.User.Update(existingUser);
+        public void EditUser(UpdateUserViewModel updateUser)
+        {
+            var user = _mapper.Map<User>(updateUser);
+            _context.User.Update(user);
             _context.SaveChanges();
-            return true;
-
-            /*
-            public void UpdateUser(User user)
-            {
-                _context.User.Update(user);
-                _context.SaveChanges();
-            }
-
-                throw new NotImplementedException();
-            }
-            */
-
-
-
         }
 
-        public IEnumerable<User> GetAllUsers()
+        public void DeleteUser(DeleteUserViewModel userModel)
         {
-            throw new NotImplementedException();
-        }
+            var userToDelete = _mapper.Map<User>(userModel);
+            userToDelete.IsActive = false;
+            _context.Update(userToDelete);
+            _context.SaveChanges();
 
-        public User GetUserById(int userId)
-        {
-            throw new NotImplementedException();
         }
     }
 }

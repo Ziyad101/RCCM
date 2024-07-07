@@ -20,13 +20,14 @@ namespace RCCM.Controllers.Web
 
         }
 
-        //
         public IActionResult Index()
         {
             try
             {
                 var users = _userRepo.GetUsers();
+
                 return View(users);
+
             }
             catch (Exception)
             {
@@ -35,80 +36,126 @@ namespace RCCM.Controllers.Web
             }
 
         }
-
-        public IActionResult Update(int id)
+        public IActionResult Add()
         {
             try
             {
-                var userModel = _userRepo.GetById(id);
-
-                if (!userModel.IsValid)
+                var model = new AddUserViewModel
                 {
-                    return NotFound();
-                }
-
-                return View(userModel.Model);
+                    Roles = _roleRepo.GetAllRoles()
+                };
+                return View(model);
             }
             catch (Exception)
             {
 
-                throw;
-            }
-        }
-        [HttpPost]
-        public IActionResult UpdateUser(string UserName,int RoleId,int UserId)
-        {
-            var updateUserViewModel = new UpdateUserViewModel();
-            updateUserViewModel.UserName = UserName;
-            updateUserViewModel.UserId = UserId;
-            updateUserViewModel.RoleId = RoleId;
-            if (_userRepo.UpdateUser(updateUserViewModel))
-            {
                 return RedirectToAction("Index");
             }
-            return NotFound();
-        }
-
-
-        /////
-
-
-
-
-
-
-
-        public IActionResult Add()
-        {
-            var model = new AddUserViewModel
-            {
-                Roles = _roleRepo.GetAllRoles()
-            };
-            return View(model);
         }
 
         [HttpPost]
         public IActionResult Add(AddUserViewModel model)
         {
-            
-                var user = new User
-                {
-                    UserName = model.UserName,
-                    RoleId = model.RoleId,
-                    IsActive = model.IsActive
+            model.IsActive=true;
+            _userRepo.AddUser(model);
+            return RedirectToAction("Index");
 
-                };
-                _userRepo.AddUser(user);
-                return RedirectToAction("Index");
-           
-            model.Roles = _roleRepo.GetAllRoles();
-            return View(model);
         }
 
+        [HttpPost]
+        public IActionResult Edit(int id)
+        {
+            try
+            {
+                var user = _userRepo.GetById(id);
+                var updateModel = new UpdateUserViewModel
+                {
+                    UserId = user.UserId,
+                    UserName = user.UserName,
+                    RoleId = user.RoleId,
+                    Roles = _roleRepo.GetAllRoles()
+                };
+                return View(updateModel);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index");
+
+            }
+
+        }
+        [HttpPost]
+        public IActionResult EditUser(int userId, int roleId, string userName)
+        {
+            try
+            {
+
+                var userToUpdate = new UpdateUserViewModel();
+                userToUpdate.UserName = userName;
+                userToUpdate.UserId = userId;
+                userToUpdate.RoleId = roleId;
+                _userRepo.EditUser(userToUpdate);
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+
+                return RedirectToAction("Index");
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+
+            try
+            {
+                var userModel = _userRepo.GetById(id);
 
 
+                var userToDelete = new DeleteUserViewModel
+                {
+                    UserId = userModel.UserId,
+                    UserName = userModel.UserName,
+                    RoleName = userModel.RoleName,
+                    IsActive = userModel.IsActive,
+                    RoleId = userModel.RoleId,
+                };
+                return View(userToDelete);
 
+            }
+            catch (Exception)
+            {
+                RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
+        }
 
+        [HttpPost]
+        public IActionResult DeleteUser(int id)
+        {
+            try
+            {
+                var user = _userRepo.GetById(id);
 
+                var userToDelte = new DeleteUserViewModel
+                {
+                    UserId = user.UserId,
+                    UserName = user.UserName,
+                    RoleName = user.RoleName,
+                    IsActive = user.IsActive,
+                    RoleId = user.RoleId,
+
+                };
+                _userRepo.DeleteUser(userToDelte);
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
     }
 }

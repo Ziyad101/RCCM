@@ -15,7 +15,7 @@ namespace Core.Entities.Model
         [Key]
         public int UserId { get; set; }
         public string UserName { get; set; }
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
 
         [ForeignKey("Role")]
         public int RoleId { get; set; }
