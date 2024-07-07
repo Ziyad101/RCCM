@@ -63,7 +63,7 @@ namespace RCCM.Controllers.Web
         [HttpPost]
         public IActionResult Add(AddUserViewModel model)
         {
-
+            model.IsActive=true;
             _userRepo.AddUser(model);
             return RedirectToAction("Index");
 
