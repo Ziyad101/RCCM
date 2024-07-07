@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Mappers
 {
-    public class Mapping :Profile
+    public class Mapping : Profile
     {
         public Mapping()
         {
@@ -17,9 +17,16 @@ namespace Infrastructure.Mappers
             
 
             CreateMap<Role, UserViewModel>().ReverseMap();
-            
-            CreateMap<User, AddUserViewModel>().IncludeMembers(x => x.Role).ReverseMap();
-            CreateMap<Role, AddUserViewModel>().ReverseMap();
+
+            CreateMap<Role, RoleViewModel>().ReverseMap();
+
+            CreateMap<User, AddUserViewModel>().ReverseMap();
+
+            CreateMap<User, UpdateUserViewModel>().ReverseMap();
+
+            CreateMap<User, DeleteUserViewModel>().ReverseMap();
+
+
 
         }
     }

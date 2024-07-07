@@ -1,4 +1,4 @@
-﻿@model Core.Entities.ViewModel.AddUserViewModel
+﻿@model AddUserViewModel
 @{
     ViewData["Title"] = "Add User";
 }
@@ -8,15 +8,16 @@
     <div class="form-group">
         <label asp-for="UserName">اسم المستخدم</label>
         <input asp-for="UserName" class="form-control" />
-        <span asp-validation-for="UserName" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="RoleId">صلاحية المستخدم</label>
         <select asp-for="RoleId" class="form-control" asp-items="@(new SelectList(Model.Roles, "RoleId", "RoleName"))"></select>
-        <span asp-validation-for="RoleId" class="text-danger"></span>
     </div>
-    <button type="submit" class="btn btn-primary">إضافة مستخدم</button>
+    <div class="d-flex justify-content-evenly mt-5">
+        <button type="submit" class="text-decoration-none btn btn-success">إضافة المستخدم</button>
+        <a class="text-decoration-none btn btn-primary" asp-action="Index">العودة لقائمة المستخدمين</a>
+    </div>
 </form>
 
 
