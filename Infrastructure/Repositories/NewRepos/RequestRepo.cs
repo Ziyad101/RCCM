@@ -1,4 +1,5 @@
-﻿using Core.Entities.Generic;
+﻿using AutoMapper;
+using Core.Entities.Generic;
 using Core.Entities.Model;
 using Core.Entities.ViewModel;
 using Core.Interfaces.NewInterFaces;
@@ -13,9 +14,9 @@ namespace Core.Interfaces
 {
     public class RequestRepo : IRequestRepo
     {
+       
 
-
-
+       
     }
 
 
