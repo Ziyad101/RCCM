@@ -11,7 +11,7 @@ namespace Infrastructure.Extensions.builder
     public static class DatabasesExtensions
     {
 
-        
+
         public static IServiceCollection AddAndMigrateDatabases(this IServiceCollection services, IConfiguration config)
         {
             try
@@ -19,11 +19,11 @@ namespace Infrastructure.Extensions.builder
                 services.AddDbContext<ApplicationDbContext>(options =>
                 {
                     var connectionString = config.GetConnectionString("DefaultConnection");
-                    
+
                     if (connectionString != null)
                         options.UseSqlServer(connectionString, b => b.MigrationsAssembly("RCCM"));
                 });
-                
+
                 return services;
             }
             catch (Exception)

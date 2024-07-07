@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Core.Entities.Model;
+using Core.Entities.ViewModel;
 using Core.Interfaces;
 using Infrastructure.Persistence;
 using System.Collections.Generic;
@@ -21,9 +22,22 @@ namespace Infrastructure.Repositories
 
         }
 
-        public IEnumerable<Role> GetAllRoles()
+        public List<RoleViewModel> GetAllRoles()
         {
-            return _context.Role.ToList();
+            var list = new List<RoleViewModel>();
+            var roles = _context.Role.ToList();
+            foreach (var a in roles)
+            {
+                var role = new RoleViewModel
+                {
+                    RoleId = a.RoleId,
+                    IsActive = a.IsActive,
+                    RoleName = a.RoleName,
+                };
+                list.Add(role);
+            }
+            
+            return list;
         }
     }
 }
