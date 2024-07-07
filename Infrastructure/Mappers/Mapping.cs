@@ -14,6 +14,7 @@ namespace Infrastructure.Mappers
         public Mapping()
         {
             CreateMap<User, UserViewModel>().IncludeMembers(x => x.Role).ReverseMap();
+            
 
             CreateMap<Role, UserViewModel>().ReverseMap();
 

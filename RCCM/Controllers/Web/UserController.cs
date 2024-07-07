@@ -43,6 +43,9 @@ namespace RCCM.Controllers.Web
             }
 
         }
+
+
+
         public IActionResult Add()
         {
             try
@@ -68,6 +71,11 @@ namespace RCCM.Controllers.Web
             return RedirectToAction("Index");
 
         }
+
+
+
+
+
 
         [HttpPost]
         public IActionResult Edit(int id)
@@ -110,6 +118,13 @@ namespace RCCM.Controllers.Web
                 return RedirectToAction("Index");
             }
         }
+
+
+
+
+
+
+
 
         [HttpPost]
         public IActionResult Delete(int id)
