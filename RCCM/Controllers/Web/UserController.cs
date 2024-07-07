@@ -88,9 +88,7 @@ namespace RCCM.Controllers.Web
                 return RedirectToAction("Index");
             
 
-            // If the model state is not valid, repopulate the roles
-            model.Roles = _roleRepo.GetAllRoles();
-            return View(model);
+            
         }
 
 

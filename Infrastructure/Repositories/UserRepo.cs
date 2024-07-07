@@ -91,23 +91,7 @@ namespace Infrastructure.Repositories
         }
 
 
-        /*
-        public void UpdateUser(User user)
-        {
-            _context.User.Update(user);
-            _context.SaveChanges();
-        }
-
-        public void DeleteUser(int userId)
-        {
-            var user = _context.User.Find(userId);
-            if (user != null)
-            {
-                _context.User.Remove(user);
-                _context.SaveChanges();
-            }
-        }
-        */
+       
 
 
 
