@@ -14,7 +14,7 @@ namespace Core.Entities.ViewModel
         public bool IsActive { get; set; }
 
 
-        public int RoleId { get; set; } 
+        public int RoleId { get; set; }
         public string RoleName { get; set; }
 
 
@@ -22,4 +22,3 @@ namespace Core.Entities.ViewModel
 
 
 }
- 
