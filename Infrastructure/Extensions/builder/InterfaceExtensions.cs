@@ -1,7 +1,9 @@
 ﻿
 
 using Core.Interfaces;
+using Core.Interfaces.ServiceInterfaces;
 using Infrastructure.Repositories;
+using Infrastructure.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -20,6 +22,10 @@ namespace Infrastructure.Extensions.builder
             services.AddScoped<IUserRepo, UserRepo>();
             services.AddScoped<IRoleRepo, RoleRepo>();
 
+
+
+            ////Services
+            services.AddScoped<IDemoService, DemoServices>();
 
             return services;
         }
