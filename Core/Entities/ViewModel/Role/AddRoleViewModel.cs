@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Entities.ViewModel
+namespace Core.Entities.ViewModel.Role
 {
-    public class RoleViewModel
+    public class AddRoleViewModel
     {
-        public int RoleId { get; set; }
         public string RoleName { get; set; }
-        public bool IsActive { get; set; }
-
+        public bool IsActive { get; set; } = true;
     }
 }

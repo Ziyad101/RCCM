@@ -40,10 +40,8 @@ namespace RCCM.Controllers.Web
         {
             try
             {
-                var model = new AddUserViewModel
-                {
-                    Roles = _roleRepo.GetAllRoles()
-                };
+                var model = new AddUserViewModel();
+                model.Roles = _roleRepo.GetAllRoles();
                 return View(model);
             }
             catch (Exception)
@@ -56,7 +54,6 @@ namespace RCCM.Controllers.Web
         [HttpPost]
         public IActionResult Add(AddUserViewModel model)
         {
-            model.IsActive=true;
             _userRepo.AddUser(model);
             return RedirectToAction("Index");
 
@@ -68,13 +65,8 @@ namespace RCCM.Controllers.Web
             try
             {
                 var user = _userRepo.GetById(id);
-                var updateModel = new UpdateUserViewModel
-                {
-                    UserId = user.UserId,
-                    UserName = user.UserName,
-                    RoleId = user.RoleId,
-                    Roles = _roleRepo.GetAllRoles()
-                };
+                var updateModel = _userRepo.GetEditModel(user);
+                updateModel.Roles = _roleRepo.GetAllRoles();
                 return View(updateModel);
             }
             catch (Exception)
@@ -85,16 +77,11 @@ namespace RCCM.Controllers.Web
 
         }
         [HttpPost]
-        public IActionResult EditUser(int userId, int roleId, string userName)
+        public IActionResult EditUser(UpdateUserViewModel userModel)
         {
             try
             {
-
-                var userToUpdate = new UpdateUserViewModel();
-                userToUpdate.UserName = userName;
-                userToUpdate.UserId = userId;
-                userToUpdate.RoleId = roleId;
-                _userRepo.EditUser(userToUpdate);
+                _userRepo.EditUser(userModel);
                 return RedirectToAction("Index");
             }
             catch (Exception)
@@ -111,16 +98,7 @@ namespace RCCM.Controllers.Web
             try
             {
                 var userModel = _userRepo.GetById(id);
-
-
-                var userToDelete = new DeleteUserViewModel
-                {
-                    UserId = userModel.UserId,
-                    UserName = userModel.UserName,
-                    RoleName = userModel.RoleName,
-                    IsActive = userModel.IsActive,
-                    RoleId = userModel.RoleId,
-                };
+                var userToDelete = _userRepo.GetDeleteModel(userModel);
                 return View(userToDelete);
 
             }
@@ -138,16 +116,8 @@ namespace RCCM.Controllers.Web
             {
                 var user = _userRepo.GetById(id);
 
-                var userToDelte = new DeleteUserViewModel
-                {
-                    UserId = user.UserId,
-                    UserName = user.UserName,
-                    RoleName = user.RoleName,
-                    IsActive = user.IsActive,
-                    RoleId = user.RoleId,
-
-                };
-                _userRepo.DeleteUser(userToDelte);
+                var userToDelete = _userRepo.GetDeleteModel(user);
+                _userRepo.DeleteUser(userToDelete);
                 return RedirectToAction("Index");
             }
             catch (Exception)
