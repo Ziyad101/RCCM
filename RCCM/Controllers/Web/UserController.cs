@@ -20,7 +20,6 @@ namespace RCCM.Controllers.Web
 
         }
 
-        //
         public IActionResult Index()
         {
             try
@@ -115,22 +114,23 @@ namespace RCCM.Controllers.Web
 
             try
             {
-                var userModel = _userRepo.GetUserById(id);
-              
+                var userModel = _userRepo.GetById(id);
+                if (userModel.IsValid)
+                {
+
                     var userToDelete = new DeleteUserViewModel
                     {
-                        UserId = userModel.UserId,
-                        UserName = userModel.UserName,
-                        RoleName = userModel.RoleName,
-                        IsActive = userModel.IsActive
+                        UserId = userModel.Model.UserId,
+                        UserName = userModel.Model.UserName,
+                        RoleName = userModel.Model.RoleName,
+                        IsActive = userModel.Model.IsActive
                     };
                     return View(userToDelete);
-                
+                }
             }
             catch (Exception)
             {
-                return RedirectToAction("Index");
-
+                throw;
             }
         }
 
@@ -143,10 +143,10 @@ namespace RCCM.Controllers.Web
 
                 var userToDelte = new DeleteUserViewModel
                 {
-                    UserId = user.UserId,
-                    UserName = user.UserName,
-                    RoleName = user.RoleName,
-                    IsActive = user.IsActive
+                    UserId = user.Model.UserId,
+                    UserName = user.Model.UserName,
+                    RoleName = user.Model.RoleName,
+                    IsActive = user.Model.IsActive
 
                 };
                 _userRepo.DeleteUser(userToDelte);

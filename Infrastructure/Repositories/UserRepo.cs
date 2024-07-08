@@ -31,6 +31,7 @@ namespace Infrastructure.Repositories
                 var user = _context.User.Include(u => u.Role).AsNoTracking().Where(x => x.UserId == id).FirstOrDefault();
 
 
+
                 var userViewModel = _mapper.Map<UserViewModel>(user);
 
 
