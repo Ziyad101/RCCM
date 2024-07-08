@@ -24,41 +24,38 @@ namespace Infrastructure.Repositories
             _mapper = mapper;
         }
 
-        public GenericResult<UserViewModel> GetById(int id)
+        public UserViewModel GetUserById(int id)
         {
             try
             {
-                var user = _context.User.Include(u => u.Role).Where(x => x.UserId == id).FirstOrDefault();
+                var user = _context.User.Include(u => u.Role).AsNoTracking().Where(x => x.UserId == id).FirstOrDefault();
 
-                if (user == null)
-                    return GenericResult<UserViewModel>.Fail();
 
                 var userViewModel = _mapper.Map<UserViewModel>(user);
 
 
 
-                return GenericResult<UserViewModel>.Success(userViewModel);
+                return userViewModel;
 
             }
             catch (Exception)
             {
 
-                return GenericResult<UserViewModel>.Fail();
+                return new UserViewModel();
             }
 
         }
 
-        public GenericResult<List<UserViewModel>> GetUsers()
+        public List<UserViewModel> GetAllUsers()
         {
             try
             {
                 var UserViewModels = new List<UserViewModel>();
 
 
-                var users = _context.User.Include(x => x.Role).Where(u => u.IsActive).ToList();
+                var users = _context.User.Include(x => x.Role).AsNoTracking().Where(u => u.IsActive).ToList();
 
-                if (users.Count == 0)
-                    return GenericResult<List<UserViewModel>>.Fail();
+
 
                 foreach (var user in users)
                 {
@@ -67,12 +64,12 @@ namespace Infrastructure.Repositories
                     UserViewModels.Add(userViewModel);
                 }
 
-                return GenericResult<List<UserViewModel>>.Success(UserViewModels);
+                return UserViewModels;
             }
             catch (Exception)
             {
 
-                return GenericResult<List<UserViewModel>>.Fail();
+                return new List<UserViewModel>();
             }
         }
 
