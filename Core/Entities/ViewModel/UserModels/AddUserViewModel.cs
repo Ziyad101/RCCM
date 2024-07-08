@@ -7,16 +7,14 @@ using System.Threading.Tasks;
 
 namespace Core.Entities.ViewModel
 {
-    public class UserViewModel
+    public class AddUserViewModel
     {
-        public string UserName { get; set; }
-        public string RoleName { get; set; }
         public int UserId { get; set; }
-
-
+        public string UserName { get; set; }
+        public bool IsActive { get; set; } = true;
+        public int RoleId { get; set; }
+        public List<RoleViewModel> Roles { get; set; }
 
     }
 
-
 }
- 
