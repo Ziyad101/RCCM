@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace Core.Entities.ViewModel.Role
 {
-    public class RoleViewModel
+    public class DeleteRoleViewModel
     {
         public int RoleId { get; set; }
         public string RoleName { get; set; }
         public bool IsActive { get; set; }
-
     }
 }

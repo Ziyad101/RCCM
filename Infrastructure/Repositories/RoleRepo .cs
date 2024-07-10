@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Core.Entities.Model;
 using Core.Entities.ViewModel;
+using Core.Entities.ViewModel.Role;
 using Core.Interfaces;
 using Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,29 +17,70 @@ namespace Infrastructure.Repositories
         private readonly IMapper _mapper;
 
 
-        public RoleRepo(ApplicationDbContext context , IMapper mapper)
+        public RoleRepo(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
 
         }
 
+        public void AddRole(AddRoleViewModel roleModel)
+        {
+            var roleAdd = _mapper.Map<Role>(roleModel);
+            _context.Role.Add(roleAdd);
+            SaveChanges();
+
+        }
+
+        public void DeleteRole(DeleteRoleViewModel roleModel)
+        {
+            var roleDelete = _mapper.Map<Role>(roleModel);
+            roleDelete.IsActive = false;
+            _context.Role.Update(roleDelete);
+            SaveChanges();
+        }
+
+        public void EditRole(UpdateRoleViewModel roleModel)
+        {
+            var roleUpdate = _mapper.Map<Role>(roleModel);
+            _context.Role.Update(roleUpdate);
+            SaveChanges();
+        }
+
         public List<RoleViewModel> GetAllRoles()
         {
-            var list = new List<RoleViewModel>();
-            var roles = _context.Role.ToList();
-            foreach (var a in roles)
+            var roleModels = new List<RoleViewModel>();
+            var roles = _context.Role.Where(r => r.IsActive).AsNoTracking().ToList();
+            foreach (var role in roles)
             {
-                var role = new RoleViewModel
-                {
-                    RoleId = a.RoleId,
-                    IsActive = a.IsActive,
-                    RoleName = a.RoleName,
-                };
-                list.Add(role);
+                var roleModel = _mapper.Map<RoleViewModel>(role);
+
+                roleModels.Add(roleModel);
             }
-            
-            return list;
+
+            return roleModels;
+        }
+
+        public DeleteRoleViewModel GetDeleteModel(RoleViewModel roleModel)
+        {
+            return _mapper.Map<DeleteRoleViewModel>(roleModel);
+        }
+
+        public UpdateRoleViewModel GetEditModel(RoleViewModel roleModel)
+        {
+            return _mapper.Map<UpdateRoleViewModel>(roleModel);
+        }
+
+        public RoleViewModel GetRoleById(int id)
+        {
+            var role = _context.Role.Where(r => r.RoleId == id).AsNoTracking().FirstOrDefault();
+            var roleModel = _mapper.Map<RoleViewModel>(role);
+            return roleModel;
+        }
+
+        public void SaveChanges()
+        {
+            _context.SaveChanges();
         }
     }
 }
