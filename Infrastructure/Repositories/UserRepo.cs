@@ -30,11 +30,7 @@ namespace Infrastructure.Repositories
             {
                 var user = _context.User.Include(u => u.Role).AsNoTracking().Where(x => x.UserId == id).FirstOrDefault();
 
-
-
                 var userViewModel = _mapper.Map<UserViewModel>(user);
-
-
 
                 return userViewModel;
 
@@ -79,7 +75,9 @@ namespace Infrastructure.Repositories
 
         public void AddUser(AddUserViewModel user)
         {
+
             var addUser = _mapper.Map<User>(user);
+
             _context.User.Add(addUser);
             SaveChanges();
         }
@@ -97,6 +95,7 @@ namespace Infrastructure.Repositories
             userToDelete.IsActive = false;
             _context.Update(userToDelete);
             SaveChanges();
+
 
         }
 
