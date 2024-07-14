@@ -40,6 +40,19 @@ namespace Infrastructure.Mappers
 
             CreateMap<RoleViewModel, UpdateRoleViewModel>().ReverseMap();
 
+            CreateMap<Nationality, NationalityViewModel>().ReverseMap();
+
+            CreateMap<Nationality, UpdateNationalityViewModel>().ReverseMap();
+
+            CreateMap<NationalityViewModel, UpdateNationalityViewModel>().ReverseMap();
+
+
+
+            CreateMap<Nationality, DeleteNationalityViewModel>().ReverseMap();
+
+            CreateMap<NationalityViewModel, DeleteNationalityViewModel>().ReverseMap();
+
+
 
 
         }

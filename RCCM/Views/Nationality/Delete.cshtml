@@ -1,0 +1,16 @@
+﻿@model DeleteNationalityViewModel
+
+<h2>حذف المستخدم</h2>
+
+<form asp-action="DeleteNationality" method="post">
+    <p><strong>اسم المستخدم:</strong> @Model.NationalityName</p>
+
+    <input type="hidden" name="id" asp-for="NationalityId" />
+
+    <div class="d-flex justify-content-evenly mt-5">
+
+        <button type="submit" class="btn btn-danger">حذف المستخدم</button>
+
+        <a class="text-decoration-none btn btn-primary" asp-action="Index">العودة لقائمة المستخدمين</a>
+    </div>
+</form>

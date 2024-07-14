@@ -90,6 +90,10 @@ namespace Infrastructure.Repositories
             SaveChanges();
         }
 
+
+        //
+
+
         public void DeleteUser(DeleteUserViewModel userModel)
         {
             var userToDelete = _mapper.Map<User>(userModel);
@@ -98,6 +102,13 @@ namespace Infrastructure.Repositories
             SaveChanges();
 
         }
+        //
+
+
+
+
+
+
 
         public UpdateUserViewModel GetEditModel(UserViewModel userModel)
         {
@@ -105,7 +116,7 @@ namespace Infrastructure.Repositories
             return model;
 
         }
-
+        //
         public DeleteUserViewModel GetDeleteModel(UserViewModel userModel)
         {
             DeleteUserViewModel model = _mapper.Map<DeleteUserViewModel>(userModel);
@@ -113,7 +124,7 @@ namespace Infrastructure.Repositories
             return model;
         }
 
-
+        //
         public void SaveChanges()
         {
             _context.SaveChanges();

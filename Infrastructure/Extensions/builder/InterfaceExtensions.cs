@@ -22,6 +22,7 @@ namespace Infrastructure.Extensions.builder
             services.AddScoped<IUserRepo, UserRepo>();
             services.AddScoped<IRoleRepo, RoleRepo>();
 
+            services.AddScoped<INationalityRepo, NationalityRepo>();
 
 
             ////Services
