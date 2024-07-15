@@ -66,7 +66,7 @@ namespace RCCM.Controllers.Web
         {
             try
             {
-                var user = _userRepo.GetById(id);
+                var user = _userRepo.GetUserById(id);
                 var updateModel = _userRepo.GetEditModel(user);
                 updateModel.Roles = _roleRepo.GetAllRoles();
                 return View(updateModel);
@@ -101,7 +101,7 @@ namespace RCCM.Controllers.Web
 
             try
             {
-                var userModel = _userRepo.GetById(id);
+                var userModel = _userRepo.GetUserById(id);
 
 
                 var userToDelete = new DeleteUserViewModel

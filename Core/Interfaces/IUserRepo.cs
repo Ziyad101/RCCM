@@ -11,8 +11,8 @@ namespace Core.Interfaces
 {
     public interface IUserRepo
     {
-        List<UserViewModel> GetUsers();
-        UserViewModel GetById(int id);
+        List<UserViewModel> GetAllUsers();
+        UserViewModel GetUserById(int id);
         void EditUser(UpdateUserViewModel updateUser);
         void AddUser(AddUserViewModel user);
         void DeleteUser(DeleteUserViewModel userModel);
