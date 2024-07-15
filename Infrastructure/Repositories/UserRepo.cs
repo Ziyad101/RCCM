@@ -80,7 +80,7 @@ namespace Infrastructure.Repositories
         {
             var addUser = _mapper.Map<User>(user);
             _context.User.Add(addUser);
-            _context.SaveChanges();
+            SaveChanges();
         }
         public bool UpdateUser(UpdateUserViewModel User)
         {
@@ -92,7 +92,7 @@ namespace Infrastructure.Repositories
         {
             var user = _mapper.Map<User>(updateUser);
             _context.User.Update(user);
-            _context.SaveChanges();
+            SaveChanges();
         }
 
         public void DeleteUser(DeleteUserViewModel userModel)
@@ -100,8 +100,29 @@ namespace Infrastructure.Repositories
             var userToDelete = _mapper.Map<User>(userModel);
             userToDelete.IsActive = false;
             _context.Update(userToDelete);
-            _context.SaveChanges();
+            SaveChanges();
 
         }
+
+        public UpdateUserViewModel GetEditModel(UserViewModel userModel)
+        {
+            UpdateUserViewModel model = _mapper.Map<UpdateUserViewModel>(userModel);
+            return model;
+
+        }
+
+        public DeleteUserViewModel GetDeleteModel(UserViewModel userModel)
+        {
+            DeleteUserViewModel model = _mapper.Map<DeleteUserViewModel>(userModel);
+
+            return model;
+        }
+
+
+        public void SaveChanges()
+        {
+            _context.SaveChanges();
+        }
+
     }
 }
