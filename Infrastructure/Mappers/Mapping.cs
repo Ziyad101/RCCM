@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Core.Entities.Model;
 using Core.Entities.ViewModel;
+using Core.Entities.ViewModel.Candidate;
+using Core.Entities.ViewModel.Request;
 using Core.Entities.ViewModel.Role;
 using System;
 using System.Collections.Generic;
@@ -15,6 +17,7 @@ namespace Infrastructure.Mappers
         public Mapping()
         {
             CreateMap<User, UserViewModel>().IncludeMembers(x => x.Role).ReverseMap();
+            
 
             CreateMap<Role, UserViewModel>().ReverseMap();
 
@@ -39,6 +42,11 @@ namespace Infrastructure.Mappers
             CreateMap<RoleViewModel, DeleteRoleViewModel>().ReverseMap();
 
             CreateMap<RoleViewModel, UpdateRoleViewModel>().ReverseMap();
+
+            CreateMap<Request, RequestViewModel>().ReverseMap();
+
+            CreateMap<Candidate,CandidateViewModel>().ReverseMap();
+
 
 
 

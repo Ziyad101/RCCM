@@ -24,8 +24,7 @@ namespace RCCM.Controllers.Web
         {
             try
             {
-                var users = _userRepo.GetUsers();
-
+                var users = _userRepo.GetAllUsers();
                 return View(users);
 
             }
@@ -36,6 +35,7 @@ namespace RCCM.Controllers.Web
             }
 
         }
+
         public IActionResult Add()
         {
             try
@@ -58,6 +58,8 @@ namespace RCCM.Controllers.Web
             return RedirectToAction("Index");
 
         }
+
+
 
         [HttpPost]
         public IActionResult Edit(int id)
@@ -91,6 +93,8 @@ namespace RCCM.Controllers.Web
             }
         }
 
+
+
         [HttpPost]
         public IActionResult Delete(int id)
         {
@@ -98,15 +102,23 @@ namespace RCCM.Controllers.Web
             try
             {
                 var userModel = _userRepo.GetById(id);
-                var userToDelete = _userRepo.GetDeleteModel(userModel);
+
+
+                var userToDelete = new DeleteUserViewModel
+                {
+                    UserId = userModel.UserId,
+                    UserName = userModel.UserName,
+                    RoleName = userModel.RoleName,
+                    IsActive = userModel.IsActive,
+                    RoleId = userModel.RoleId,
+                };
                 return View(userToDelete);
 
             }
             catch (Exception)
             {
-                RedirectToAction("Index");
+                throw;
             }
-            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -114,10 +126,18 @@ namespace RCCM.Controllers.Web
         {
             try
             {
-                var user = _userRepo.GetById(id);
+                var user = _userRepo.GetUserById(id);
 
-                var userToDelete = _userRepo.GetDeleteModel(user);
-                _userRepo.DeleteUser(userToDelete);
+                var userToDelte = new DeleteUserViewModel
+                {
+                    UserId = user.UserId,
+                    UserName = user.UserName,
+                    RoleName = user.RoleName,
+                    IsActive = user.IsActive,
+                    RoleId = user.RoleId,
+
+                };
+                _userRepo.DeleteUser(userToDelte);
                 return RedirectToAction("Index");
             }
             catch (Exception)

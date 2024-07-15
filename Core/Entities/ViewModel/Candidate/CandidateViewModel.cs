@@ -1,16 +1,15 @@
-﻿using System;
+﻿using Core.Entities.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Entities.Model
+namespace Core.Entities.ViewModel.Candidate
 {
-    public class Candidate
+    public class CandidateViewModel
     {
-        [Key]
         public int CandidateId { get; set; }
         public string CandidateName { get; set; }
         public int NationalId { get; set; }
@@ -22,18 +21,9 @@ namespace Core.Entities.Model
         public bool IsActive { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-
-        [ForeignKey("Nationality")]
         public int NationalityId { get; set; }
-        public Nationality Nationality { get; set; }
-        [ForeignKey("Major")]
         public int MajorId { get; set; }
-        public Major Major { get; set; }
-        public List<Experience>? Experiences { get; set; }
-        public List<ExamResult>? ExamResults { get; set; }
-        public Request Request { get; set; }
-        public Interview? Interview { get; set; }
-        public JobOffer? JobOffer { get; set; }
-        public CandidateStatus CandidateStatus { get; set; }
+       
+      
     }
 }
