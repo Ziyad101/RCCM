@@ -54,7 +54,7 @@ namespace Infrastructure.Repositories
                 var UserViewModels = new List<UserViewModel>();
 
 
-                var users = _context.User.Include(x => x.Role).AsNoTracking().Where(u => u.IsActive).ToList();
+                var users = _context.User.Include(x => x.Role).AsNoTracking().Where(u => u.IsActive && u.Role.IsActive).ToList();
 
 
                 foreach (var user in users)
@@ -80,25 +80,29 @@ namespace Infrastructure.Repositories
         {
             var addUser = _mapper.Map<User>(user);
             _context.User.Add(addUser);
-            _context.SaveChanges();
+            SaveChanges();
         }
 
         public void EditUser(UpdateUserViewModel updateUser)
         {
             var user = _mapper.Map<User>(updateUser);
             _context.User.Update(user);
-            _context.SaveChanges();
+            SaveChanges();
         }
+
+
+        //
+
 
         public void DeleteUser(DeleteUserViewModel userModel)
         {
             var userToDelete = _mapper.Map<User>(userModel);
             userToDelete.IsActive = false;
             _context.Update(userToDelete);
-            _context.SaveChanges();
+            SaveChanges();
 
         }
-       
+        //
 
 
 
@@ -106,7 +110,25 @@ namespace Infrastructure.Repositories
 
 
 
+        public UpdateUserViewModel GetEditModel(UserViewModel userModel)
+        {
+            UpdateUserViewModel model = _mapper.Map<UpdateUserViewModel>(userModel);
+            return model;
 
+        }
+        //
+        public DeleteUserViewModel GetDeleteModel(UserViewModel userModel)
+        {
+            DeleteUserViewModel model = _mapper.Map<DeleteUserViewModel>(userModel);
+
+            return model;
+        }
+
+        //
+        public void SaveChanges()
+        {
+            _context.SaveChanges();
+        }
 
     }
 }

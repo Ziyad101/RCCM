@@ -1,4 +1,4 @@
-﻿@model List<UserViewModel>
+﻿@model List<NationalityViewModel>
 
 <h1 class="text-center mb-4">قائمة المستخدمين (@Model.Count())</h1>
 
@@ -16,29 +16,30 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var user in Model)
+            @foreach (var Nationality in Model)
             {
                 <tr>
-                    <td>@user.UserName</td>
-                    <td>@user.RoleName</td>
+                    <td>@Nationality.NationalityName</td>
+                  
 
-                    <td>
+                     <td>
                         <form asp-action="Edit" method="post">
-                            <input hidden asp-for="@user.UserId" name="id" />
+                            <input hidden asp-for="@Nationality.NationalityId" name="id" />
                             <button class="btn btn-warning" type="submit">تعديل البيانات</button>
                         </form>
-                    </td>
-                    <td>
+                    </td> 
+
+                     <td>
                         <form asp-action="Delete" method="post">
-                            <input hidden asp-for="@user.UserId" name="id" />
+                            <input hidden asp-for="@Nationality.NationalityId" name="id" />
                             <button class="btn btn-danger" type="submit">حذف المستخدم</button>
                         </form>
-                    </td>
+                    </td> 
                 </tr>
             }
 
         </tbody>
     </table>
 
-    <a class="nav-link text-decoration-none text-white btn btn-success" asp-controller="User" asp-action="Add"> إضافة مستخدم</a>
+    <a class="nav-link text-decoration-none text-white btn btn-success" asp-controller="Nationality" asp-action="ADD"> ADD Nationality </a>
 </div>

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Core.Entities.Model;
 using Core.Entities.ViewModel;
+using Core.Entities.ViewModel.Role;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,13 +19,40 @@ namespace Infrastructure.Mappers
 
             CreateMap<Role, UserViewModel>().ReverseMap();
 
-            CreateMap<Role, RoleViewModel>().ReverseMap();
-
             CreateMap<User, AddUserViewModel>().ReverseMap();
 
             CreateMap<User, UpdateUserViewModel>().ReverseMap();
 
             CreateMap<User, DeleteUserViewModel>().ReverseMap();
+
+            CreateMap<UserViewModel, DeleteUserViewModel>().ReverseMap();
+
+            CreateMap<UserViewModel, UpdateUserViewModel>().ReverseMap();
+
+            CreateMap<Role, RoleViewModel>().ReverseMap();
+
+            CreateMap<Role, AddRoleViewModel>().ReverseMap();
+
+            CreateMap<Role, DeleteRoleViewModel>().ReverseMap();
+
+            CreateMap<Role, UpdateRoleViewModel>().ReverseMap();
+
+            CreateMap<RoleViewModel, DeleteRoleViewModel>().ReverseMap();
+
+            CreateMap<RoleViewModel, UpdateRoleViewModel>().ReverseMap();
+
+            CreateMap<Nationality, NationalityViewModel>().ReverseMap();
+
+            CreateMap<Nationality, UpdateNationalityViewModel>().ReverseMap();
+
+            CreateMap<NationalityViewModel, UpdateNationalityViewModel>().ReverseMap();
+
+
+
+            CreateMap<Nationality, DeleteNationalityViewModel>().ReverseMap();
+
+            CreateMap<NationalityViewModel, DeleteNationalityViewModel>().ReverseMap();
+
 
 
 

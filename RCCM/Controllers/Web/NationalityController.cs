@@ -5,28 +5,26 @@ using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace RCCM.Controllers.Web
 {
-    public class UserController : Controller
+    public class NationalityController : Controller
     {
-        private readonly IUserRepo _userRepo;
-        private readonly IRoleRepo _roleRepo;
 
+        private readonly INationalityRepo _nationalityRepo;
 
-        public UserController(IUserRepo userRepo, IRoleRepo roleRepo)
+        public NationalityController(INationalityRepo nationalityRepo)
         {
-            _userRepo = userRepo;
-            _roleRepo = roleRepo;
-
+            _nationalityRepo = nationalityRepo;
         }
 
         public IActionResult Index()
         {
             try
             {
-                var users = _userRepo.GetUsers();
+                var nationality = _nationalityRepo.GetAllNationalitys();
 
-                return View(users);
+                return View(nationality);
 
             }
             catch (Exception)
@@ -43,8 +41,7 @@ namespace RCCM.Controllers.Web
         {
             try
             {
-                var model = new AddUserViewModel();
-                model.Roles = _roleRepo.GetAllRoles();
+                var model = new AddNationalityViewModel();
                 return View(model);
             }
             catch (Exception)
@@ -55,12 +52,20 @@ namespace RCCM.Controllers.Web
         }
 
         [HttpPost]
-        public IActionResult Add(AddUserViewModel model)
+        public IActionResult Add(AddNationalityViewModel model)
         {
-            _userRepo.AddUser(model);
+            _nationalityRepo.AddNationality(model);
             return RedirectToAction("Index");
 
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -71,9 +76,8 @@ namespace RCCM.Controllers.Web
         {
             try
             {
-                var user = _userRepo.GetById(id);
-                var updateModel = _userRepo.GetEditModel(user);
-                updateModel.Roles = _roleRepo.GetAllRoles();
+                var nationality = _nationalityRepo.GetById(id);
+                var updateModel = _nationalityRepo.GetEditModel(nationality);
                 return View(updateModel);
             }
             catch (Exception)
@@ -83,12 +87,15 @@ namespace RCCM.Controllers.Web
             }
 
         }
+
+
+
         [HttpPost]
-        public IActionResult EditUser(UpdateUserViewModel userModel)
+        public IActionResult EditNationality(UpdateNationalityViewModel nationalitModel)
         {
             try
             {
-                _userRepo.EditUser(userModel);
+                _nationalityRepo.EditNationality(nationalitModel);
                 return RedirectToAction("Index");
             }
             catch (Exception)
@@ -101,19 +108,14 @@ namespace RCCM.Controllers.Web
 
 
 
-
-
-
-
-        [HttpPost]
         public IActionResult Delete(int id)
         {
 
             try
             {
-                var userModel = _userRepo.GetById(id);
-                var userToDelete = _userRepo.GetDeleteModel(userModel);
-                return View(userToDelete);
+                var nationalityModel = _nationalityRepo.GetById(id);
+                var nationalityToDelete = _nationalityRepo.GetDeleteModel(nationalityModel);
+                return View(nationalityToDelete);
 
             }
             catch (Exception)
@@ -124,14 +126,14 @@ namespace RCCM.Controllers.Web
         }
 
         [HttpPost]
-        public IActionResult DeleteUser(int id)
+        public IActionResult DeleteNationality(int id)
         {
             try
             {
-                var user = _userRepo.GetById(id);
+                var nationality = _nationalityRepo.GetById(id);
 
-                var userToDelete = _userRepo.GetDeleteModel(user);
-                _userRepo.DeleteUser(userToDelete);
+                var nationalityToDelete = _nationalityRepo.GetDeleteModel(nationality);
+                _nationalityRepo.DeleteNationality(nationalityToDelete);
                 return RedirectToAction("Index");
             }
             catch (Exception)
@@ -141,7 +143,16 @@ namespace RCCM.Controllers.Web
             }
 
         }
-
-       
     }
+
+
+   
+
+
+
+
+
+
+
+
 }
