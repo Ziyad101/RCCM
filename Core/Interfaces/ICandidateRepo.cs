@@ -12,5 +12,6 @@ namespace Core.Interfaces
     {
         List<CandidateViewModel> GetAllCandidate();
         void AddCandidate(AddCandidateViewModel candidateModel);
+
     }
 }
