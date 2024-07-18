@@ -16,6 +16,9 @@ namespace RCCM.Controllers.Web
             _candidateRepo = candidateRepo;
             _majorRepo = majorRepo;
         }
+
+ 
+
         public IActionResult Index()
         {
             var viewModels = _candidateRepo.GetAllCandidate();
@@ -45,5 +48,13 @@ namespace RCCM.Controllers.Web
             return RedirectToAction("Index");
 
         }
+
+        public IActionResult CandidateIndex()
+        {
+            return View();
+        }
+
     }
+
+
 }
