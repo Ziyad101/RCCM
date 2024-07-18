@@ -11,7 +11,6 @@ namespace Core.Entities.ViewModel
     {
         public int NationalityId { get; set; }
         public string NationalityName { get; set; }
-        public bool IsActive { get; set; }
 
       
 
