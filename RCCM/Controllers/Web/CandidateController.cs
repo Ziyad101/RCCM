@@ -10,11 +10,13 @@ namespace RCCM.Controllers.Web
     {
         private readonly ICandidateRepo _candidateRepo;
         private readonly IMajorRepo _majorRepo;
+        private readonly INationalityRepo _nationalityRepo;
 
-        public CandidateController(ICandidateRepo candidateRepo, IMajorRepo majorRepo)
+        public CandidateController(ICandidateRepo candidateRepo, IMajorRepo majorRepo, INationalityRepo nationalityRepo)
         {
             _candidateRepo = candidateRepo;
             _majorRepo = majorRepo;
+            _nationalityRepo = nationalityRepo;
         }
         public IActionResult Index()
         {
@@ -29,6 +31,7 @@ namespace RCCM.Controllers.Web
             {
                 var candidateModel = new AddCandidateViewModel();
                 candidateModel.Majors = _majorRepo.GetAllMajors();
+                candidateModel.Nationalities = _nationalityRepo.GetAllNationalitys();
                 return View(candidateModel);
             }
             catch (Exception)
@@ -39,9 +42,9 @@ namespace RCCM.Controllers.Web
         }
 
         [HttpPost]
-        public IActionResult Add(AddUserViewModel model)
+        public IActionResult Add(AddCandidateViewModel model)
         {
-           
+            _candidateRepo.AddCandidate(model);
             return RedirectToAction("Index");
 
         }

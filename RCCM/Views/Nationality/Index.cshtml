@@ -1,0 +1,44 @@
+﻿@model List<NationalityViewModel>
+
+<h1 class="text-center mb-4">قائمة الجنسيات (@Model.Count())</h1>
+
+
+
+<div class="container">
+    <table class="table table-hover table-striped">
+        <thead class="bg-primary bg-opacity-75 text-black">
+            <tr>
+                <th>اسم الجنسية</th>
+                <th></th>
+                <th></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Nationality in Model)
+            {
+                <tr>
+                    <td>@Nationality.NationalityName</td>
+                  
+
+                     <td>
+                        <form asp-action="Edit" method="post">
+                            <input hidden asp-for="@Nationality.NationalityId" name="id" />
+                            <button class="btn btn-warning" type="submit">تعديل البيانات</button>
+                        </form>
+                    </td> 
+
+                     <td>
+                        <form asp-action="Delete" method="post">
+                            <input hidden asp-for="@Nationality.NationalityId" name="id" />
+                            <button class="btn btn-danger" type="submit">حذف الجنسية</button>
+                        </form>
+                    </td> 
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+    <a class="nav-link text-decoration-none text-white btn btn-success" asp-controller="Nationality" asp-action="ADD"> ADD Nationality </a>
+</div>

@@ -26,6 +26,7 @@ namespace Core.Entities.Model
         [ForeignKey("Nationality")]
         public int NationalityId { get; set; }
         public Nationality Nationality { get; set; }
+
         [ForeignKey("Major")]
         public int MajorId { get; set; }
         public Major Major { get; set; }

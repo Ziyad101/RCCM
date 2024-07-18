@@ -28,12 +28,11 @@ namespace Infrastructure.Repositories
             var candidate = _mapper.Map<Candidate>(candidateModel);
             _context.Add(candidate);
             _context.SaveChanges();
-            throw new NotImplementedException();
         }
 
         public List<CandidateViewModel> GetAllCandidate()
         {
-            var allCandidates = _context.Candidate.Where(c=>c.IsActive).AsNoTracking().ToList();
+            var allCandidates = _context.Candidate.Where(c=>c.IsActive).Include(c=>c.Nationality).Include(c=>c.Major).AsNoTracking().ToList();
 
             var candidateModels = new List<CandidateViewModel>();
 

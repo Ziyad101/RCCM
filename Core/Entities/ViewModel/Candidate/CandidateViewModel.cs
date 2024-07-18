@@ -1,4 +1,6 @@
 ﻿using Core.Entities.Model;
+using Core.Entities.ViewModel.Nationality;
+using Core.Entities.ViewModel.Major;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -17,13 +19,12 @@ namespace Core.Entities.ViewModel.Candidate
         public DateTime DateOfBirth { get; set; }
         public string Email { get; set; }
         public int PhoneNumber { get; set; }
-        public int RequestStatus { get; set; }
         public bool IsActive { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-        public int NationalityId { get; set; }
-        public int MajorId { get; set; }
-       
-      
+        public NationalityViewModel Nationality {get; set;}
+        public MajorViewModel Major {get; set;}
+
+
     }
 }
