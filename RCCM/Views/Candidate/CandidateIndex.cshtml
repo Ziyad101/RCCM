@@ -1,0 +1,209 @@
+﻿
+    <div class="container mt-4">
+        <!-- Search Bar and Add Candidate Button -->
+        <div class="row justify-content-center mb-3">
+            <div class="col-md-6">
+                <form class="form-inline">
+                    <div class="input-group w-100">
+                        <button type="button" class="btn btn-primary mr-2" id="addCandidateButton" data-toggle="modal" data-target="#addCandidateModal">إضافة مرشح جديد</button>
+                        <input type="text" class="form-control" id="searchInput" placeholder="ابحث عن المرشح..." aria-label="ابحث عن المرشح..." aria-describedby="searchButton">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" id="searchButton">بحث</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Candidate Cards Section -->
+        <div class="row mt-4" id="candidatesList">
+        </div>
+    </div>
+
+    <!-- Add Candidate Modal -->
+    <div class="modal fade" id="addCandidateModal" tabindex="-1" role="dialog" aria-labelledby="addCandidateModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addCandidateModalLabel">إضافة مرشح جديد</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="addCandidateForm">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="candidateName">اسم المرشح:</label>
+                            <input type="text" class="form-control" id="candidateName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="candidateNationalId">الرقم الوطني:</label>
+                            <input type="text" class="form-control" id="candidateNationalId" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="candidateSpecialization">التخصص:</label>
+                            <input type="text" class="form-control" id="candidateSpecialization" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="candidateNationality">الجنسية:</label>
+                            <input type="text" class="form-control" id="candidateNationality">
+                        </div>
+                        <div class="form-group">
+                            <label for="candidateDateOfBirth">تاريخ الميلاد:</label>
+                            <input type="date" class="form-control" id="candidateDateOfBirth">
+                        </div>
+                        <div class="form-group">
+                            <label for="candidateQualification">المؤهل:</label>
+                            <input type="text" class="form-control" id="candidateQualification">
+                        </div>
+                        <div class="form-group">
+                            <label for="candidateEmail">البريد الإلكتروني:</label>
+                            <input type="email" class="form-control" id="candidateEmail">
+                        </div>
+                        <div class="form-group">
+                            <label for="candidateMobile">رقم الجوال:</label>
+                            <input type="tel" class="form-control" id="candidateMobile">
+                        </div>
+                        <div class="form-group">
+                            <label for="candidateJob">الوظيفة المرشح لها:</label>
+                            <input type="text" class="form-control" id="candidateJob">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
+                        <button type="submit" class="btn btn-primary">حفظ المرشح</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Candidate Details Modal -->
+    <div class="modal fade" id="candidateDetailModal" tabindex="-1" role="dialog" aria-labelledby="candidateDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="candidateDetailModalLabel">تفاصيل المرشح</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-right" id="candidateDetailContent">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
+                    <a asp-action="RecruitIndex" asp-controller="Recruitment" class="btn btn-primary">تعيين المرشح</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Counter for dynamically adding candidate cards
+        var candidateCounter = 0; // Starting with no existing candidates
+
+        // Function to add a new candidate card
+        function addCandidate(name, nationalId, specialization, nationality, dateOfBirth, qualification, email, mobile, job) {
+            candidateCounter++;
+            var newCard = `
+                                <div class="col-md-4 mb-4">
+                                    <div class="card shadow-lg">
+                                        <div class="card-body text-center">
+                                            <h5 class="card-title">${name}</h5>
+                                            <p class="card-text">الرقم الوطني: ${nationalId}</p>
+                                            <p class="card-text">التخصص: ${specialization}</p>
+                                            <button type="button" class="btn btn-primary btn-block candidate-detail-button"
+                                                data-name="${name}"
+                                                data-national-id="${nationalId}"
+                                                data-specialization="${specialization}"
+                                                data-nationality="${nationality}"
+                                                data-date-of-birth="${dateOfBirth}"
+                                                data-qualification="${qualification}"
+                                                data-email="${email}"
+                                                data-mobile="${mobile}"
+                                                data-job="${job}">تفاصيل المرشح</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+            $('#candidatesList').prepend(newCard); // Prepend to show at the beginning
+        }
+
+        // Event listener for the "حفظ المرشح" button in modal
+        $('#addCandidateForm').submit(function (event) {
+            event.preventDefault(); // Prevent form submission
+
+            var name = $('#candidateName').val().trim();
+            var nationalId = $('#candidateNationalId').val().trim();
+            var specialization = $('#candidateSpecialization').val().trim();
+            var nationality = $('#candidateNationality').val().trim();
+            var dateOfBirth = $('#candidateDateOfBirth').val().trim();
+            var qualification = $('#candidateQualification').val().trim();
+            var email = $('#candidateEmail').val().trim();
+            var mobile = $('#candidateMobile').val().trim();
+            var job = $('#candidateJob').val().trim();
+
+            if (name && nationalId && specialization) {
+                addCandidate(name, nationalId, specialization, nationality, dateOfBirth, qualification, email, mobile, job);
+                $('#addCandidateModal').modal('hide');
+                // Clear form inputs after adding candidate
+                $('#candidateName').val('');
+                $('#candidateNationalId').val('');
+                $('#candidateSpecialization').val('');
+                $('#candidateNationality').val('');
+                $('#candidateDateOfBirth').val('');
+                $('#candidateQualification').val('');
+                $('#candidateEmail').val('');
+                $('#candidateMobile').val('');
+                $('#candidateJob').val('');
+            } else {
+                alert('يرجى ملء جميع الحقول المطلوبة');
+            }
+        });
+
+        // Event listener for dynamically added candidate detail buttons
+        $(document).on('click', '.candidate-detail-button', function () {
+            var name = $(this).data('name');
+            var nationalId = $(this).data('national-id');
+            var specialization = $(this).data('specialization');
+            var nationality = $(this).data('nationality');
+            var dateOfBirth = $(this).data('date-of-birth');
+            var qualification = $(this).data('qualification');
+            var email = $(this).data('email');
+            var mobile = $(this).data('mobile');
+            var job = $(this).data('job');
+
+            var detailContent = `
+                                <p><strong>اسم المرشح:</strong> ${name}</p>
+                                <p><strong>الرقم الوطني:</strong> ${nationalId}</p>
+                                <p><strong>التخصص:</strong> ${specialization}</p>
+                                <p><strong>الجنسية:</strong> ${nationality}</p>
+                                <p><strong>تاريخ الميلاد:</strong> ${dateOfBirth}</p>
+                                <p><strong>المؤهل:</strong> ${qualification}</p>
+                                <p><strong>البريد الإلكتروني:</strong> ${email}</p>
+                                <p><strong>رقم الجوال:</strong> ${mobile}</p>
+                                <p><strong>الوظيفة المرشح لها:</strong> ${job}</p>
+                            `;
+            $('#candidateDetailContent').html(detailContent);
+            $('#candidateDetailModal').modal('show');
+        });
+
+        // Search functionality
+        $('#searchButton').click(function () {
+            var input = $('#searchInput').val().trim().toLowerCase();
+            var candidates = $('.card');
+
+            candidates.each(function () {
+                var candidateName = $(this).find('.card-title').text().trim().toLowerCase();
+                if (candidateName.includes(input)) {
+                    $(this).parent().prepend($(this)); // Move the card to the top of its parent container
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+    </script>

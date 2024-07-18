@@ -16,3 +16,76 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.bg {
+    background-color: #072e6e;
+}
+.btn {
+    background-color: #072e6e;
+}
+
+.main-content {
+    background-color: rgba(255, 255, 255, 0.7); 
+    padding: 20px;
+    border-radius: 10px;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+
+.bg-tiled {
+    background-image: url('/bodyLOGO.ico');
+    background-repeat: repeat;
+    background-size: 100px; 
+    background-position: center center;
+    height: 85vh; 
+}
+
+:root {
+    --primary-color: #072e6e; 
+}
+
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
+    .btn-primary:not(:disabled):not(.disabled):active,
+    .btn-primary:not(:disabled):not(.disabled).active,
+    .show > .btn-primary.dropdown-toggle {
+        background-color: #072e6e !important; 
+        border-color: #072e6e !important;
+    }
+
+.modal-header {
+    background-color: #072e6e;
+    color: #fff;
+}
+
+.modal-footer .btn-primary {
+    background-color: #072e6e;
+    border-color: #072e6e;
+}
+
+.bg-primary {
+    background-color: #072e6e !important;
+}
+
+
+.table thead th {
+    background-color: #072e6e !important;
+    color: #fff;
+}
+
+
+.navbar-nav .nav-item:hover .nav-link {
+    background-color: #184080;
+}
+

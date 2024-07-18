@@ -59,5 +59,31 @@ namespace RCCM.Controllers
                 throw;
             }
         }
+
+
+
+        public IActionResult Recruitment()
+        {
+            return View();
+        }
+        public IActionResult Candidate()
+        {
+            return View();
+        }
+
+        public IActionResult Interview()
+        {
+            return View();
+        }
+
+        public IActionResult CandTestTable()
+        {
+            return View();
+        }
+
+        public IActionResult InterviewTable()
+        {
+            return View();
+        }
     }
 }
