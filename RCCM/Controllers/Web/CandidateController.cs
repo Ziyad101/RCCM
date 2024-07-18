@@ -26,7 +26,7 @@ namespace RCCM.Controllers.Web
         public IActionResult Add()
         {
             try
-            {
+        {
                 var candidateModel = new AddCandidateViewModel();
                 candidateModel.Majors = _majorRepo.GetAllMajors();
                 return View(candidateModel);
