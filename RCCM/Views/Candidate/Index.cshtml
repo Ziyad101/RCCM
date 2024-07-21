@@ -9,6 +9,12 @@
         <thead class="bg-primary bg-opacity-75 text-black">
             <tr>
                 <th>اسم المرشح</th>
+                <th>البريد الإلكتروني</th>
+                <th>رقم التواصل</th>
+                <th>التخصص</th>
+                <th>الجنسية</th>
+                <th>تاريخ الميلاد</th>
+                <th>رقم الهوية</th>
                 <th></th>
                 <th></th>
 
@@ -19,6 +25,13 @@
             {
                 <tr>
                     <td>@candidate.CandidateName</td>
+                    <td>@candidate.Email</td>
+                    <td>@candidate.PhoneNumber</td>
+                    <td>@candidate.Major.MajorName</td>
+                    <td>@candidate.Nationality.NationalityName</td>
+                    <td>@DateOnly.FromDateTime(candidate.DateOfBirth)</td>
+                    <td>@candidate.NationalId</td>
+                    
                     
 
                     <td>

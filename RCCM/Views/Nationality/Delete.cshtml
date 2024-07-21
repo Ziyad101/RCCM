@@ -1,0 +1,16 @@
+﻿@model DeleteNationalityViewModel
+
+<h2>حذف الجنسية</h2>
+
+<form asp-action="DeleteNationality" method="post">
+    <p><strong>اسم الجنسية:</strong> @Model.NationalityName</p>
+
+    <input type="hidden" name="id" asp-for="NationalityId" />
+
+    <div class="d-flex justify-content-evenly mt-5">
+
+        <button type="submit" class="btn btn-danger">حذف الجنسية</button>
+
+        <a class="text-decoration-none btn btn-primary" asp-action="Index">العودة لقائمة الجنسيات</a>
+    </div>
+</form>

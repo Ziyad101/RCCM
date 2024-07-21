@@ -5,6 +5,7 @@ using Core.Entities.ViewModel.Candidate;
 using Core.Entities.ViewModel.Major;
 using Core.Entities.ViewModel.Request;
 using Core.Entities.ViewModel.Role;
+using Core.Entities.ViewModel.Nationality;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,7 +50,17 @@ namespace Infrastructure.Mappers
             CreateMap<Request, RequestViewModel>().ReverseMap();
 
             //Candidate Mappers
-            CreateMap<Candidate,CandidateViewModel>().ReverseMap();
+            CreateMap<Candidate,CandidateViewModel>().IncludeMembers(c=>c.Major).IncludeMembers(c=>c.Nationality).ReverseMap();
+            CreateMap<Major,CandidateViewModel>().ReverseMap();
+            CreateMap<Nationality,CandidateViewModel>().ReverseMap();
+            CreateMap<Candidate,AddCandidateViewModel>().ReverseMap();
+            CreateMap<Candidate,UpdateCandidateViewModel>().ReverseMap();
+            CreateMap<Candidate,DeleteCandidateViewModel>().ReverseMap();
+            CreateMap<CandidateViewModel,AddCandidateViewModel>().ReverseMap();
+            CreateMap<CandidateViewModel,UpdateCandidateViewModel>().ReverseMap();
+            CreateMap<CandidateViewModel,DeleteCandidateViewModel>().ReverseMap();
+
+           
 
             //Major Mappers
             CreateMap<Major, MajorViewModel>().ReverseMap();
@@ -66,6 +77,21 @@ namespace Infrastructure.Mappers
 
             CreateMap<MajorViewModel,DeleteMajorViewModel>().ReverseMap();
 
+            //Nationality Mappers.
+
+            CreateMap<Nationality, NationalityViewModel>().ReverseMap();
+
+            CreateMap<Nationality, AddNationalityViewModel>().ReverseMap();
+
+            CreateMap<Nationality, UpdateNationalityViewModel>().ReverseMap();
+
+            CreateMap<Nationality, DeleteNationalityViewModel>().ReverseMap();
+
+            CreateMap<NationalityViewModel, AddNationalityViewModel>().ReverseMap();
+
+            CreateMap<NationalityViewModel, UpdateNationalityViewModel>().ReverseMap();
+
+            CreateMap<NationalityViewModel, DeleteNationalityViewModel>().ReverseMap();
 
 
 
