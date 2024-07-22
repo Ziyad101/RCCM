@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
-{
+{   
     public class CandidateRepo : ICandidateRepo
     {
         private readonly ApplicationDbContext _context;
@@ -28,6 +28,7 @@ namespace Infrastructure.Repositories
             var candidate = _mapper.Map<Candidate>(candidateModel);
             _context.Add(candidate);
             _context.SaveChanges();
+            throw new NotImplementedException();
         }
 
         public List<CandidateViewModel> GetAllCandidate()
@@ -40,11 +41,11 @@ namespace Infrastructure.Repositories
         }
 
         public CandidateViewModel GetCandidateById(int id)
-        {
+            {
             var candidate = _context.Candidate.Where(c => c.CandidateId == id).Include(c=>c.Major).Include(c=>c.Nationality).AsNoTracking().FirstOrDefault();
-            var candidateModel = _mapper.Map<CandidateViewModel>(candidate);
+                var candidateModel = _mapper.Map<CandidateViewModel>(candidate);
             return candidateModel;
-        }
+            }
 
         public UpdateCandidateViewModel GetEditModel(int id)
         {
@@ -61,7 +62,7 @@ namespace Infrastructure.Repositories
             var nationality = _context.Nationality.AsNoTracking().Where(n=>n.NationalityId == candidate.Nationality.NationalityId).FirstOrDefault();
             candidate.Major = major;
             candidate.Nationality = nationality;
-         
+
             _context.Update(candidate);
             _context.SaveChanges();
         }
