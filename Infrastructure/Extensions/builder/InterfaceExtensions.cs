@@ -19,7 +19,9 @@ namespace Infrastructure.Extensions.builder
             services.AddScoped<IHomeRepo, HomeRepo>();
             services.AddScoped<IUserRepo, UserRepo>();
             services.AddScoped<IRoleRepo, RoleRepo>();
-
+            services.AddScoped<IRequestRepo, RequestRepo>();
+            services.AddScoped<ICandidateRepo, CandidateRepo>();
+            services.AddScoped<IGradeRepo, GradeRepo>();
 
             return services;
         }
