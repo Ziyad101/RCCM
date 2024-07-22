@@ -29,25 +29,17 @@ namespace Infrastructure.Repositories
         {
             try
             {
-                var nationalityViewModels = new List<NationalityViewModel>();
 
+                var nationalities = _context.Nationality.Where(n => n.IsActive).AsNoTracking().ToList();
 
-                var nationality = _context.Nationality.Where(n=>n.IsActive).AsNoTracking().ToList();
-
-
-                foreach (var national in nationality)
-                {
-                    var nationalityViewModel = _mapper.Map<NationalityViewModel>(national);
-
-                    nationalityViewModels.Add(nationalityViewModel);
-                }
+                var nationalityViewModels = _mapper.Map<List<NationalityViewModel>>(nationalities);
 
                 return nationalityViewModels;
             }
             catch (Exception)
             {
 
-                return new List<NationalityViewModel>{ };
+                return new List<NationalityViewModel> { };
             }
         }
 
@@ -56,7 +48,7 @@ namespace Infrastructure.Repositories
         {
             try
             {
-                var nationality = _context.Nationality.AsNoTracking().Where(x=>x.NationalityId==id).FirstOrDefault();
+                var nationality = _context.Nationality.AsNoTracking().Where(x => x.NationalityId == id).FirstOrDefault();
 
                 var nationalityViewModel = _mapper.Map<NationalityViewModel>(nationality);
 
@@ -123,6 +115,6 @@ namespace Infrastructure.Repositories
             _context.SaveChanges();
         }
 
-        
+
     }
 }

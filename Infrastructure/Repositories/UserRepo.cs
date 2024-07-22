@@ -47,19 +47,9 @@ namespace Infrastructure.Repositories
         {
             try
             {
-                var UserViewModels = new List<UserViewModel>();
-
-
                 var users = _context.User.Include(x => x.Role).AsNoTracking().Where(u => u.IsActive).ToList();
 
-
-
-                foreach (var user in users)
-                {
-                    var userViewModel = _mapper.Map<UserViewModel>(user);
-
-                    UserViewModels.Add(userViewModel);
-                }
+                var UserViewModels = _mapper.Map<List<UserViewModel>>(users);
 
                 return UserViewModels;
             }

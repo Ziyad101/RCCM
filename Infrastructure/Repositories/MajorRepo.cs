@@ -1,4 +1,4 @@
-﻿  using AutoMapper;
+﻿using AutoMapper;
 using Core.Entities.Model;
 using Core.Entities.ViewModel.Major;
 using Core.Interfaces;
@@ -51,13 +51,10 @@ namespace Infrastructure.Repositories
 
         public List<MajorViewModel> GetAllMajors()
         {
-            var majorModels = new List<MajorViewModel>();
-            var majors = _context.Major.Where(m=> m.IsActive).AsNoTracking().ToList();
-            foreach (var major in majors)
-            {
-                var majorModel = _mapper.Map<MajorViewModel>(major);
-                majorModels.Add(majorModel);
-            }
+            var majors = _context.Major.Where(m => m.IsActive).AsNoTracking().ToList();
+
+            var majorModels = _mapper.Map<List<MajorViewModel>>(majors);
+
             return majorModels;
         }
 

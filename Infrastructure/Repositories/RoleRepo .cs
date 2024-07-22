@@ -49,14 +49,9 @@ namespace Infrastructure.Repositories
 
         public List<RoleViewModel> GetAllRoles()
         {
-            var roleModels = new List<RoleViewModel>();
             var roles = _context.Role.Where(r => r.IsActive).AsNoTracking().ToList();
-            foreach (var role in roles)
-            {
-                var roleModel = _mapper.Map<RoleViewModel>(role);
 
-                roleModels.Add(roleModel);
-            }
+            var roleModels = _mapper.Map<List<RoleViewModel>>(roles);
 
             return roleModels;
         }

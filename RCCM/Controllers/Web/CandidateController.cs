@@ -48,5 +48,19 @@ namespace RCCM.Controllers.Web
             return RedirectToAction("Index");
 
         }
+
+        public IActionResult Edit(int id)
+        {
+            var candidateUpdateModel = _candidateRepo.GetEditModel(id);
+            candidateUpdateModel.Nationalities = _nationalityRepo.GetAllNationalitys();
+            candidateUpdateModel.Majors = _majorRepo.GetAllMajors();
+            return View(candidateUpdateModel);
+        }
+
+        public IActionResult EditCandidate(UpdateCandidateViewModel updateModel)
+        {
+            _candidateRepo.UpdateCandidate(updateModel);
+            return RedirectToAction("Index");
+        }
     }
 }
