@@ -11,11 +11,14 @@ namespace Core.Interfaces
 {
     public interface IUserRepo
     {
-        public GenericResult<List<UserViewModel>> GetUsers();
-        GenericResult<UserViewModel> GetById(int id);
-        public void EditUser(UpdateUserViewModel updateUser);
-        public void AddUser(AddUserViewModel user);
-        public void DeleteUser(DeleteUserViewModel userModel);
+        List<UserViewModel> GetAllUsers();
+        UserViewModel GetUserById(int id);
+        void EditUser(UpdateUserViewModel userModel);
+        void AddUser(AddUserViewModel user);
+        void DeleteUser(DeleteUserViewModel userModel);
+        UpdateUserViewModel GetEditModel(int id);
+        DeleteUserViewModel GetDeleteModel(int id);
+
 
 
 

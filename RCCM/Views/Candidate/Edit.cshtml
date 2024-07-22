@@ -1,0 +1,56 @@
+﻿@model UpdateCandidateViewModel
+
+
+<h2>تحديث معلومات مرشح</h2>
+
+<form asp-action="EditCandidate" method="post">
+    <div class="form-group">
+        <label asp-for="CandidateName">اسم المرشح</label>
+        <input asp-for="CandidateName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="NationalId">رقم الهوية</label>
+        <input asp-for="NationalId"  class="form-control" >
+    </div>
+    <div class="form-group">
+        <label asp-for="DateOfBirth">تاريخ الميلاد</label>
+        <input asp-for="DateOfBirth" type="date" max="" class="form-control">
+    </div>
+    <div class="form-group">
+        <label asp-for="Email">البريد الإلكتروني</label>
+        <input asp-for="Email" type="email" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PhoneNumber">رقم الهاتف</label>
+        <input asp-for="PhoneNumber" class="form-control">
+    </div>
+
+    <label asp-for="Gender" class="form-label mt-3">الجنس: </label>
+    <div class="form-check form-check-inline">
+        <input asp-for="Gender" type="radio" value="Male" class="form-check-input" checked>
+        <label asp-for="Gender" class="form-check-label">ذكر</label>
+    </div>
+
+    <div class="form-check form-check-inline">
+        <input asp-for="Gender" type="radio" value="Female" class="form-check-input">
+        <label asp-for="Gender" class="form-check-label">أنثى</label>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Major.MajorId" class="form-check-label">التخصص الجامعي</label>
+        <select asp-for="Major.MajorId" class="form-control form-select" asp-items="@(new SelectList(Model.Majors, "MajorId", "MajorName",Model.Major.MajorId))"></select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Nationality.NationalityId" class="form-check-label">الجنسية</label>
+        <select asp-for="Nationality.NationalityId" class="form-control form-select" asp-items="@(new SelectList(Model.Nationalities, "NationalityId", "NationalityName",Model.Nationality.NationalityId))"></select>
+    </div>
+    <input hidden asp-for="CandidateId" />
+
+    <div class="d-flex justify-content-evenly mt-5">
+        <button type="submit" class="btn btn-success">تحديث المرشح</button>
+        <a class="text-decoration-none btn btn-primary" asp-action="Index">العودة لقائمة المرشحين</a>
+    </div>
+</form>

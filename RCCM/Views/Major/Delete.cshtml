@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Delete Major";
+}
+@model DeleteMajorViewModel
+
+<h2>حذف التخصص</h2>
+
+<form asp-action="DeleteMajor" method="post">
+    <p><strong>اسم التخصص:</strong> @Model.MajorName</p>
+    <input type="hidden" asp-for="MajorId" />
+    <input type="hidden" asp-for="MajorName   " />
+    <div class="d-flex justify-content-evenly mt-5">
+        <button type="submit" class="btn btn-danger">حذف التخصص</button>
+        <a class="text-decoration-none btn btn-primary" asp-action="Index">العودة لقائمة التخصصات</a>
+    </div>
+</form>

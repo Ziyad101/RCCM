@@ -5,7 +5,9 @@
 <form asp-action="DeleteUser" method="post">
     <p><strong>اسم المستخدم:</strong> @Model.UserName</p>
     <p><strong>الصلاحية:</strong> @Model.RoleName</p>
-    <input type="hidden" name="id" asp-for="UserId" />
+    <input type="hidden" asp-for="UserId" />
+    <input type="hidden" asp-for="UserName" />
+    <input type="hidden" asp-for="RoleId" />
     <div class="d-flex justify-content-evenly mt-5">
         <button type="submit" class="btn btn-danger">حذف المستخدم</button>
         <a class="text-decoration-none btn btn-primary" asp-action="Index">العودة لقائمة المستخدمين</a>

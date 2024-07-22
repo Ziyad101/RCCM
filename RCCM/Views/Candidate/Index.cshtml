@@ -1,0 +1,56 @@
+﻿@model List<CandidateViewModel>
+
+<h1 class="text-center mb-4">قائمة المرشحين (@Model.Count())</h1>
+
+
+
+<div class="container">
+    <table class="table table-hover table-striped">
+        <thead class="bg-primary bg-opacity-75 text-black">
+            <tr>
+                <th>اسم المرشح</th>
+                <th>البريد الإلكتروني</th>
+                <th>رقم التواصل</th>
+                <th>التخصص</th>
+                <th>الجنسية</th>
+                <th>تاريخ الميلاد</th>
+                <th>رقم الهوية</th>
+                <th></th>
+                <th></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var candidate in Model)
+            {
+                <tr>
+                    <td>@candidate.CandidateName</td>
+                    <td>@candidate.Email</td>
+                    <td>@candidate.PhoneNumber</td>
+                    <td>@candidate.Major.MajorName</td>
+                    <td>@candidate.Nationality.NationalityName</td>
+                    <td>@DateOnly.FromDateTime(candidate.DateOfBirth)</td>
+                    <td>@candidate.NationalId</td>
+                    
+                    
+
+                    <td>
+                        <form asp-action="Edit" method="post">
+                            <input hidden asp-for="@candidate.CandidateId" name="id" />
+                            <button class="btn btn-warning" type="submit">تعديل البيانات</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form asp-action="Delete" method="post">
+                            <input hidden asp-for="@candidate.CandidateId" name="id" />
+                            <button class="btn btn-danger" type="submit">حذف المرشح</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+    <a class="nav-link text-decoration-none text-white btn btn-success" asp-controller="Candidate" asp-action="Add"> إضافة مرشح</a>
+</div>
