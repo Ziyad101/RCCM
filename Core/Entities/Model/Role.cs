@@ -14,7 +14,7 @@ namespace Core.Entities.Model
         public string RoleName { get; set; }
         public bool IsActive { get; set; }
 
-        //public List<User> Users { get; set; }
+        //  public List<User> Users { get; set; }
 
     }
 }

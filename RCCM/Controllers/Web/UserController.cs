@@ -150,7 +150,6 @@ namespace RCCM.Controllers.Web
             {
                 throw;
             }
-            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -158,7 +157,15 @@ namespace RCCM.Controllers.Web
         {
             try
             {
-                var user = _userRepo.GetById(id);
+                var user = _userRepo.GetUserById(id);
+
+                var userToDelte = new DeleteUserViewModel
+                {
+                    UserId = user.UserId,
+                    UserName = user.UserName,
+                    RoleName = user.RoleName,
+                    IsActive = user.IsActive,
+                    RoleId = user.RoleId,
 
                 var userToDelte = new DeleteUserViewModel
                 {

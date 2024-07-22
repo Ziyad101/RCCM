@@ -18,6 +18,7 @@ namespace Core.Interfaces
         public void DeleteUser(DeleteUserViewModel userModel);
 
 
+
     }
 
     ////

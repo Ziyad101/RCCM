@@ -60,6 +60,7 @@ namespace Infrastructure.Repositories
                 if (users.Count == 0)
                     return GenericResult<List<UserViewModel>>.Fail();
 
+
                 foreach (var user in users)
                 {
                     var userViewModel = _mapper.Map<UserViewModel>(user);

@@ -29,11 +29,11 @@ namespace Core.Entities.Model
         [ForeignKey("Major")]
         public int MajorId { get; set; }
         public Major Major { get; set; }
-        public List<Experience> Experiences { get; set; }
-        public List<ExamResult> ExamResults { get; set; }
+        public List<Experience>? Experiences { get; set; }
+        public List<ExamResult>? ExamResults { get; set; }
         public Request Request { get; set; }
-        public Interview Interview { get; set; }
-        public JobOffer JobOffer { get; set; }
+        public Interview? Interview { get; set; }
+        public JobOffer? JobOffer { get; set; }
         public CandidateStatus CandidateStatus { get; set; }
     }
 }
