@@ -1,14 +1,14 @@
-﻿@model AddRoleViewModel
+﻿@model AddCandidateStatusViewModel
 @{
-    ViewData["Title"] = "Add Role";
+    ViewData["Title"] = "Add Status";
 }
 
-<h2>إضافة صلاحية</h2>
+<h2>إضافة حالة</h2>
 
-<form asp-action="Add" method="post">
+<form asp-action="AddCandidateStatus" method="post">
     <div class="form-group">
-        <label asp-for="RoleName">اسم الصلاحية</label>
-        <input asp-for="RoleName" class="form-control form-text" />
+        <label asp-for="Status">اسم الصلاحية</label>
+        <input asp-for="Status" class="form-control form-text" />
     </div>
     <div class="d-flex justify-content-evenly mt-5">
         <button type="submit" class="btn btn-success">إضافة صلاحيات</button>

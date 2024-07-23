@@ -6,6 +6,7 @@ using Core.Entities.ViewModel.Major;
 using Core.Entities.ViewModel.Request;
 using Core.Entities.ViewModel.Role;
 using Core.Entities.ViewModel.Nationality;
+using Core.Entities.ViewModel.CandidateStatus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -93,6 +94,16 @@ namespace Infrastructure.Mappers
 
             CreateMap<NationalityViewModel, DeleteNationalityViewModel>().ReverseMap();
 
+            //CandidateStatus Mappers
+
+            CreateMap<CandidateStatus, CandidateStatusViewModel>().ReverseMap();
+            CreateMap<CandidateStatus, AddCandidateStatusViewModel>().ReverseMap();
+            CreateMap<CandidateStatus, UpdateCandidateStatusViewModel>().ReverseMap();
+            CreateMap<CandidateStatus, DeleteCandidateStatusViewModel>().ReverseMap();
+            CreateMap<CandidateViewModel, AddCandidateViewModel>().ReverseMap();
+            CreateMap<CandidateViewModel, UpdateCandidateStatusViewModel>().ReverseMap();
+            CreateMap<CandidateViewModel, DeleteCandidateStatusViewModel>().ReverseMap();
+            
 
 
         }
