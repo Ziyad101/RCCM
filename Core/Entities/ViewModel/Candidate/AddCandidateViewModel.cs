@@ -12,11 +12,11 @@ namespace Core.Entities.ViewModel.Candidate
     public class AddCandidateViewModel
     {
         public string CandidateName { get; set; }
-        public int NationalId { get; set; }
+        public string NationalId { get; set; }
         public string Gender { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string Email { get; set; }
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
         public int RequestStatus { get; set; }
         public bool IsActive { get; set; } = true;
         public DateTime CreatedAt { get; set; } = DateTime.Now;

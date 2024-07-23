@@ -52,11 +52,32 @@ namespace RCCM.Controllers.Web
 
         }
 
-        public IActionResult CandidateIndex()
+        public IActionResult Edit(int id)
         {
-            return View();
+            var candidateUpdateModel = _candidateRepo.GetEditModel(id);
+            candidateUpdateModel.Nationalities = _nationalityRepo.GetAllNationalitys();
+            candidateUpdateModel.Majors = _majorRepo.GetAllMajors();
+            return View(candidateUpdateModel);
         }
 
+        public IActionResult EditCandidate(UpdateCandidateViewModel updateModel)
+        {
+            _candidateRepo.UpdateCandidate(updateModel);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Delete(int id)
+        {
+           var model = _candidateRepo.GetDeleteModel(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteCandidate(DeleteCandidateViewModel model)
+        {
+            _candidateRepo.DeleteCandidate(model);
+            return RedirectToAction("Index");
+        }
     }
 
 

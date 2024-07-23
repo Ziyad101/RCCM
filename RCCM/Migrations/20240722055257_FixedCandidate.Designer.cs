@@ -4,6 +4,7 @@ using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace RCCM.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240722055257_FixedCandidate")]
+    partial class FixedCandidate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -251,9 +253,6 @@ namespace RCCM.Migrations
                     b.Property<bool>("ExperienceMatch")
                         .HasColumnType("bit");
 
-                    b.Property<int>("GradeId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -274,8 +273,6 @@ namespace RCCM.Migrations
 
                     b.HasIndex("CandidateId");
 
-                    b.HasIndex("GradeId");
-
                     b.ToTable("Experience");
                 });
 
@@ -290,6 +287,9 @@ namespace RCCM.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("ExperienceId")
+                        .HasColumnType("int");
+
                     b.Property<int>("GradeValue")
                         .HasColumnType("int");
 
@@ -300,6 +300,8 @@ namespace RCCM.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("GradeId");
+
+                    b.HasIndex("ExperienceId");
 
                     b.ToTable("Grade");
                 });
@@ -621,15 +623,18 @@ namespace RCCM.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Core.Entities.Model.Grade", "Grade")
+                    b.Navigation("Candidate");
+                });
+
+            modelBuilder.Entity("Core.Entities.Model.Grade", b =>
+                {
+                    b.HasOne("Core.Entities.Model.Experience", "Experience")
                         .WithMany()
-                        .HasForeignKey("GradeId")
+                        .HasForeignKey("ExperienceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Candidate");
-
-                    b.Navigation("Grade");
+                    b.Navigation("Experience");
                 });
 
             modelBuilder.Entity("Core.Entities.Model.Interview", b =>

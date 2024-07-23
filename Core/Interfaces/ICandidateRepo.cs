@@ -11,7 +11,12 @@ namespace Core.Interfaces
     public interface ICandidateRepo
     {
         List<CandidateViewModel> GetAllCandidate();
+        CandidateViewModel GetCandidateById(int id);
         void AddCandidate(AddCandidateViewModel candidateModel);
+        void UpdateCandidate(UpdateCandidateViewModel candidateModel);
+        void DeleteCandidate(DeleteCandidateViewModel candidateModel);
+        UpdateCandidateViewModel GetEditModel(int id);
+        DeleteCandidateViewModel GetDeleteModel(int id);
 
     }
 }

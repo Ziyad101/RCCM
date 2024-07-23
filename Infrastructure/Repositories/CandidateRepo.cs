@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
-{   
+{
     public class CandidateRepo : ICandidateRepo
     {
         private readonly ApplicationDbContext _context;
@@ -30,20 +30,56 @@ namespace Infrastructure.Repositories
             _context.SaveChanges();
         }
 
+        public void DeleteCandidate(DeleteCandidateViewModel candidateModel)
+        {
+            var candidate = _mapper.Map<Candidate>(candidateModel);
+            candidate.IsActive = false;
+            _context.Update(candidate);
+            _context.SaveChanges();
+        }
+
         public List<CandidateViewModel> GetAllCandidate()
         {
-            var allCandidates = _context.Candidate.Where(c=>c.IsActive).Include(c=>c.Nationality).Include(c=>c.Major).AsNoTracking().ToList();
+            var allCandidates = _context.Candidate.Where(c => c.IsActive).Include(c => c.Nationality).Include(c => c.Major).AsNoTracking().ToList();
 
-            var candidateModels = new List<CandidateViewModel>();
+            var candidateModels = _mapper.Map<List<CandidateViewModel>>(allCandidates);
 
-            foreach (var candidate in allCandidates)
-            {
-                var candidateModel = _mapper.Map<CandidateViewModel>(candidate);
-                candidateModels.Add(candidateModel);
-            }
             return candidateModels;
         }
 
+        public CandidateViewModel GetCandidateById(int id)
+        {
+            var candidate = _context.Candidate.Where(c => c.CandidateId == id).Include(c=>c.Major).Include(c=>c.Nationality).AsNoTracking().FirstOrDefault();
+            var candidateModel = _mapper.Map<CandidateViewModel>(candidate);
+            return candidateModel;
+        }
 
+        public DeleteCandidateViewModel GetDeleteModel(int id)
+        {
+            var candidate = GetCandidateById(id);
+            var deleteModel = _mapper.Map<DeleteCandidateViewModel>(candidate);
+            return deleteModel;
+
+        }
+
+        public UpdateCandidateViewModel GetEditModel(int id)
+        {
+            var candidate = GetCandidateById(id);
+            var updateModel = _mapper.Map<UpdateCandidateViewModel>(candidate);
+            return updateModel;
+
+        }
+
+        public void UpdateCandidate(UpdateCandidateViewModel candidateModel)
+        {
+            var candidate = _mapper.Map<Candidate>(candidateModel);
+            var major = _context.Major.AsNoTracking().Where(m => m.MajorId == candidate.Major.MajorId).FirstOrDefault();
+            var nationality = _context.Nationality.AsNoTracking().Where(n=>n.NationalityId == candidate.Nationality.NationalityId).FirstOrDefault();
+            candidate.Major = major;
+            candidate.Nationality = nationality;
+         
+            _context.Update(candidate);
+            _context.SaveChanges();
+        }
     }
 }

@@ -28,5 +28,9 @@ namespace Core.Entities.Model
         [ForeignKey("Candidate")]
         public int CandidateId { get; set; }
         public Candidate Candidate { get; set; }
+
+        [ForeignKey("Grade")]
+        public int GradeId { get; set; }
+        public Grade Grade { get; set; }
     }
 }

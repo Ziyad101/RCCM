@@ -16,9 +16,6 @@ namespace Core.Entities.Model
         public bool IsActive { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-
-        [ForeignKey("Experience")]
-        public int ExperienceId { get; set; }
-        public Experience Experience { get; set; }
+        List<Experience> Experiences { get; set; }
     }
 }

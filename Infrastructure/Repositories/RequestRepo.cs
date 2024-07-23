@@ -23,31 +23,10 @@ namespace Infrastructure.Repositories
         public List<RequestViewModel> GetAllReqests()
         {
             var allRoles = _context.Request.Where(r=>r.IsActive).AsNoTracking().ToList();
-            _context.Request.Add(new Core.Entities.Model.Request
-            {
-                IsActive = true,
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now,
-                RequestStatus = 2
-            });
-            _context.Request.Add(new Core.Entities.Model.Request
-            {
-                IsActive = true,
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now,
-                RequestStatus = 3
-            });
-            _context.SaveChanges();
-
-            var requestModels = new List<RequestViewModel>();
-            foreach (var role in allRoles)
-            {
-
-                var rle = _mapper.Map<RequestViewModel>(role);
-                requestModels.Add(rle);
-            }
             
-            return requestModels;
+            var roleModels = _mapper.Map<List<RequestViewModel>>(allRoles);
+
+            return roleModels;
         }
     }
 }
