@@ -62,5 +62,18 @@ namespace RCCM.Controllers.Web
             _candidateRepo.UpdateCandidate(updateModel);
             return RedirectToAction("Index");
         }
+
+        public IActionResult Delete(int id)
+        {
+           var model = _candidateRepo.GetDeleteModel(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteCandidate(DeleteCandidateViewModel model)
+        {
+            _candidateRepo.DeleteCandidate(model);
+            return RedirectToAction("Index");
+        }
     }
 }
