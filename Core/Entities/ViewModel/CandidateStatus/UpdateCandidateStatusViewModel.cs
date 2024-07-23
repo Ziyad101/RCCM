@@ -10,7 +10,7 @@ namespace Core.Entities.ViewModel.CandidateStatus
     {
         public int CandidateStatusId { get; set; }
         public string Status { get; set; }
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
     }
 }

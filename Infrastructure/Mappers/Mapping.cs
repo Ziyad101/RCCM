@@ -100,9 +100,9 @@ namespace Infrastructure.Mappers
             CreateMap<CandidateStatus, AddCandidateStatusViewModel>().ReverseMap();
             CreateMap<CandidateStatus, UpdateCandidateStatusViewModel>().ReverseMap();
             CreateMap<CandidateStatus, DeleteCandidateStatusViewModel>().ReverseMap();
-            CreateMap<CandidateViewModel, AddCandidateViewModel>().ReverseMap();
-            CreateMap<CandidateViewModel, UpdateCandidateStatusViewModel>().ReverseMap();
-            CreateMap<CandidateViewModel, DeleteCandidateStatusViewModel>().ReverseMap();
+            CreateMap<CandidateStatusViewModel, AddCandidateViewModel>().ReverseMap();
+            CreateMap<CandidateStatusViewModel, UpdateCandidateStatusViewModel>().ReverseMap();
+            CreateMap<CandidateStatusViewModel, DeleteCandidateStatusViewModel>().ReverseMap();
             
 
 

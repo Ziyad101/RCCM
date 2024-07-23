@@ -34,6 +34,9 @@ namespace RCCM.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("CandidateStatusId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -73,11 +76,13 @@ namespace RCCM.Migrations
 
                     b.HasKey("CandidateId");
 
+                    b.HasIndex("CandidateStatusId");
+
                     b.HasIndex("MajorId");
 
                     b.HasIndex("NationalityId");
 
-                    b.ToTable("Candidate", (string)null);
+                    b.ToTable("Candidate");
                 });
 
             modelBuilder.Entity("Core.Entities.Model.CandidateStatus", b =>
@@ -87,9 +92,6 @@ namespace RCCM.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CandidateStatusId"), 1L, 1);
-
-                    b.Property<int>("CandidateId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -106,10 +108,7 @@ namespace RCCM.Migrations
 
                     b.HasKey("CandidateStatusId");
 
-                    b.HasIndex("CandidateId")
-                        .IsUnique();
-
-                    b.ToTable("CandidateStatus", (string)null);
+                    b.ToTable("CandidateStatus");
                 });
 
             modelBuilder.Entity("Core.Entities.Model.CreatorExamTypeConf", b =>
@@ -141,7 +140,7 @@ namespace RCCM.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("CreatorExamTypeConf", (string)null);
+                    b.ToTable("CreatorExamTypeConf");
                 });
 
             modelBuilder.Entity("Core.Entities.Model.ExamResult", b =>
@@ -183,7 +182,7 @@ namespace RCCM.Migrations
 
                     b.HasIndex("ExamTypeConfId");
 
-                    b.ToTable("ExamResult", (string)null);
+                    b.ToTable("ExamResult");
                 });
 
             modelBuilder.Entity("Core.Entities.Model.ExamTypeConf", b =>
@@ -221,7 +220,7 @@ namespace RCCM.Migrations
 
                     b.HasKey("ExamTypeConfId");
 
-                    b.ToTable("ExamTypeConf", (string)null);
+                    b.ToTable("ExamTypeConf");
                 });
 
             modelBuilder.Entity("Core.Entities.Model.Experience", b =>
@@ -276,7 +275,7 @@ namespace RCCM.Migrations
 
                     b.HasIndex("GradeId");
 
-                    b.ToTable("Experience", (string)null);
+                    b.ToTable("Experience");
                 });
 
             modelBuilder.Entity("Core.Entities.Model.Grade", b =>
@@ -301,7 +300,7 @@ namespace RCCM.Migrations
 
                     b.HasKey("GradeId");
 
-                    b.ToTable("Grade", (string)null);
+                    b.ToTable("Grade");
                 });
 
             modelBuilder.Entity("Core.Entities.Model.Interview", b =>
@@ -332,7 +331,7 @@ namespace RCCM.Migrations
                     b.HasIndex("CandidateId")
                         .IsUnique();
 
-                    b.ToTable("Interview", (string)null);
+                    b.ToTable("Interview");
                 });
 
             modelBuilder.Entity("Core.Entities.Model.InterviewResult", b =>
@@ -363,7 +362,7 @@ namespace RCCM.Migrations
 
                     b.HasIndex("InterviewId");
 
-                    b.ToTable("InterviewResult", (string)null);
+                    b.ToTable("InterviewResult");
                 });
 
             modelBuilder.Entity("Core.Entities.Model.JobOffer", b =>
@@ -414,7 +413,7 @@ namespace RCCM.Migrations
                     b.HasIndex("CandidateId")
                         .IsUnique();
 
-                    b.ToTable("JobOffer", (string)null);
+                    b.ToTable("JobOffer");
                 });
 
             modelBuilder.Entity("Core.Entities.Model.Major", b =>
@@ -440,7 +439,7 @@ namespace RCCM.Migrations
 
                     b.HasKey("MajorId");
 
-                    b.ToTable("Major", (string)null);
+                    b.ToTable("Major");
                 });
 
             modelBuilder.Entity("Core.Entities.Model.Nationality", b =>
@@ -466,7 +465,7 @@ namespace RCCM.Migrations
 
                     b.HasKey("NationalityId");
 
-                    b.ToTable("Nationality", (string)null);
+                    b.ToTable("Nationality");
                 });
 
             modelBuilder.Entity("Core.Entities.Model.Request", b =>
@@ -497,7 +496,7 @@ namespace RCCM.Migrations
                     b.HasIndex("CandidateId")
                         .IsUnique();
 
-                    b.ToTable("Request", (string)null);
+                    b.ToTable("Request");
                 });
 
             modelBuilder.Entity("Core.Entities.Model.Role", b =>
@@ -517,7 +516,7 @@ namespace RCCM.Migrations
 
                     b.HasKey("RoleId");
 
-                    b.ToTable("Role", (string)null);
+                    b.ToTable("Role");
                 });
 
             modelBuilder.Entity("Core.Entities.Model.User", b =>
@@ -542,11 +541,17 @@ namespace RCCM.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("User", (string)null);
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("Core.Entities.Model.Candidate", b =>
                 {
+                    b.HasOne("Core.Entities.Model.CandidateStatus", "CandidateStatus")
+                        .WithMany()
+                        .HasForeignKey("CandidateStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Core.Entities.Model.Major", "Major")
                         .WithMany("Candidates")
                         .HasForeignKey("MajorId")
@@ -559,20 +564,11 @@ namespace RCCM.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("CandidateStatus");
+
                     b.Navigation("Major");
 
                     b.Navigation("Nationality");
-                });
-
-            modelBuilder.Entity("Core.Entities.Model.CandidateStatus", b =>
-                {
-                    b.HasOne("Core.Entities.Model.Candidate", "Candidate")
-                        .WithOne("CandidateStatus")
-                        .HasForeignKey("Core.Entities.Model.CandidateStatus", "CandidateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Candidate");
                 });
 
             modelBuilder.Entity("Core.Entities.Model.CreatorExamTypeConf", b =>
@@ -689,9 +685,6 @@ namespace RCCM.Migrations
 
             modelBuilder.Entity("Core.Entities.Model.Candidate", b =>
                 {
-                    b.Navigation("CandidateStatus")
-                        .IsRequired();
-
                     b.Navigation("ExamResults");
 
                     b.Navigation("Experiences");

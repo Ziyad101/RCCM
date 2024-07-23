@@ -23,13 +23,13 @@
 
                     <td>
                         <form asp-action="Edit" method="post">
-                            <input hidden name="RoleId" asp-for="@role.CandidateStatusId" />
+                            <input hidden name="id" asp-for="@role.CandidateStatusId" />
                             <button class="btn btn-warning" type="submit">تعديل البيانات</button>
                         </form>
                     </td>
                     <td>
                         <form asp-action="Delete" method="post">
-                            <input hidden name="roleId" asp-for="@role.CandidateStatusId" />
+                            <input hidden name="id" asp-for="@role.CandidateStatusId" />
                             <button class="btn btn-danger" type="submit">حذف الحالة</button>
                         </form>
                     </td>

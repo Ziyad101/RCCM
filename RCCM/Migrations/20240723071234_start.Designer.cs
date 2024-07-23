@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace RCCM.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240703133406_IsActiveForUserAndRole")]
-    partial class IsActiveForUserAndRole
+    [Migration("20240723071234_start")]
+    partial class start
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,6 +36,9 @@ namespace RCCM.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("CandidateStatusId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -56,14 +59,16 @@ namespace RCCM.Migrations
                     b.Property<int>("MajorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("NationalId")
-                        .HasColumnType("int");
+                    b.Property<string>("NationalId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("NationalityId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("int");
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RequestStatus")
                         .HasColumnType("int");
@@ -72,6 +77,8 @@ namespace RCCM.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("CandidateId");
+
+                    b.HasIndex("CandidateStatusId");
 
                     b.HasIndex("MajorId");
 
@@ -88,9 +95,6 @@ namespace RCCM.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CandidateStatusId"), 1L, 1);
 
-                    b.Property<int>("CandidateId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -105,9 +109,6 @@ namespace RCCM.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("CandidateStatusId");
-
-                    b.HasIndex("CandidateId")
-                        .IsUnique();
 
                     b.ToTable("CandidateStatus");
                 });
@@ -251,6 +252,9 @@ namespace RCCM.Migrations
                     b.Property<bool>("ExperienceMatch")
                         .HasColumnType("bit");
 
+                    b.Property<int>("GradeId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -271,6 +275,8 @@ namespace RCCM.Migrations
 
                     b.HasIndex("CandidateId");
 
+                    b.HasIndex("GradeId");
+
                     b.ToTable("Experience");
                 });
 
@@ -285,9 +291,6 @@ namespace RCCM.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ExperienceId")
-                        .HasColumnType("int");
-
                     b.Property<int>("GradeValue")
                         .HasColumnType("int");
 
@@ -298,8 +301,6 @@ namespace RCCM.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("GradeId");
-
-                    b.HasIndex("ExperienceId");
 
                     b.ToTable("Grade");
                 });
@@ -547,6 +548,12 @@ namespace RCCM.Migrations
 
             modelBuilder.Entity("Core.Entities.Model.Candidate", b =>
                 {
+                    b.HasOne("Core.Entities.Model.CandidateStatus", "CandidateStatus")
+                        .WithMany()
+                        .HasForeignKey("CandidateStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Core.Entities.Model.Major", "Major")
                         .WithMany("Candidates")
                         .HasForeignKey("MajorId")
@@ -559,20 +566,11 @@ namespace RCCM.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("CandidateStatus");
+
                     b.Navigation("Major");
 
                     b.Navigation("Nationality");
-                });
-
-            modelBuilder.Entity("Core.Entities.Model.CandidateStatus", b =>
-                {
-                    b.HasOne("Core.Entities.Model.Candidate", "Candidate")
-                        .WithOne("CandidateStatus")
-                        .HasForeignKey("Core.Entities.Model.CandidateStatus", "CandidateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Candidate");
                 });
 
             modelBuilder.Entity("Core.Entities.Model.CreatorExamTypeConf", b =>
@@ -621,18 +619,15 @@ namespace RCCM.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Candidate");
-                });
-
-            modelBuilder.Entity("Core.Entities.Model.Grade", b =>
-                {
-                    b.HasOne("Core.Entities.Model.Experience", "Experience")
+                    b.HasOne("Core.Entities.Model.Grade", "Grade")
                         .WithMany()
-                        .HasForeignKey("ExperienceId")
+                        .HasForeignKey("GradeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Experience");
+                    b.Navigation("Candidate");
+
+                    b.Navigation("Grade");
                 });
 
             modelBuilder.Entity("Core.Entities.Model.Interview", b =>
@@ -692,18 +687,13 @@ namespace RCCM.Migrations
 
             modelBuilder.Entity("Core.Entities.Model.Candidate", b =>
                 {
-                    b.Navigation("CandidateStatus")
-                        .IsRequired();
-
                     b.Navigation("ExamResults");
 
                     b.Navigation("Experiences");
 
-                    b.Navigation("Interview")
-                        .IsRequired();
+                    b.Navigation("Interview");
 
-                    b.Navigation("JobOffer")
-                        .IsRequired();
+                    b.Navigation("JobOffer");
 
                     b.Navigation("Request")
                         .IsRequired();
