@@ -33,14 +33,14 @@ namespace Infrastructure.Repositories
         {
             var candidateStatus = _mapper.Map<CandidateStatus>(candidateModel);
             candidateStatus.IsActive = false;
-            _context.Update(candidateStatus);
+            _context.CandidateStatus.Update(candidateStatus);
             _context.SaveChanges();
         }
 
         public void UpdateCandidateStatus(UpdateCandidateStatusViewModel candidateModel)
         {
             var candidateStatus = _mapper.Map<CandidateStatus>(candidateModel);
-            _context.Update(candidateStatus);
+            _context.CandidateStatus.Update(candidateStatus);
             _context.SaveChanges();
         }
 

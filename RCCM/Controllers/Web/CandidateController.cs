@@ -11,12 +11,14 @@ namespace RCCM.Controllers.Web
         private readonly ICandidateRepo _candidateRepo;
         private readonly IMajorRepo _majorRepo;
         private readonly INationalityRepo _nationalityRepo;
+        private readonly ICandidateStatusRepo _candidateStatusRepo;
 
-        public CandidateController(ICandidateRepo candidateRepo, IMajorRepo majorRepo, INationalityRepo nationalityRepo)
+        public CandidateController(ICandidateRepo candidateRepo, IMajorRepo majorRepo, INationalityRepo nationalityRepo,ICandidateStatusRepo candidateStatus)
         {
             _candidateRepo = candidateRepo;
             _majorRepo = majorRepo;
             _nationalityRepo = nationalityRepo;
+            _candidateStatusRepo = candidateStatus;
         }
         public IActionResult Index()
         {
@@ -32,6 +34,7 @@ namespace RCCM.Controllers.Web
                 var candidateModel = new AddCandidateViewModel();
                 candidateModel.Majors = _majorRepo.GetAllMajors();
                 candidateModel.Nationalities = _nationalityRepo.GetAllNationalitys();
+                candidateModel.CandidateStatuses = _candidateStatusRepo.GetAllCandidateStatus();
                 return View(candidateModel);
             }
             catch (Exception)
@@ -54,6 +57,7 @@ namespace RCCM.Controllers.Web
             var candidateUpdateModel = _candidateRepo.GetEditModel(id);
             candidateUpdateModel.Nationalities = _nationalityRepo.GetAllNationalitys();
             candidateUpdateModel.Majors = _majorRepo.GetAllMajors();
+            candidateUpdateModel.CandidateStatuses = _candidateStatusRepo.GetAllCandidateStatus();
             return View(candidateUpdateModel);
         }
 

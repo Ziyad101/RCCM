@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Delete Candidate Status";
+}
+@model DeleteExamTypeConfViewModel
+
+<h2>حذف الاختبار</h2>
+
+<form asp-action="DeleteExamTypeConf" method="post">
+    <p><strong>اسم الاختبار:</strong> @Model.Title</p>
+    <input type="hidden"  asp-for="ExamTypeConfId" />
+    <input type="hidden"  asp-for="Title" />
+    <div class="d-flex justify-content-evenly mt-5">
+        <button type="submit" class="btn btn-danger">حذف الاختبار</button>
+        <a class="text-decoration-none btn btn-primary" asp-action="Index">العودة لقائمة الصلاحية</a>
+    </div>
+</form>

@@ -31,6 +31,10 @@ namespace Core.Entities.Model
         public int MajorId { get; set; }
         public Major Major { get; set; }
 
+        [ForeignKey("CandidateStatus")]
+        public int CandidateStatusId { get; set; }
+        public CandidateStatus CandidateStatus { get; set; }
+
         public List<Experience>? Experiences { get; set; }
         public List<ExamResult>? ExamResults { get; set; }
 
@@ -38,8 +42,5 @@ namespace Core.Entities.Model
         public Interview? Interview { get; set; }
         public JobOffer? JobOffer { get; set; }
 
-        [ForeignKey("CandidateStatus")]
-        public int CandidateStatusId { get; set; }
-        public CandidateStatus CandidateStatus { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Core.Entities.Model;
+using Core.Entities.ViewModel.CandidateStatus;
 using Core.Entities.ViewModel.Major;
 using Core.Entities.ViewModel.Nationality;
 using System;
@@ -25,5 +26,8 @@ namespace Core.Entities.ViewModel.Candidate
         public List<MajorViewModel> Majors { get; set; }
         public int NationalityId { get; set; }
         public List<NationalityViewModel> Nationalities { get; set; }
+        public int CandidateStatusId { get; set; }
+        public List<CandidateStatusViewModel> CandidateStatuses { get; set; } 
+
     }
 }

@@ -47,6 +47,11 @@
         <select asp-for="NationalityId" class="form-control form-select" asp-items="@(new SelectList(Model.Nationalities, "NationalityId", "NationalityName"))"></select>
     </div>
 
+    <div class="form-group">
+        <label asp-for="CandidateStatusId" class="form-check-label">حالة المرشح</label>
+        <select asp-for="CandidateStatusId" class="form-control form-select" asp-items="@(new SelectList(Model.CandidateStatuses, "CandidateStatusId", "CandidateStatusName"))"></select>
+    </div>
+
 
 
     <div class="d-flex justify-content-evenly mt-5">

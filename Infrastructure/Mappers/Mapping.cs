@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Entities.ViewModel.ExamTypeConf;
 
 namespace Infrastructure.Mappers
 {
@@ -20,40 +21,33 @@ namespace Infrastructure.Mappers
         public Mapping()
         {
             //User Mappers
-            CreateMap<User, UserViewModel>().IncludeMembers(x => x.Role).ReverseMap();
-            
+
+            CreateMap<User, UserViewModel>().IncludeMembers(x => x.Role).ReverseMap();        
             CreateMap<Role, UserViewModel>().ReverseMap();
-
             CreateMap<User, AddUserViewModel>().ReverseMap();
-
             CreateMap<User, UpdateUserViewModel>().ReverseMap();
-
             CreateMap<User, DeleteUserViewModel>().ReverseMap();
-
             CreateMap<UserViewModel, DeleteUserViewModel>().ReverseMap();
-
             CreateMap<UserViewModel, UpdateUserViewModel>().ReverseMap();
 
             //Role Mappers
+
             CreateMap<Role, RoleViewModel>().ReverseMap();
-
             CreateMap<Role, AddRoleViewModel>().ReverseMap();
-
             CreateMap<Role, DeleteRoleViewModel>().ReverseMap();
-
             CreateMap<Role, UpdateRoleViewModel>().ReverseMap();
-
             CreateMap<RoleViewModel, DeleteRoleViewModel>().ReverseMap();
-
             CreateMap<RoleViewModel, UpdateRoleViewModel>().ReverseMap();
 
             //Request Mappers
+
             CreateMap<Request, RequestViewModel>().ReverseMap();
 
             //Candidate Mappers
-            CreateMap<Candidate,CandidateViewModel>().IncludeMembers(c=>c.Major).IncludeMembers(c=>c.Nationality).ReverseMap();
+            CreateMap<Candidate,CandidateViewModel>().IncludeMembers(c=>c.Major).IncludeMembers(c=>c.Nationality).IncludeMembers(c=>c.CandidateStatus).ReverseMap();
             CreateMap<Major,CandidateViewModel>().ReverseMap();
             CreateMap<Nationality,CandidateViewModel>().ReverseMap();
+            CreateMap<CandidateStatus,CandidateViewModel>().ReverseMap();
             CreateMap<Candidate,AddCandidateViewModel>().ReverseMap();
             CreateMap<Candidate,UpdateCandidateViewModel>().ReverseMap();
             CreateMap<Candidate,DeleteCandidateViewModel>().ReverseMap();
@@ -61,37 +55,24 @@ namespace Infrastructure.Mappers
             CreateMap<CandidateViewModel,UpdateCandidateViewModel>().ReverseMap();
             CreateMap<CandidateViewModel,DeleteCandidateViewModel>().ReverseMap();
 
-           
-
             //Major Mappers
+
             CreateMap<Major, MajorViewModel>().ReverseMap();
-
             CreateMap<Major,AddMajorViewModel>().ReverseMap();
-
             CreateMap<Major,UpdateMajorViewModel>().ReverseMap();
-
             CreateMap<Major,DeleteMajorViewModel>().ReverseMap();
-
             CreateMap<MajorViewModel,AddMajorViewModel>().ReverseMap();
-
             CreateMap<MajorViewModel,UpdateMajorViewModel>().ReverseMap();
-
             CreateMap<MajorViewModel,DeleteMajorViewModel>().ReverseMap();
 
             //Nationality Mappers.
 
             CreateMap<Nationality, NationalityViewModel>().ReverseMap();
-
             CreateMap<Nationality, AddNationalityViewModel>().ReverseMap();
-
             CreateMap<Nationality, UpdateNationalityViewModel>().ReverseMap();
-
             CreateMap<Nationality, DeleteNationalityViewModel>().ReverseMap();
-
             CreateMap<NationalityViewModel, AddNationalityViewModel>().ReverseMap();
-
             CreateMap<NationalityViewModel, UpdateNationalityViewModel>().ReverseMap();
-
             CreateMap<NationalityViewModel, DeleteNationalityViewModel>().ReverseMap();
 
             //CandidateStatus Mappers
@@ -103,8 +84,16 @@ namespace Infrastructure.Mappers
             CreateMap<CandidateStatusViewModel, AddCandidateViewModel>().ReverseMap();
             CreateMap<CandidateStatusViewModel, UpdateCandidateStatusViewModel>().ReverseMap();
             CreateMap<CandidateStatusViewModel, DeleteCandidateStatusViewModel>().ReverseMap();
-            
 
+            //ExamTypeConf Mappers
+
+            CreateMap<ExamTypeConf, ExamTypeConfViewModel>().ReverseMap();
+            CreateMap<ExamTypeConf, AddExamTypeConfViewModel>().ReverseMap();
+            CreateMap<ExamTypeConf, UpdateExamTypeConfViewModel>().ReverseMap();
+            CreateMap<ExamTypeConf, DeleteExamTypeConfViewModel>().ReverseMap();
+            CreateMap<ExamTypeConfViewModel, AddExamTypeConfViewModel>().ReverseMap();
+            CreateMap<ExamTypeConfViewModel, UpdateExamTypeConfViewModel>().ReverseMap();
+            CreateMap<ExamTypeConfViewModel, DeleteExamTypeConfViewModel>().ReverseMap();
 
         }
     }
