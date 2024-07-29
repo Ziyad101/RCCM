@@ -49,7 +49,7 @@
 
     <div class="form-group">
         <label asp-for="CandidateStatusId" class="form-check-label">حالة المرشح</label>
-        <select asp-for="CandidateStatusId" class="form-control form-select" asp-items="@(new SelectList(Model.CandidateStatuses, "CandidateStatusId", "CandidateStatusName"))"></select>
+        <select asp-for="CandidateStatusId" class="form-control form-select" asp-items="@(new SelectList(Model.CandidateStatuses, "CandidateStatusId", "Status"))"></select>
     </div>
 
 

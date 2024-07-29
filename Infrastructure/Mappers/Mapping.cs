@@ -13,6 +13,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Entities.ViewModel.ExamTypeConf;
+using Core.Entities.ViewModel.ExamResult;
+using Core.Entities.ViewModel.Interview;
 
 namespace Infrastructure.Mappers
 {
@@ -95,6 +97,29 @@ namespace Infrastructure.Mappers
             CreateMap<ExamTypeConfViewModel, UpdateExamTypeConfViewModel>().ReverseMap();
             CreateMap<ExamTypeConfViewModel, DeleteExamTypeConfViewModel>().ReverseMap();
 
+            //ExamResult Mappers
+
+            CreateMap<ExamResult, ExamResultViewModel>().IncludeMembers(e=>e.Candidate).IncludeMembers(c=>c.ExamTypeConf).ReverseMap();
+            CreateMap<ExamTypeConf, ExamResultViewModel>().ReverseMap();
+            CreateMap<Candidate, ExamResultViewModel>().ReverseMap();
+            CreateMap<ExamResult,AddExamResultViewModel>().ReverseMap();
+            CreateMap<ExamResult,UpdateExamResultViewModel>().ReverseMap();
+            CreateMap<ExamResult,DeleteExamResultViewModel>().ReverseMap();
+            CreateMap<ExamResultViewModel,AddExamResultViewModel>().ReverseMap();
+            CreateMap<ExamResultViewModel,UpdateExamResultViewModel>().ReverseMap();
+            CreateMap<ExamResultViewModel,DeleteExamResultViewModel>().ReverseMap();
+
+            //Interview Mappers
+
+            CreateMap<Interview, InterviewViewModel>().IncludeMembers(i=>i.Candidate).ReverseMap();
+            CreateMap<Candidate, InterviewViewModel>().ReverseMap();
+            CreateMap<CandidateViewModel, InterviewViewModel>().ReverseMap();
+            CreateMap<Interview, AddInterviewViewModel>().ReverseMap();
+            CreateMap<Interview, UpdateInterviewViewModel>().ReverseMap();
+            CreateMap<Interview, DeleteInterviewViewModel>().ReverseMap();
+            CreateMap<InterviewViewModel, AddInterviewViewModel>().ReverseMap();
+            CreateMap<InterviewViewModel, UpdateInterviewViewModel>().ReverseMap();
+            CreateMap<InterviewViewModel, DeleteInterviewViewModel>().ReverseMap();
         }
     }
 }

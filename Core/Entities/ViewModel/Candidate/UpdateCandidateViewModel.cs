@@ -27,6 +27,6 @@ namespace Core.Entities.ViewModel.Candidate
         public List<MajorViewModel> Majors { get; set; }
         public int CandidateStatusId { get; set; }
         public List<CandidateStatusViewModel> CandidateStatuses { get; set; }
-        public CandidateViewModel CandidateStatus { get; set; }
+        public CandidateStatusViewModel CandidateStatus { get; set; }
     }
 }

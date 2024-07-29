@@ -15,7 +15,7 @@
     </div>
     <div class="form-group">
         <label asp-for="DateOfBirth">تاريخ الميلاد</label>
-        <input asp-for="DateOfBirth" type="date" max="" class="form-control">
+        <input asp-for="DateOfBirth" type="date" max="@DateTime.UtcNow" class="form-control">
     </div>
     <div class="form-group">
         <label asp-for="Email">البريد الإلكتروني</label>
@@ -50,7 +50,7 @@
 
     <div class="form-group">
         <label asp-for="CandidateStatusId" class="form-check-label">حالة المرشح</label>
-        <select asp-for="CandidateStatusId" class="form-control form-select" asp-items="@(new SelectList(Model.CandidateStatuses, "CandidateStatusId", "CandidateStatusName"))"></select>
+        <select asp-for="CandidateStatusId" class="form-control form-select" asp-items="@(new SelectList(Model.CandidateStatuses, "CandidateStatusId", "Status",Model.CandidateStatus.CandidateStatusId))"></select>
     </div>
 
     <input hidden asp-for="CandidateId" />

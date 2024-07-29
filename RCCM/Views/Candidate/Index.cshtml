@@ -15,6 +15,7 @@
                 <th>الجنسية</th>
                 <th>تاريخ الميلاد</th>
                 <th>رقم الهوية</th>
+                <th>حالة المرشح</th>
                 <th></th>
                 <th></th>
 
@@ -31,6 +32,7 @@
                     <td>@candidate.Nationality.NationalityName</td>
                     <td>@DateOnly.FromDateTime(candidate.DateOfBirth)</td>
                     <td>@candidate.NationalId</td>
+                    <td>@candidate.CandidateStatus.Status</td>
                     
                     
 

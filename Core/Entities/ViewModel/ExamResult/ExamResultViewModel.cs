@@ -1,16 +1,15 @@
-﻿using System;
+﻿using Core.Entities.ViewModel.Candidate;
+using Core.Entities.ViewModel.ExamTypeConf;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Entities.Model
+namespace Core.Entities.ViewModel.ExamResult
 {
-    public class ExamResult
+    public class ExamResultViewModel
     {
-        [Key]
         public int ExamResultId { get; set; }
         public string Notes { get; set; }
         public bool PassedExam { get; set; }
@@ -18,13 +17,9 @@ namespace Core.Entities.Model
         public bool IsActive { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-
-        [ForeignKey("Candidate")]
-        public int CandidateId { get; set; }
-        public Candidate Candidate { get; set; }
-
-        [ForeignKey("ExamTypeConf")]
         public int ExamTypeConfId { get; set; }
-        public ExamTypeConf ExamTypeConf { get; set; }
+        ExamTypeConfViewModel ExamType { get; set; }
+        public int CandidateId { get; set; }
+        CandidateViewModel Candidate { get; set; }
     }
 }

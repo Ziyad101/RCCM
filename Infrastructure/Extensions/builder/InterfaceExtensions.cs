@@ -23,6 +23,8 @@ namespace Infrastructure.Extensions.builder
             services.AddScoped<INationalityRepo, NationalityRepo>();
             services.AddScoped<ICandidateStatusRepo, CandidateStatusRepo>();
             services.AddScoped<IExamTypeConfRepo, ExamTypeConfRepo>();
+            services.AddScoped<IExamResultRepo, ExamResultRepo>();
+            services.AddScoped<IInterviewRepo, InterviewRepo>();
 
 
 
