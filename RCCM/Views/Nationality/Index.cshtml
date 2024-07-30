@@ -1,44 +1,67 @@
 ﻿@model List<NationalityViewModel>
+@{
+    Layout = "_AdminLayout";
+}
 
 <h1 class="text-center mb-4">قائمة الجنسيات (@Model.Count())</h1>
 
-
-
 <div class="container">
-    <table class="table table-hover table-striped">
-        <thead class="bg-primary bg-opacity-75 text-black">
-            <tr>
-                <th>اسم الجنسية</th>
-                <th></th>
-                <th></th>
+    <!-- Search Input -->
+    <div class="row mb-3">
+        <div class="col-md-6 offset-md-3">
+            <input id="searchInput" class="form-control" type="text" placeholder="ابحث عن جنسية...">
+        </div>
+    </div>
 
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var Nationality in Model)
-            {
-                <tr>
-                    <td>@Nationality.NationalityName</td>
-                  
+    <!-- Add Nationality Button -->
+    <div class="text-center mb-4">
+        <a class="nav-link text-decoration-none text-white btn btn-primary" asp-controller="Nationality" asp-action="Add">إضافة جنسية</a>
+    </div>
 
-                     <td>
+    <div class="row">
+        <div class="col">
+            <hr class="my-4" style="border-color: #072e6e;">
+        </div>
+    </div>
+
+    <!-- Nationalities Cards -->
+    <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+        @foreach (var nationality in Model)
+        {
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title text-white custom-bg-primary p-3">@nationality.NationalityName</h5>
                         <form asp-action="Edit" method="post">
-                            <input hidden asp-for="@Nationality.NationalityId" name="id" />
-                            <button class="btn btn-warning" type="submit">تعديل البيانات</button>
+                            <input type="hidden" name="id" value="@nationality.NationalityId" />
+                            <button class="btn btn-warning btn-sm" type="submit">تعديل البيانات</button>
                         </form>
-                    </td> 
-
-                     <td>
-                        <form asp-action="Delete" method="post">
-                            <input hidden asp-for="@Nationality.NationalityId" name="id" />
-                            <button class="btn btn-danger" type="submit">حذف الجنسية</button>
+                        <form asp-action="Delete" method="post" class="mt-2">
+                            <input type="hidden" name="id" value="@nationality.NationalityId" />
+                            <button class="btn btn-danger btn-sm" type="submit">حذف الجنسية</button>
                         </form>
-                    </td> 
-                </tr>
-            }
-
-        </tbody>
-    </table>
-
-    <a class="nav-link text-decoration-none text-white btn btn-success" asp-controller="Nationality" asp-action="ADD"> ADD Nationality </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>
+
+@section scripts {
+    <script>
+        // Function to handle search input change
+        document.getElementById('searchInput').addEventListener('input', function () {
+            var filter = this.value.toLowerCase();
+            var cards = document.querySelectorAll('.card');
+
+            cards.forEach(function (card) {
+                var nationalityName = card.querySelector('.card-title').innerText.toLowerCase();
+                if (nationalityName.includes(filter)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+}

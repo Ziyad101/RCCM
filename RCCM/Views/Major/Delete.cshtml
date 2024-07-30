@@ -1,16 +1,33 @@
-﻿@{
+﻿@model DeleteMajorViewModel
+
+@{
     ViewData["Title"] = "Delete Major";
+    Layout = "_AdminLayout";
 }
-@model DeleteMajorViewModel
 
-<h2>حذف التخصص</h2>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow custom-card border-primary">
+                <div class="card-header bg-custom-primary text-white text-center">
+                    <h2>حذف التخصص</h2>
+                </div>
+                <div class="card-body custom-card-body">
+                    <form asp-action="DeleteMajor" method="post">
+                        <div class="mb-3">
+                            <label class="form-label custom-form-label">اسم التخصص</label>
+                            <p class="form-control-plaintext">@Model.MajorName</p>
+                        </div>
+                        <input type="hidden" asp-for="MajorId" />
+                        <input type="hidden" asp-for="MajorName" />
 
-<form asp-action="DeleteMajor" method="post">
-    <p><strong>اسم التخصص:</strong> @Model.MajorName</p>
-    <input type="hidden" asp-for="MajorId" />
-    <input type="hidden" asp-for="MajorName   " />
-    <div class="d-flex justify-content-evenly mt-5">
-        <button type="submit" class="btn btn-danger">حذف التخصص</button>
-        <a class="text-decoration-none btn btn-primary" asp-action="Index">العودة لقائمة التخصصات</a>
+                        <div class="d-flex justify-content-between mt-4">
+                            <button type="submit" class="btn btn-danger">حذف التخصص</button>
+                            <a class="btn btn-primary" asp-action="Index">العودة لقائمة التخصصات</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-</form>
+</div>

@@ -1,56 +1,75 @@
 ﻿@model UpdateCandidateViewModel
 
+@{
+    Layout = "_AdminLayout";
+}
 
-<h2>تحديث معلومات مرشح</h2>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow custom-card border-primary">
+                <div class="card-header bg-custom-primary text-white text-center">
+                    <h2>تحديث معلومات مرشح</h2>
+                </div>
+                <div class="card-body custom-card-body">
+                    <form asp-action="EditCandidate" method="post">
+                        <div class="mb-3">
+                            <label asp-for="CandidateName" class="form-label custom-form-label">اسم المرشح</label>
+                            <input asp-for="CandidateName" class="form-control custom-form-control" />
+                        </div>
 
-<form asp-action="EditCandidate" method="post">
-    <div class="form-group">
-        <label asp-for="CandidateName">اسم المرشح</label>
-        <input asp-for="CandidateName" class="form-control" />
-    </div>
+                        <div class="mb-3">
+                            <label asp-for="NationalId" class="form-label custom-form-label">رقم الهوية</label>
+                            <input asp-for="NationalId" class="form-control custom-form-control" />
+                        </div>
 
-    <div class="form-group">
-        <label asp-for="NationalId">رقم الهوية</label>
-        <input asp-for="NationalId"  class="form-control" >
-    </div>
-    <div class="form-group">
-        <label asp-for="DateOfBirth">تاريخ الميلاد</label>
-        <input asp-for="DateOfBirth" type="date" max="" class="form-control">
-    </div>
-    <div class="form-group">
-        <label asp-for="Email">البريد الإلكتروني</label>
-        <input asp-for="Email" type="email" class="form-control">
-    </div>
+                        <div class="mb-3">
+                            <label asp-for="DateOfBirth" class="form-label custom-form-label">تاريخ الميلاد</label>
+                            <input asp-for="DateOfBirth" type="date" class="form-control custom-form-control" />
+                        </div>
 
-    <div class="form-group">
-        <label asp-for="PhoneNumber">رقم الهاتف</label>
-        <input asp-for="PhoneNumber" class="form-control">
-    </div>
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label custom-form-label">البريد الإلكتروني</label>
+                            <input asp-for="Email" type="email" class="form-control custom-form-control" />
+                        </div>
 
-    <label asp-for="Gender" class="form-label mt-3">الجنس: </label>
-    <div class="form-check form-check-inline">
-        <input asp-for="Gender" type="radio" value="Male" class="form-check-input" checked>
-        <label asp-for="Gender" class="form-check-label">ذكر</label>
-    </div>
+                        <div class="mb-3">
+                            <label asp-for="PhoneNumber" class="form-label custom-form-label">رقم الهاتف</label>
+                            <input asp-for="PhoneNumber" class="form-control custom-form-control" />
+                        </div>
 
-    <div class="form-check form-check-inline">
-        <input asp-for="Gender" type="radio" value="Female" class="form-check-input">
-        <label asp-for="Gender" class="form-check-label">أنثى</label>
-    </div>
+                        <div class="mb-3">
+                            <label asp-for="Gender" class="form-label custom-form-label">الجنس:</label>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="Gender" type="radio" value="Male" class="form-check-input" checked />
+                                <label asp-for="Gender" class="form-check-label">ذكر</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="Gender" type="radio" value="Female" class="form-check-input" />
+                                <label asp-for="Gender" class="form-check-label">أنثى</label>
+                            </div>
+                        </div>
 
-    <div class="form-group">
-        <label asp-for="Major.MajorId" class="form-check-label">التخصص الجامعي</label>
-        <select asp-for="Major.MajorId" class="form-control form-select" asp-items="@(new SelectList(Model.Majors, "MajorId", "MajorName",Model.Major.MajorId))"></select>
-    </div>
+                        <div class="mb-3">
+                            <label asp-for="Major.MajorId" class="form-label custom-form-label">التخصص الجامعي</label>
+                            <select asp-for="Major.MajorId" class="form-control form-select custom-form-select" asp-items="@(new SelectList(Model.Majors, "MajorId", "MajorName", Model.Major.MajorId))"></select>
+                        </div>
 
-    <div class="form-group">
-        <label asp-for="Nationality.NationalityId" class="form-check-label">الجنسية</label>
-        <select asp-for="Nationality.NationalityId" class="form-control form-select" asp-items="@(new SelectList(Model.Nationalities, "NationalityId", "NationalityName",Model.Nationality.NationalityId))"></select>
-    </div>
-    <input hidden asp-for="CandidateId" />
+                        <div class="mb-4">
+                            <label asp-for="Nationality.NationalityId" class="form-label custom-form-label">الجنسية</label>
+                            <select asp-for="Nationality.NationalityId" class="form-control form-select custom-form-select" asp-items="@(new SelectList(Model.Nationalities, "NationalityId", "NationalityName", Model.Nationality.NationalityId))"></select>
+                        </div>
 
-    <div class="d-flex justify-content-evenly mt-5">
-        <button type="submit" class="btn btn-success">تحديث المرشح</button>
-        <a class="text-decoration-none btn btn-primary" asp-action="Index">العودة لقائمة المرشحين</a>
+                        <input type="hidden" asp-for="CandidateId" />
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <button type="submit" class="btn btn-success">تحديث المرشح</button>
+                            <a class="btn btn-primary" asp-action="Index">العودة لقائمة المرشحين</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-</form>
+</div>
+

@@ -121,5 +121,10 @@ namespace RCCM.Controllers.Web
             }
         }
 
+        public IActionResult RoleTable()
+        {
+            return View();
+        }
+
     }
 }

@@ -43,7 +43,7 @@ footer {
     background-repeat: repeat;
     background-size: 100px; 
     background-position: center center;
-    height: 85vh; 
+    height: 100vh; 
 }
 
 :root {
@@ -89,3 +89,36 @@ footer {
     background-color: #184080;
 }
 
+.custom-bg-primary {
+    background-color: #072e6e !important;
+}
+
+.card {
+    direction: rtl;
+}
+
+.card-body {
+    text-align: right;
+}
+
+.bg-custom-primary {
+    background-color: #072e6e !important;
+}
+
+.text-custom-primary {
+    color: #072e6e !important;
+}
+
+.border-custom-primary {
+    border-color: #072e6e !important;
+}
+
+.btn-custom-primary {
+    background-color: #072e6e;
+    border-color: #072e6e;
+}
+
+    .btn-custom-primary:hover {
+        background-color: #061f4f;
+        border-color: #061f4f;
+    }

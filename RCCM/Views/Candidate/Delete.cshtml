@@ -1,48 +1,68 @@
 ﻿@model DeleteCandidateViewModel
 
-<form asp-action="DeleteCandidate" method="post">
-    <div class="form-group">
-        <label asp-for="CandidateName">اسم المرشح</label>
-        <input asp-for="CandidateName" class="form-control" readonly />
-    </div>
+@{
+    Layout = "_AdminLayout";
+}
 
-    <div class="form-group">
-        <label asp-for="NationalId">رقم الهوية</label>
-        <input asp-for="NationalId"  class="form-control" readonly>
-    </div>
-    <div class="form-group">
-        <label asp-for="DateOfBirth">تاريخ الميلاد</label>
-        <input asp-for="DateOfBirth"  class="form-control" readonly>
-    </div>
-    <div class="form-group">
-        <label asp-for="Email">البريد الإلكتروني</label>
-        <input asp-for="Email" class="form-control" readonly>
-    </div>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow custom-card border-primary">
+                <div class="card-header bg-custom-primary text-white text-center">
+                    <h2>حذف مرشح</h2>
+                </div>
+                <div class="card-body custom-card-body">
+                    <form asp-action="DeleteCandidate" method="post">
+                        <div class="mb-3">
+                            <label asp-for="CandidateName" class="form-label custom-form-label">اسم المرشح</label>
+                            <input asp-for="CandidateName" class="form-control custom-form-control" readonly />
+                        </div>
 
-    <div class="form-group">
-        <label asp-for="PhoneNumber">رقم الهاتف</label>
-        <input asp-for="PhoneNumber" class="form-control" readonly>
-    </div>
+                        <div class="mb-3">
+                            <label asp-for="NationalId" class="form-label custom-form-label">رقم الهوية</label>
+                            <input asp-for="NationalId" class="form-control custom-form-control" readonly />
+                        </div>
 
+                        <div class="mb-3">
+                            <label asp-for="DateOfBirth" class="form-label custom-form-label">تاريخ الميلاد</label>
+                            <input asp-for="DateOfBirth" class="form-control custom-form-control" readonly />
+                        </div>
 
-    <div class="form-check">
-        <label asp-for="Gender">الجنس</label>
-        <input asp-for="Gender" class="form-control" readonly>
-    </div>
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label custom-form-label">البريد الإلكتروني</label>
+                            <input asp-for="Email" class="form-control custom-form-control" readonly />
+                        </div>
 
-    <div class="form-group">
-        <label asp-for="Major">التخصص الجامعي</label>
-        <input asp-for="Major.MajorName" type="text" class="form-control" readonly>
-    </div>
+                        <div class="mb-3">
+                            <label asp-for="PhoneNumber" class="form-label custom-form-label">رقم الهاتف</label>
+                            <input asp-for="PhoneNumber" class="form-control custom-form-control" readonly />
+                        </div>
 
-    <div class="form-group">
-        <label asp-for="Nationality">الجنسية</label>
-        <input asp-for="Nationality.NationalityName" class="form-control" readonly>
-    </div>
+                        <div class="mb-3">
+                            <label asp-for="Gender" class="form-label custom-form-label">الجنس</label>
+                            <input asp-for="Gender" class="form-control custom-form-control" readonly />
+                        </div>
 
-    <input hidden asp-for="CandidateId" />
-    <div class="d-flex justify-content-evenly mt-5">
-        <button type="submit" class="btn btn-success">حذف المرشح</button>
-        <a class="text-decoration-none btn btn-primary" asp-action="Index">العودة لقائمة المرشحين</a>
+                        <div class="mb-3">
+                            <label asp-for="Major" class="form-label custom-form-label">التخصص الجامعي</label>
+                            <input asp-for="Major.MajorName" class="form-control custom-form-control" readonly />
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="Nationality" class="form-label custom-form-label">الجنسية</label>
+                            <input asp-for="Nationality.NationalityName" class="form-control custom-form-control" readonly />
+                        </div>
+
+                        <input type="hidden" asp-for="CandidateId" />
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <button type="submit" class="btn btn-danger">حذف المرشح</button>
+                            <a class="btn btn-primary" asp-action="Index">العودة لقائمة المرشحين</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-</form>
+</div>
+

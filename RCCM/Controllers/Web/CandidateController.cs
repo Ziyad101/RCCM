@@ -78,6 +78,11 @@ namespace RCCM.Controllers.Web
             _candidateRepo.DeleteCandidate(model);
             return RedirectToAction("Index");
         }
+
+        public IActionResult CandidateIndex()
+        {
+            return View();
+        }
     }
 
 
