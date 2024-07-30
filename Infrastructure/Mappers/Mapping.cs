@@ -17,6 +17,7 @@ using Core.Entities.ViewModel.ExamTypeConf;
 using Core.Entities.ViewModel.ExamResult;
 using Core.Entities.ViewModel.Interview;
 using Core.Entities.ViewModel.CreatorExamTypeConf;
+using Core.Entities.ViewModel.Experience;
 
 namespace Infrastructure.Mappers
 {
@@ -138,15 +139,21 @@ namespace Infrastructure.Mappers
           
             // Grade Mappers
             CreateMap<Grade,GradeViewModel>().ReverseMap();
-          
             CreateMap<Grade,AddGradeViewModel>().ReverseMap();
             CreateMap<Grade,UpdateGradeViewModel>().ReverseMap();
-           
             CreateMap<Grade,DeleteGradeViewModel>().ReverseMap();
-           
             CreateMap<GradeViewModel,DeleteGradeViewModel>().ReverseMap();
-
             CreateMap<GradeViewModel, UpdateGradeViewModel>().ReverseMap();
+
+            //Experience Mappers
+
+            CreateMap<Experience, ExperienceViewModel>().IncludeMembers(e => e.Candidate).IncludeMembers(e => e.Grade).ReverseMap();
+            CreateMap<Experience, AddCandidateViewModel>().ReverseMap();
+            CreateMap<Experience, UpdateCandidateViewModel>().ReverseMap();
+            CreateMap<Experience, DeleteCandidateViewModel>().ReverseMap();
+            CreateMap<ExperienceViewModel, AddCandidateViewModel>().ReverseMap();
+            CreateMap<ExperienceViewModel, UpdateCandidateViewModel>().ReverseMap();
+            CreateMap<ExperienceViewModel, DeleteCandidateViewModel>().ReverseMap();
 
         }
     }
