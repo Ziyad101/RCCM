@@ -20,11 +20,8 @@ namespace Core.Entities.Model
         public DateTime EndDate { get; set; }
         public bool IsActive { get; set; }
         public DateTime CreatedAt { get; set; }
-
         public DateTime UpdatedAt { get; set; }
-        
         public List<ExamResult> ExamResults { get; set; }
-
         public List<CreatorExamTypeConf> CreatorExamTypeConf { get; set; }
 
     }

@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Edit Role";
+}
+@model UpdateCandidateStatusViewModel
+
+<h2>تحديث الصلاحيات</h2>
+
+<form class=" " asp-action="EditCandidateStatus" method="post">
+    <div class="form-group">
+        <label asp-for="Status">اسم الحالة</label>
+        <input asp-for="Status" class="form-control form-text" value="@Model.Status" />
+    </div>
+   
+    <input hidden asp-for="CandidateStatusId" />
+    <div class="d-flex justify-content-evenly mt-5">
+        <button type="submit" class="btn btn-success">تحديث بيانات الصلاحية</button>
+        <a class="text-decoration-none btn btn-primary" asp-action="Index">العودة لقائمة الصلاحيات</a>
+    </div>
+</form>

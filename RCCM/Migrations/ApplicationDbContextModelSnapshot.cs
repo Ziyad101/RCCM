@@ -34,6 +34,9 @@ namespace RCCM.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("CandidateStatusId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -73,6 +76,8 @@ namespace RCCM.Migrations
 
                     b.HasKey("CandidateId");
 
+                    b.HasIndex("CandidateStatusId");
+
                     b.HasIndex("MajorId");
 
                     b.HasIndex("NationalityId");
@@ -88,9 +93,6 @@ namespace RCCM.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CandidateStatusId"), 1L, 1);
 
-                    b.Property<int>("CandidateId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -105,9 +107,6 @@ namespace RCCM.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("CandidateStatusId");
-
-                    b.HasIndex("CandidateId")
-                        .IsUnique();
 
                     b.ToTable("CandidateStatus");
                 });
@@ -547,6 +546,12 @@ namespace RCCM.Migrations
 
             modelBuilder.Entity("Core.Entities.Model.Candidate", b =>
                 {
+                    b.HasOne("Core.Entities.Model.CandidateStatus", "CandidateStatus")
+                        .WithMany()
+                        .HasForeignKey("CandidateStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Core.Entities.Model.Major", "Major")
                         .WithMany("Candidates")
                         .HasForeignKey("MajorId")
@@ -559,20 +564,11 @@ namespace RCCM.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("CandidateStatus");
+
                     b.Navigation("Major");
 
                     b.Navigation("Nationality");
-                });
-
-            modelBuilder.Entity("Core.Entities.Model.CandidateStatus", b =>
-                {
-                    b.HasOne("Core.Entities.Model.Candidate", "Candidate")
-                        .WithOne("CandidateStatus")
-                        .HasForeignKey("Core.Entities.Model.CandidateStatus", "CandidateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Candidate");
                 });
 
             modelBuilder.Entity("Core.Entities.Model.CreatorExamTypeConf", b =>
@@ -689,9 +685,6 @@ namespace RCCM.Migrations
 
             modelBuilder.Entity("Core.Entities.Model.Candidate", b =>
                 {
-                    b.Navigation("CandidateStatus")
-                        .IsRequired();
-
                     b.Navigation("ExamResults");
 
                     b.Navigation("Experiences");

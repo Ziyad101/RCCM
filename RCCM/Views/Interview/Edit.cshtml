@@ -1,0 +1,23 @@
+﻿@model UpdateInterviewViewModel
+<h2>Update interview</h2>
+
+<form asp-action="EditInterview" method="post">
+
+    <div class="form-group">
+        <label asp-for="Candidates" class="form-check-label"> Candidate</label>
+        <select asp-for="CandidateId" class="form-control form-select" asp-items="@(new SelectList(Model.Candidates, "CandidateId", "CandidateName",Model.CandidateId))"></select>
+    </div>
+    <div class="form-group">
+        <label asp-for="InterviewDate"></label>
+        <input asp-for="InterviewDate" class="form-control" />
+    </div>
+
+    <input hidden asp-for="InterviewId" />
+
+    <div class="d-flex justify-content-evenly mt-5">
+        <button type="submit" class="btn btn-success">إضافة التخصص</button>
+        <a class="text-decoration-none btn btn-primary" asp-action="Index">العودة لقائمة التخصصات</a>
+    </div>
+</form>
+
+

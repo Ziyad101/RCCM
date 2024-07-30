@@ -12,7 +12,6 @@ namespace Core.Entities.Model
     {
         [Key]
         public int ExamResultId { get; set; }
-
         public string Notes { get; set; }
         public bool PassedExam { get; set; }
         public DateTime ResultDate { get; set; }

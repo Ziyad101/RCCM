@@ -10,6 +10,22 @@ namespace RCCM.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "CandidateStatus",
+                columns: table => new
+                {
+                    CandidateStatusId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CandidateStatus", x => x.CandidateStatusId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ExamTypeConf",
                 columns: table => new
                 {
@@ -27,6 +43,22 @@ namespace RCCM.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ExamTypeConf", x => x.ExamTypeConfId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Grade",
+                columns: table => new
+                {
+                    GradeId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    GradeValue = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Grade", x => x.GradeId);
                 });
 
             migrationBuilder.CreateTable(
@@ -82,21 +114,28 @@ namespace RCCM.Migrations
                     CandidateId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CandidateName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NationalId = table.Column<int>(type: "int", nullable: false),
+                    NationalId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhoneNumber = table.Column<int>(type: "int", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RequestStatus = table.Column<int>(type: "int", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     NationalityId = table.Column<int>(type: "int", nullable: false),
-                    MajorId = table.Column<int>(type: "int", nullable: false)
+                    MajorId = table.Column<int>(type: "int", nullable: false),
+                    CandidateStatusId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Candidate", x => x.CandidateId);
+                    table.ForeignKey(
+                        name: "FK_Candidate_CandidateStatus_CandidateStatusId",
+                        column: x => x.CandidateStatusId,
+                        principalTable: "CandidateStatus",
+                        principalColumn: "CandidateStatusId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Candidate_Major_MajorId",
                         column: x => x.MajorId,
@@ -129,29 +168,6 @@ namespace RCCM.Migrations
                         column: x => x.RoleId,
                         principalTable: "Role",
                         principalColumn: "RoleId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CandidateStatus",
-                columns: table => new
-                {
-                    CandidateStatusId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CandidateId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CandidateStatus", x => x.CandidateStatusId);
-                    table.ForeignKey(
-                        name: "FK_CandidateStatus_Candidate_CandidateId",
-                        column: x => x.CandidateId,
-                        principalTable: "Candidate",
-                        principalColumn: "CandidateId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -203,7 +219,8 @@ namespace RCCM.Migrations
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CandidateId = table.Column<int>(type: "int", nullable: false)
+                    CandidateId = table.Column<int>(type: "int", nullable: false),
+                    GradeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -213,6 +230,12 @@ namespace RCCM.Migrations
                         column: x => x.CandidateId,
                         principalTable: "Candidate",
                         principalColumn: "CandidateId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Experience_Grade_GradeId",
+                        column: x => x.GradeId,
+                        principalTable: "Grade",
+                        principalColumn: "GradeId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -320,29 +343,6 @@ namespace RCCM.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Grade",
-                columns: table => new
-                {
-                    GradeId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    GradeValue = table.Column<int>(type: "int", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ExperienceId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Grade", x => x.GradeId);
-                    table.ForeignKey(
-                        name: "FK_Grade_Experience_ExperienceId",
-                        column: x => x.ExperienceId,
-                        principalTable: "Experience",
-                        principalColumn: "ExperienceId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "InterviewResult",
                 columns: table => new
                 {
@@ -366,6 +366,11 @@ namespace RCCM.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Candidate_CandidateStatusId",
+                table: "Candidate",
+                column: "CandidateStatusId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Candidate_MajorId",
                 table: "Candidate",
                 column: "MajorId");
@@ -374,12 +379,6 @@ namespace RCCM.Migrations
                 name: "IX_Candidate_NationalityId",
                 table: "Candidate",
                 column: "NationalityId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CandidateStatus_CandidateId",
-                table: "CandidateStatus",
-                column: "CandidateId",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_CreatorExamTypeConf_ExamTypeConfId",
@@ -407,9 +406,9 @@ namespace RCCM.Migrations
                 column: "CandidateId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Grade_ExperienceId",
-                table: "Grade",
-                column: "ExperienceId");
+                name: "IX_Experience_GradeId",
+                table: "Experience",
+                column: "GradeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Interview_CandidateId",
@@ -443,16 +442,13 @@ namespace RCCM.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CandidateStatus");
-
-            migrationBuilder.DropTable(
                 name: "CreatorExamTypeConf");
 
             migrationBuilder.DropTable(
                 name: "ExamResult");
 
             migrationBuilder.DropTable(
-                name: "Grade");
+                name: "Experience");
 
             migrationBuilder.DropTable(
                 name: "InterviewResult");
@@ -470,7 +466,7 @@ namespace RCCM.Migrations
                 name: "ExamTypeConf");
 
             migrationBuilder.DropTable(
-                name: "Experience");
+                name: "Grade");
 
             migrationBuilder.DropTable(
                 name: "Interview");
@@ -480,6 +476,9 @@ namespace RCCM.Migrations
 
             migrationBuilder.DropTable(
                 name: "Candidate");
+
+            migrationBuilder.DropTable(
+                name: "CandidateStatus");
 
             migrationBuilder.DropTable(
                 name: "Major");

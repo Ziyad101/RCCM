@@ -26,7 +26,7 @@ namespace Infrastructure.Repositories
         public void AddCandidate(AddCandidateViewModel candidateModel)
         {
             var candidate = _mapper.Map<Candidate>(candidateModel);
-            _context.Add(candidate);
+            _context.Candidate.Add(candidate);
             _context.SaveChanges();
         }
 
@@ -34,13 +34,13 @@ namespace Infrastructure.Repositories
         {
             var candidate = _mapper.Map<Candidate>(candidateModel);
             candidate.IsActive = false;
-            _context.Update(candidate);
+            _context.Candidate.Update(candidate);
             _context.SaveChanges();
         }
 
         public List<CandidateViewModel> GetAllCandidate()
         {
-            var allCandidates = _context.Candidate.Where(c => c.IsActive).Include(c => c.Nationality).Include(c => c.Major).AsNoTracking().ToList();
+            var allCandidates = _context.Candidate.Where(c => c.IsActive).Include(c => c.Nationality).Include(c => c.Major).Include(c=>c.CandidateStatus).AsNoTracking().ToList();
 
             var candidateModels = _mapper.Map<List<CandidateViewModel>>(allCandidates);
 
@@ -49,7 +49,7 @@ namespace Infrastructure.Repositories
 
         public CandidateViewModel GetCandidateById(int id)
         {
-            var candidate = _context.Candidate.Where(c => c.CandidateId == id).Include(c=>c.Major).Include(c=>c.Nationality).AsNoTracking().FirstOrDefault();
+            var candidate = _context.Candidate.Where(c => c.CandidateId == id).Include(c=>c.Major).Include(c=>c.Nationality).Include(c=>c.CandidateStatus).AsNoTracking().FirstOrDefault();
             var candidateModel = _mapper.Map<CandidateViewModel>(candidate);
             return candidateModel;
         }
@@ -76,9 +76,8 @@ namespace Infrastructure.Repositories
             var major = _context.Major.AsNoTracking().Where(m => m.MajorId == candidate.Major.MajorId).FirstOrDefault();
             var nationality = _context.Nationality.AsNoTracking().Where(n=>n.NationalityId == candidate.Nationality.NationalityId).FirstOrDefault();
             candidate.Major = major;
-            candidate.Nationality = nationality;
-         
-            _context.Update(candidate);
+            candidate.Nationality = nationality;     
+            _context.Candidate.Update(candidate);
             _context.SaveChanges();
         }
     }

@@ -22,5 +22,6 @@ namespace Core.Entities.ViewModel.Candidate
         public DateTime UpdatedAt { get; set; }
         public NationalityViewModel Nationality {get; set;}
         public MajorViewModel Major {get; set;}
+        public CandidateViewModel CandidateStatus { get; set; }
     }
 }

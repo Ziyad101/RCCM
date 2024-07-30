@@ -16,10 +16,7 @@ namespace Core.Entities.Model
         public bool IsActive { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-
-        [ForeignKey("Candidate")]
-        public int CandidateId { get; set; }
-        public Candidate Candidate { get; set; }
+        List<Candidate> Candidates { get; set; }
     }
 
 }

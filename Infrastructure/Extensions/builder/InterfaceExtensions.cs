@@ -1,6 +1,4 @@
-﻿
-
-using Core.Interfaces;
+﻿using Core.Interfaces;
 using Infrastructure.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,6 +21,11 @@ namespace Infrastructure.Extensions.builder
             services.AddScoped<ICandidateRepo, CandidateRepo>();
             services.AddScoped<IMajorRepo, MajorRepo>();
             services.AddScoped<INationalityRepo, NationalityRepo>();
+            services.AddScoped<ICandidateStatusRepo, CandidateStatusRepo>();
+            services.AddScoped<IExamTypeConfRepo, ExamTypeConfRepo>();
+            services.AddScoped<IExamResultRepo, ExamResultRepo>();
+            services.AddScoped<IInterviewRepo, InterviewRepo>();
+            services.AddScoped<ICreatorExamTypeConfRepo, CreatorExamTypeConfRepo>();
 
 
 

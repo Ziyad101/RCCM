@@ -7,6 +7,11 @@
     }
 }
 
+    <div class="form-group">
+        <label asp-for="CandidateStatusId" class="form-check-label">حالة المرشح</label>
+        <select asp-for="CandidateStatusId" class="form-control form-select" asp-items="@(new SelectList(Model.CandidateStatuses, "CandidateStatusId", "Status"))"></select>
+    </div>
+
 
 <div class="container mt-5 mb-5">
     <div class="row justify-content-center">

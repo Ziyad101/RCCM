@@ -1,6 +1,7 @@
 ﻿using Core.Entities.Model;
 using Core.Entities.ViewModel.Nationality;
 using Core.Entities.ViewModel.Major;
+using Core.Entities.ViewModel.CandidateStatus;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -24,6 +25,7 @@ namespace Core.Entities.ViewModel.Candidate
         public DateTime UpdatedAt { get; set; }
         public NationalityViewModel Nationality {get; set;}
         public MajorViewModel Major {get; set;}
+        public CandidateStatusViewModel CandidateStatus {get; set;}
 
 
     }
