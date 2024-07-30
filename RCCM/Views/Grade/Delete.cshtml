@@ -1,11 +1,11 @@
-﻿@model DeleteUserViewModel
+﻿@model DeleteGradeViewModel
 
 <h2>حذف المستخدم</h2>
 
-<form asp-action="DeleteUser" method="post">
-    <p><strong>اسم المستخدم:</strong> @Model.UserName</p>
-    <p><strong>الصلاحية:</strong> @Model.RoleName</p>
-    <input type="hidden" name="id" asp-for="UserId" />
+<form asp-action="DeleteGrade" method="post">
+    <p><strong>اسم المستخدم:</strong> @Model.GradeValue</p>
+    
+    <input type="hidden"  asp-for="GradeId" />
     <div class="d-flex justify-content-evenly mt-5">
         <button type="submit" class="btn btn-danger">حذف المستخدم</button>
         <a class="text-decoration-none btn btn-primary" asp-action="Index">العودة لقائمة المستخدمين</a>

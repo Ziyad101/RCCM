@@ -6,6 +6,7 @@ using Core.Entities.ViewModel.Major;
 using Core.Entities.ViewModel.Request;
 using Core.Entities.ViewModel.Role;
 using Core.Entities.ViewModel.Nationality;
+using Core.Entities.ViewModel.Grade;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,6 +48,18 @@ namespace Infrastructure.Mappers
             CreateMap<RoleViewModel, UpdateRoleViewModel>().ReverseMap();
 
 
+
+            // Grade Mappers
+            CreateMap<Grade,GradeViewModel>().ReverseMap();
+          
+            CreateMap<Grade,AddGradeViewModel>().ReverseMap();
+            CreateMap<Grade,UpdateGradeViewModel>().ReverseMap();
+           
+            CreateMap<Grade,DeleteGradeViewModel>().ReverseMap();
+           
+            CreateMap<GradeViewModel,DeleteGradeViewModel>().ReverseMap();
+
+            CreateMap<GradeViewModel, UpdateGradeViewModel>().ReverseMap();
 
         }
     }

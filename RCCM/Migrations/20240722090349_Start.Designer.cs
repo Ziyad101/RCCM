@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace RCCM.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240710080059_start")]
-    partial class start
+    [Migration("20240722090349_Start")]
+    partial class Start
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -56,14 +56,16 @@ namespace RCCM.Migrations
                     b.Property<int>("MajorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("NationalId")
-                        .HasColumnType("int");
+                    b.Property<string>("NationalId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("NationalityId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("int");
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RequestStatus")
                         .HasColumnType("int");
@@ -251,6 +253,9 @@ namespace RCCM.Migrations
                     b.Property<bool>("ExperienceMatch")
                         .HasColumnType("bit");
 
+                    b.Property<int>("GradeId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -271,6 +276,8 @@ namespace RCCM.Migrations
 
                     b.HasIndex("CandidateId");
 
+                    b.HasIndex("GradeId");
+
                     b.ToTable("Experience");
                 });
 
@@ -285,9 +292,6 @@ namespace RCCM.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ExperienceId")
-                        .HasColumnType("int");
-
                     b.Property<int>("GradeValue")
                         .HasColumnType("int");
 
@@ -298,8 +302,6 @@ namespace RCCM.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("GradeId");
-
-                    b.HasIndex("ExperienceId");
 
                     b.ToTable("Grade");
                 });
@@ -621,18 +623,15 @@ namespace RCCM.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Candidate");
-                });
-
-            modelBuilder.Entity("Core.Entities.Model.Grade", b =>
-                {
-                    b.HasOne("Core.Entities.Model.Experience", "Experience")
+                    b.HasOne("Core.Entities.Model.Grade", "Grade")
                         .WithMany()
-                        .HasForeignKey("ExperienceId")
+                        .HasForeignKey("GradeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Experience");
+                    b.Navigation("Candidate");
+
+                    b.Navigation("Grade");
                 });
 
             modelBuilder.Entity("Core.Entities.Model.Interview", b =>
@@ -699,11 +698,9 @@ namespace RCCM.Migrations
 
                     b.Navigation("Experiences");
 
-                    b.Navigation("Interview")
-                        .IsRequired();
+                    b.Navigation("Interview");
 
-                    b.Navigation("JobOffer")
-                        .IsRequired();
+                    b.Navigation("JobOffer");
 
                     b.Navigation("Request")
                         .IsRequired();

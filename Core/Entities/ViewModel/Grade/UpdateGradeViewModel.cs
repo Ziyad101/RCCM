@@ -10,13 +10,11 @@ namespace Core.Entities.ViewModel.Grade
     {
           public int GradeId { get; set; }
         public int GradeValue { get; set; }
-        public bool IsActive { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+        public bool IsActive { get; set; } = true;
 
-        public int ExperienceId { get; set; }
+        public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
-        public List<GradeViewModel> Experience { get; set;}
+       
    }
  }
 

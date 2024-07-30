@@ -8,8 +8,18 @@ using System.Threading.Tasks;
 
 namespace Core.Interfaces
 {
-    public interface IGradeRepo
+    public interface IGradeRepo 
     {
         List<GradeViewModel> GetAllGrades();
+
+        void AddGrade(AddGradeViewModel gradeModel);
+
+        void DeleteGrade(DeleteGradeViewModel gradeModel);
+
+        DeleteGradeViewModel GetDeleteModel(int id);
+
+       void EditGrade(UpdateGradeViewModel gradeModel);
+
+        UpdateGradeViewModel GetEditModel(int id); 
     }
 }

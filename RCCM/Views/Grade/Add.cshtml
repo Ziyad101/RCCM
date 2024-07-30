@@ -2,40 +2,12 @@
 @{
     ViewData["Title"] = "Add Grade";
 }
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grade Form</title>
-</head>
-<body>
-    <form action="/submit-grade" method="post">
+
+    <form asp-action="AddGrade" method="post">
         <div>
-            <label for="GradeId">Grade ID:</label>
-            <input type="number" id="GradeId" name="GradeId" required>
+            <label asp-for="GradeValue">Grade ID:</label>
+            <input asp-for="GradeValue" >
         </div>
-        <div>
-            <label for="GradeValue">Grade Value:</label>
-            <input type="number" id="GradeValue" name="GradeValue" required>
-        </div>
-        <div>
-            <label for="IsActive">Is Active:</label>
-            <input type="checkbox" id="IsActive" name="IsActive">
-        </div>
-        <div>
-            <label for="CreatedAt">Created At:</label>
-            <input type="datetime-local" id="CreatedAt" name="CreatedAt" required>
-        </div>
-        <div>
-            <label for="UpdatedAt">Updated At:</label>
-            <input type="datetime-local" id="UpdatedAt" name="UpdatedAt" required>
-        </div>
-        <div>
-            <label for="ExperienceId">Experience ID:</label>
-            <input type="number" id="ExperienceId" name="ExperienceId" required>
-        </div>
+      
         <button type="submit">Submit</button>
     </form>
-</body>
-</html>
