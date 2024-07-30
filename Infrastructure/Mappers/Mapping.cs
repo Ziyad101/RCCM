@@ -51,6 +51,7 @@ namespace Infrastructure.Mappers
             CreateMap<Major,CandidateViewModel>().ReverseMap();
             CreateMap<Nationality,CandidateViewModel>().ReverseMap();
             CreateMap<CandidateStatus,CandidateViewModel>().ReverseMap();
+            CreateMap<CandidateStatusViewModel,CandidateViewModel>().ReverseMap();
             CreateMap<Candidate,AddCandidateViewModel>().ReverseMap();
             CreateMap<Candidate,UpdateCandidateViewModel>().ReverseMap();
             CreateMap<Candidate,DeleteCandidateViewModel>().ReverseMap();
