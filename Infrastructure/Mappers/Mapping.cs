@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using Core.Entities.ViewModel.ExamTypeConf;
 using Core.Entities.ViewModel.ExamResult;
 using Core.Entities.ViewModel.Interview;
+using Core.Entities.ViewModel.CreatorExamTypeConf;
 
 namespace Infrastructure.Mappers
 {
@@ -120,6 +121,19 @@ namespace Infrastructure.Mappers
             CreateMap<InterviewViewModel, AddInterviewViewModel>().ReverseMap();
             CreateMap<InterviewViewModel, UpdateInterviewViewModel>().ReverseMap();
             CreateMap<InterviewViewModel, DeleteInterviewViewModel>().ReverseMap();
+
+            //CreatorExamTypeConf Mappers
+
+            CreateMap<CreatorExamTypeConf, CreatorExamTypeConfViewModel>().IncludeMembers(c=>c.User).IncludeMembers(c=>c.ExamTypeConf).ReverseMap();
+            CreateMap<User, CreatorExamTypeConfViewModel>().ReverseMap();
+            CreateMap<ExamTypeConf, CreatorExamTypeConfViewModel>().ReverseMap();
+            CreateMap<CreatorExamTypeConf, AddCreatorExamTypeConfViewModel>().ReverseMap();
+            CreateMap<CreatorExamTypeConf, UpdateCreatorExamTypeConfViewModel>().ReverseMap();
+            CreateMap<CreatorExamTypeConf, DeleteCreatorExamTypeConfViewModel>().ReverseMap();
+            CreateMap<CreatorExamTypeConfViewModel, AddCreatorExamTypeConfViewModel>().ReverseMap();
+            CreateMap<CreatorExamTypeConfViewModel, UpdateCreatorExamTypeConfViewModel>().ReverseMap();
+            CreateMap<CreatorExamTypeConfViewModel, DeleteCreatorExamTypeConfViewModel>().ReverseMap();
+          
         }
     }
 }
