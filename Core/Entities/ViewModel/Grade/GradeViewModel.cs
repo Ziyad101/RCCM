@@ -1,20 +1,19 @@
-﻿using System;
+﻿using Core.Entities.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-namespace Core.Entities.Model
+
+namespace Core.Entities.ViewModel.Grade
 {
-    public class Grade
+    public class GradeViewModel
     {
-        [Key]
         public int GradeId { get; set; }
         public int GradeValue { get; set; }
         public bool IsActive { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-        List<Experience> Experiences { get; set; }
     }
 }
