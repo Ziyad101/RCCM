@@ -25,8 +25,17 @@ namespace RCCM.Controllers.Web
 
         public IActionResult Index()
         {
+
             var viewModels = _candidateRepo.GetAllCandidate();
-            return View(viewModels);
+            var majors = _majorRepo.GetAllMajors();
+            var nations= _nationalityRepo.GetAllNationalitys();
+            var candidateStatuses = _candidateStatusRepo.GetAllCandidateStatus();
+            var model = new GeneralCandidateViewModel();
+            GeneralCandidateViewModel.AllMajors=majors;
+            GeneralCandidateViewModel.AllNationalities =nations;
+            GeneralCandidateViewModel.AllCandidateStatuses =candidateStatuses;
+            model.AllCandidate = viewModels;
+            return View(model);
         }
 
 

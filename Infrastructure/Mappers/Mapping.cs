@@ -148,6 +148,7 @@ namespace Infrastructure.Mappers
             //Experience Mappers
 
             CreateMap<Experience, ExperienceViewModel>().IncludeMembers(e => e.Candidate).IncludeMembers(e => e.Grade).ReverseMap();
+            CreateMap<Grade, ExperienceViewModel>().ReverseMap();
             CreateMap<Experience, AddCandidateViewModel>().ReverseMap();
             CreateMap<Experience, UpdateCandidateViewModel>().ReverseMap();
             CreateMap<Experience, DeleteCandidateViewModel>().ReverseMap();
