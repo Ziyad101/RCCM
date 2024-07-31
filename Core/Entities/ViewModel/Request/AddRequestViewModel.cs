@@ -7,13 +7,12 @@ using System.Threading.Tasks;
 
 namespace Core.Entities.ViewModel.Request
 {
-    public class RequestViewModel
+    public class AddRequestViewModel
     {
-        public int RequestId { get; set; }
         public int RequestStatus { get; set; }
         public bool IsActive { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime UpdatedAt { get; set; } = DateTime.Now;
         public CandidateViewModel Candidate { get; set; }
     }
 }
