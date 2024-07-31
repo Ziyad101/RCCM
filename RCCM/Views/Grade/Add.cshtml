@@ -1,0 +1,13 @@
+﻿@model AddGradeViewModel
+@{
+    ViewData["Title"] = "Add Grade";
+}
+
+    <form asp-action="AddGrade" method="post">
+        <div>
+            <label asp-for="GradeValue">Grade ID:</label>
+            <input asp-for="GradeValue" >
+        </div>
+      
+        <button type="submit">Submit</button>
+    </form>

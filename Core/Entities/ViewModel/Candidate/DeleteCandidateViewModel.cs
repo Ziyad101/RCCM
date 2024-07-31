@@ -1,4 +1,5 @@
-﻿using Core.Entities.ViewModel.Major;
+﻿using Core.Entities.ViewModel.CandidateStatus;
+using Core.Entities.ViewModel.Major;
 using Core.Entities.ViewModel.Nationality;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,6 @@ namespace Core.Entities.ViewModel.Candidate
         public DateTime UpdatedAt { get; set; }
         public NationalityViewModel Nationality {get; set;}
         public MajorViewModel Major {get; set;}
-        public CandidateViewModel CandidateStatus { get; set; }
+        public CandidateStatusViewModel CandidateStatus { get; set; }
     }
 }

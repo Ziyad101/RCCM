@@ -7,6 +7,7 @@ using Core.Entities.ViewModel.Request;
 using Core.Entities.ViewModel.Role;
 using Core.Entities.ViewModel.Nationality;
 using Core.Entities.ViewModel.CandidateStatus;
+using Core.Entities.ViewModel.Grade;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ using Core.Entities.ViewModel.ExamTypeConf;
 using Core.Entities.ViewModel.ExamResult;
 using Core.Entities.ViewModel.Interview;
 using Core.Entities.ViewModel.CreatorExamTypeConf;
+using Core.Entities.ViewModel.Experience;
 
 namespace Infrastructure.Mappers
 {
@@ -51,6 +53,7 @@ namespace Infrastructure.Mappers
             CreateMap<Major,CandidateViewModel>().ReverseMap();
             CreateMap<Nationality,CandidateViewModel>().ReverseMap();
             CreateMap<CandidateStatus,CandidateViewModel>().ReverseMap();
+            CreateMap<CandidateStatusViewModel,CandidateViewModel>().ReverseMap();
             CreateMap<Candidate,AddCandidateViewModel>().ReverseMap();
             CreateMap<Candidate,UpdateCandidateViewModel>().ReverseMap();
             CreateMap<Candidate,DeleteCandidateViewModel>().ReverseMap();
@@ -134,6 +137,24 @@ namespace Infrastructure.Mappers
             CreateMap<CreatorExamTypeConfViewModel, UpdateCreatorExamTypeConfViewModel>().ReverseMap();
             CreateMap<CreatorExamTypeConfViewModel, DeleteCreatorExamTypeConfViewModel>().ReverseMap();
           
+            // Grade Mappers
+            CreateMap<Grade,GradeViewModel>().ReverseMap();
+            CreateMap<Grade,AddGradeViewModel>().ReverseMap();
+            CreateMap<Grade,UpdateGradeViewModel>().ReverseMap();
+            CreateMap<Grade,DeleteGradeViewModel>().ReverseMap();
+            CreateMap<GradeViewModel,DeleteGradeViewModel>().ReverseMap();
+            CreateMap<GradeViewModel, UpdateGradeViewModel>().ReverseMap();
+
+            //Experience Mappers
+
+            CreateMap<Experience, ExperienceViewModel>().IncludeMembers(e => e.Candidate).IncludeMembers(e => e.Grade).ReverseMap();
+            CreateMap<Experience, AddCandidateViewModel>().ReverseMap();
+            CreateMap<Experience, UpdateCandidateViewModel>().ReverseMap();
+            CreateMap<Experience, DeleteCandidateViewModel>().ReverseMap();
+            CreateMap<ExperienceViewModel, AddCandidateViewModel>().ReverseMap();
+            CreateMap<ExperienceViewModel, UpdateCandidateViewModel>().ReverseMap();
+            CreateMap<ExperienceViewModel, DeleteCandidateViewModel>().ReverseMap();
+
         }
     }
 }

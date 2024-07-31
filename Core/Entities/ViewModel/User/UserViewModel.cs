@@ -1,4 +1,5 @@
 ﻿using Core.Entities.Model;
+using Core.Entities.ViewModel.Role;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace Core.Entities.ViewModel
         public bool IsActive { get; set; }
         public int RoleId { get; set; }
         public string RoleName { get; set; }
+        public RoleViewModel Role { get; set; }
 
 
     }

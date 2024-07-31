@@ -1,0 +1,19 @@
+﻿@model UpdateGradeViewModel
+@{
+    ViewData["Title"] = "Edit Grade Data";
+}
+
+<h2>تحديث مستخدم</h2>
+
+<form class=" " asp-action="EditGrade" method="post">
+    <div class="form-group">
+        <label asp-for="GradeValue">درجة الاختبار</label>
+        <input asp-for="GradeValue" class="form-control form-text" value="@Model.GradeValue" />
+    </div>
+  
+    <input hidden asp-for="GradeId" />
+    <div class="d-flex justify-content-evenly mt-5">
+        <button type="submit" class="btn btn-success">تحديث بيانات دؤجة الاختبار</button>
+        <a class="text-decoration-none btn btn-primary" asp-action="Index">العودة لقائمة الدرجات</a>
+    </div>
+</form>

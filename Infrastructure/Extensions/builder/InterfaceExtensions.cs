@@ -26,6 +26,7 @@ namespace Infrastructure.Extensions.builder
             services.AddScoped<IExamResultRepo, ExamResultRepo>();
             services.AddScoped<IInterviewRepo, InterviewRepo>();
             services.AddScoped<ICreatorExamTypeConfRepo, CreatorExamTypeConfRepo>();
+            services.AddScoped<IExperienceRepo, ExperienceRepo>();
 
 
 
