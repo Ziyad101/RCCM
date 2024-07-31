@@ -1,23 +1,46 @@
+
 trigger:
-- Amjad
+- main
 
-pool:
-  vmImage: 'windows-latest'
+jobs:
+  #============================ Building ============================= 
+  - job: "Build"
+    pool: "Default"
+    variables:
+      BuildConfiguration: "Release"
+      BuildProject: "**/*.csproj"
+      TestProject: "**/*[Tt]ests/*.csproj"
+      system.debug: false
+      ASPNETCORE_ENVIRONMENT: 'Production'
 
-steps:
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'restore'
-    projects: '**/*.csproj'
-
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'build'
-    projects: '**/*.csproj'
-    arguments: '--configuration Release'
-
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'test'
-    projects: '**/*Tests.csproj'
-    arguments: '--configuration Release'
+    steps:
+      - task: DotNetCoreCLI@2
+        displayName: "Restore"
+        inputs:
+          command: restore
+          projects: "$(BuildProject)"
+      - task: DotNetCoreCLI@2
+        displayName: "Build"
+        inputs:
+          command: build
+          projects: "$(BuildProject)"
+          arguments: "--configuration $(BuildConfiguration)"
+      - task: DotNetCoreCLI@2
+        displayName: "Test"
+        inputs:
+          command: test
+          projects: "$(TestProjects)"
+          arguments: "--configuration $(BuildConfiguration)"
+      - task: DotNetCoreCLI@2
+        displayName: "Publish"
+        inputs:
+          command: publish
+          publishWebProjects: True
+          arguments: "--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory) /p:EnvironmentName=$(ASPNETCORE_ENVIRONMENT)"
+          zipAfterPublish: True
+      - task: PublishBuildArtifacts@1
+        displayName: "Publish Artifact"
+        inputs:
+          PathtoPublish: "$(build.artifactstagingdirectory)"
+        condition: succeededOrFailed()
+  #========================== End of Building ========================== 
