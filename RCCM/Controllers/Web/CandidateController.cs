@@ -2,6 +2,7 @@
 using Core.Entities.ViewModel.Candidate;
 using Core.Interfaces;
 using Infrastructure.Repositories;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace RCCM.Controllers.Web
@@ -9,40 +10,22 @@ namespace RCCM.Controllers.Web
     public class CandidateController : Controller
     {
         private readonly ICandidateRepo _candidateRepo;
-        private readonly IMajorRepo _majorRepo;
-        private readonly INationalityRepo _nationalityRepo;
-        private readonly ICandidateStatusRepo _candidateStatusRepo;
+        private readonly CandidateService _candidateService;
+      
 
-        public CandidateController(ICandidateRepo candidateRepo, IMajorRepo majorRepo, INationalityRepo nationalityRepo,ICandidateStatusRepo candidateStatus)
+        public CandidateController(ICandidateRepo candidateRepo,CandidateService candidateService)
         {
             _candidateRepo = candidateRepo;
-            _majorRepo = majorRepo;
-            _nationalityRepo = nationalityRepo;
-            _candidateStatusRepo = candidateStatus;
+            _candidateService = candidateService;
+           
         }
         public IActionResult Index()
         {
-            var viewModels = _candidateRepo.GetAllCandidate();
-            return View(viewModels);
+            var model = _candidateService.GetGeneralModel();
+            return View(model);
         }
 
 
-        public IActionResult Add()
-        {
-            try
-            {
-                var candidateModel = new AddCandidateViewModel();
-                candidateModel.Majors = _majorRepo.GetAllMajors();
-                candidateModel.Nationalities = _nationalityRepo.GetAllNationalitys();
-                candidateModel.CandidateStatuses = _candidateStatusRepo.GetAllCandidateStatus();
-                return View(candidateModel);
-            }
-            catch (Exception)
-            {
-
-                return RedirectToAction("Index");
-            }
-        }
 
         [HttpPost]
         public IActionResult Add(AddCandidateViewModel model)
@@ -52,26 +35,12 @@ namespace RCCM.Controllers.Web
 
         }
 
-        public IActionResult Edit(int id)
-        {
-            var candidateUpdateModel = _candidateRepo.GetEditModel(id);
-            candidateUpdateModel.Nationalities = _nationalityRepo.GetAllNationalitys();
-            candidateUpdateModel.Majors = _majorRepo.GetAllMajors();
-            candidateUpdateModel.CandidateStatuses = _candidateStatusRepo.GetAllCandidateStatus();
-            return View(candidateUpdateModel);
-        }
-
         public IActionResult EditCandidate(UpdateCandidateViewModel updateModel)
         {
             _candidateRepo.UpdateCandidate(updateModel);
             return RedirectToAction("Index");
         }
 
-        public IActionResult Delete(int id)
-        {
-           var model = _candidateRepo.GetDeleteModel(id);
-            return View(model);
-        }
 
         [HttpPost]
         public IActionResult DeleteCandidate(DeleteCandidateViewModel model)

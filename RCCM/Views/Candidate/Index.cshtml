@@ -1,6 +1,6 @@
-﻿@model List<CandidateViewModel>
+﻿@model GeneralCandidateViewModel
 
-<h1 class="text-center mb-4">قائمة المرشحين (@Model.Count())</h1>
+<h1 class="text-center mb-4">قائمة المرشحين (@Model.AllCandidate.Count())</h1>
 
 
 
@@ -22,7 +22,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var candidate in Model)
+            @foreach (var candidate in Model.AllCandidate)
             {
                 <tr>
                     <td>@candidate.CandidateName</td>

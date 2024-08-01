@@ -1,5 +1,6 @@
 ﻿using Core.Interfaces;
 using Infrastructure.Repositories;
+using Infrastructure.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -27,6 +28,7 @@ namespace Infrastructure.Extensions.builder
             services.AddScoped<IInterviewRepo, InterviewRepo>();
             services.AddScoped<ICreatorExamTypeConfRepo, CreatorExamTypeConfRepo>();
             services.AddScoped<IExperienceRepo, ExperienceRepo>();
+            services.AddScoped<CandidateService>();
 
 
 
