@@ -1,11 +1,11 @@
-
 trigger:
 - main
 
 jobs:
   #============================ Building ============================= 
   - job: "Build"
-    pool: "Azure Pipelines"
+    pool:
+      vmImage: 'ubuntu-latest' # Specify an appropriate VM image
     variables:
       BuildConfiguration: "Release"
       BuildProject: "**/*.csproj"
@@ -19,28 +19,43 @@ jobs:
         inputs:
           command: restore
           projects: "$(BuildProject)"
+          
       - task: DotNetCoreCLI@2
         displayName: "Build"
         inputs:
           command: build
           projects: "$(BuildProject)"
           arguments: "--configuration $(BuildConfiguration)"
+          
       - task: DotNetCoreCLI@2
         displayName: "Test"
         inputs:
           command: test
-          projects: "$(TestProjects)"
+          projects: "$(TestProject)" # Corrected to $(TestProject)
           arguments: "--configuration $(BuildConfiguration)"
+          
       - task: DotNetCoreCLI@2
         displayName: "Publish"
         inputs:
           command: publish
-          publishWebProjects: True
-          arguments: "--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory) /p:EnvironmentName=$(ASPNETCORE_ENVIRONMENT)"
-          zipAfterPublish: True
+          publishWebProjects: true
+          arguments: "--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory) /p:EnvironmentName=$(ASPNETCORE_ENVIRONMENT)"
+          zipAfterPublish: true
+          
       - task: PublishBuildArtifacts@1
         displayName: "Publish Artifact"
         inputs:
-          PathtoPublish: "$(build.artifactstagingdirectory)"
-        condition: succeededOrFailed()
-  #========================== End of Building ========================== 
+          PathtoPublish: "$(Build.ArtifactStagingDirectory)" # Corrected indentation
+          ArtifactName: "drop" # Added ArtifactName
+          publishLocation: "Container" # Specify where to publish
+          
+      - task: AzureWebApp@1
+        displayName: "Deploy to Azure Web App"
+        inputs:
+          azureSubscription: 'Azure subscription 1(649567db-77d3-4ca6-8270-ba5e46e50914)'
+          appType: 'webApp'
+          appName: 'RCCMRCJY'
+          package: '$(Build.ArtifactStagingDirectory)/**/*.zip' # Corrected path to published package
+          deploymentMethod: 'auto'
+          
+    #========================== End of Building ==========================
