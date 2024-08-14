@@ -49,8 +49,9 @@ namespace Infrastructure.Mappers
             CreateMap<Request, RequestViewModel>().ReverseMap();
 
             //Candidate Mappers
-            CreateMap<Candidate,CandidateViewModel>().IncludeMembers(c=>c.Major).IncludeMembers(c=>c.Nationality).IncludeMembers(c=>c.CandidateStatus).ReverseMap();
+            CreateMap<Candidate,CandidateViewModel>().IncludeMembers(c=>c.Major).IncludeMembers(c=>c.Nationality).IncludeMembers(c=>c.Request).IncludeMembers(c=>c.CandidateStatus).ReverseMap();
             CreateMap<Major,CandidateViewModel>().ReverseMap();
+            CreateMap<Request,CandidateViewModel>().ReverseMap();
             CreateMap<Nationality,CandidateViewModel>().ReverseMap();
             CreateMap<CandidateStatus,CandidateViewModel>().ReverseMap();
             CreateMap<CandidateStatusViewModel,CandidateViewModel>().ReverseMap();

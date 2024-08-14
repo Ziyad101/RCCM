@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Entities.ViewModel.Request;
 
 namespace Core.Entities.ViewModel.Candidate
 {
@@ -26,6 +27,7 @@ namespace Core.Entities.ViewModel.Candidate
         public NationalityViewModel Nationality {get; set;}
         public MajorViewModel Major {get; set;}
         public CandidateStatusViewModel CandidateStatus {get; set;}
+        public RequestViewModel Request {get; set;}
 
 
     }

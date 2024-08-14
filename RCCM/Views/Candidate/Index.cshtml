@@ -1,6 +1,6 @@
-﻿@model GeneralCandidateViewModel
+﻿@model List<CandidateViewModel>
 
-<h1 class="text-center mb-4">قائمة المرشحين (@Model.AllCandidate.Count())</h1>
+<h1 class="text-center mb-4">قائمة المرشحين (@Model.Count())</h1>
 
 
 
@@ -18,11 +18,12 @@
                 <th>حالة المرشح</th>
                 <th></th>
                 <th></th>
+                <th></th>
 
             </tr>
         </thead>
         <tbody>
-            @foreach (var candidate in Model.AllCandidate)
+            @foreach (var candidate in Model)
             {
                 <tr>
                     <td>@candidate.CandidateName</td>
@@ -33,8 +34,33 @@
                     <td>@DateOnly.FromDateTime(candidate.DateOfBirth)</td>
                     <td>@candidate.NationalId</td>
                     <td>@candidate.CandidateStatus.Status</td>
-                    
-                    
+
+                    <td>
+                        @{
+                            if (candidate.Request.RequestStatus == 0)
+                            {
+                                <form asp-action="Add" class="form-control" asp-controller="Expeirence">
+                                    <input hidden asp-for="@candidate.CandidateId" />
+                                    <button type="submit" class="btn btn-primary">Exp</button>
+                                </form>
+                            }
+                            if (candidate.Request?.RequestStatus == 1)
+                            {
+                                <form asp-action="Add" class="form-control" asp-controller="ExamTypeConf">
+                                    <input hidden asp-for="@candidate.CandidateId" />
+                                    <button type="submit" class="btn btn-primary">Exam</button>
+                                </form>
+                            }
+                            if (candidate.Request?.RequestStatus == 2)
+                            {
+                                <form asp-action="Add" class="form-control" asp-controller="Interview">
+                                    <input hidden asp-for="@candidate.CandidateId" />
+                                    <button type="submit" class="btn btn-primary">Interview</button>
+                                </form>
+                            }
+                        }
+                    </td>
+
 
                     <td>
                         <form asp-action="Edit" method="post">
