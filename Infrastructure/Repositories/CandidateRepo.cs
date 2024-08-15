@@ -41,9 +41,7 @@ namespace Infrastructure.Repositories
         public List<CandidateViewModel> GetAllCandidate()
         {
             var allCandidates = _context.Candidate.Where(c => c.IsActive).Include(c => c.Nationality).Include(c => c.Major).Include(c=>c.Request).Include(c=>c.CandidateStatus).AsNoTracking().ToList();
-
             var candidateModels = _mapper.Map<List<CandidateViewModel>>(allCandidates);
-
             return candidateModels;
         }
 
