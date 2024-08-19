@@ -43,4 +43,11 @@ jobs:
         inputs:
           PathtoPublish: "$(build.artifactstagingdirectory)"
         condition: succeededOrFailed()
+      - task: AzureWebApp@1
+        inputs:
+          azureSubscription: 'Azure subscription 1(1)(649567db-77d3-4ca6-8270-ba5e46e50914)'
+          appType: 'webApp'
+          appName: 'RCCM'
+          package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+          deploymentMethod: 'auto'
   #========================== End of Building ========================== 
