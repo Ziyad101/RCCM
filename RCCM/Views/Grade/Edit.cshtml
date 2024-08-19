@@ -8,9 +8,8 @@
 <div class="container my-4">
 
     <!-- Display Success Alert -->
-    <div id="successAlert" class="alert alert-warning alert-dismissible fade show d-none" role="alert">
-        <span id="alertMessage"></span>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <div id="successAlert" class="alert alert-warning d-none">
+        <span class="alert-message"></span>
     </div>
 
     <h2 class="text-center mb-4">تحديث درجة الاختبار</h2>
@@ -40,28 +39,4 @@
     </div>
 </div>
 
-@section scripts {
-    <!-- Include jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <script>
-        $(document).ready(function () {
-            $('#editGradeForm').on('submit', function (event) {
-                event.preventDefault(); // Prevent default form submission
-
-                var form = $(this);
-                var successAlert = $('#successAlert');
-                var alertMessage = $('#alertMessage');
-
-                // Show success alert
-                alertMessage.text('تم تحديث بيانات درجة الاختبار بنجاح!');
-                successAlert.removeClass('d-none');
-
-                // Simulate a delay before redirecting
-                setTimeout(function () {
-                    form.off('submit').submit(); // Unbind event handler and submit form programmatically after delay
-                }, 2000); // 2 seconds delay
-            });
-        });
-    </script>
-}

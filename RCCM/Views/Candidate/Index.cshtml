@@ -1,7 +1,5 @@
 ﻿@model GeneralCandidateViewModel
 
-
-
 <h1 class="text-center mb-4">قائمة المرشحين (@Model.AllCandidate.Count())</h1>
 
 <div class="container">
@@ -27,7 +25,6 @@
     <div class="row mt-4">
         @foreach (var candidate in Model.AllCandidate)
         {
-           
             <div class="col-md-4 mb-4">
                 <div class="card shadow">
                     <div class="card-body">
@@ -39,172 +36,147 @@
                             <li><strong>الجنسية:</strong> @candidate.Nationality.NationalityName</li>
                             <li><strong>تاريخ الميلاد:</strong> @DateOnly.FromDateTime(candidate.DateOfBirth)</li>
                         </ul>
-                        <form asp-action="Edit" method="post">
-                            <input type="hidden" name="id" value="@candidate.CandidateId" />
-                            <button class="btn btn-warning btn-sm mt-2" type="submit">تعديل البيانات</button>
-                        </form>
-                        <form asp-action="Delete" method="post" class="mt-2">
-                            <input type="hidden" name="id" value="@candidate.CandidateId" />
-                            <button class="btn btn-danger btn-sm" type="submit">حذف المرشح</button>
-                        </form>
 
+                        <!-- Dropdown Menu for Actions -->
                         <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown button
+                            <button class="btn bg-custom-primary dropdown-toggle text-white" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                خيارات
                             </button>
-                            <ul class="dropdown-menu">
-                                <li> <form class="dropdown-item" asp-action="ScheduleExam" asp-controller="CandidateExamSchedule" method="post">
-                                        <input hidden asp-for="@candidate.CandidateId" name="CandidateId">
-                                    <button type="submit" class="btn btn-danger dropdown-item">Exam</button>
-                                </form> </li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li>
+                                    <form class="dropdown-item" asp-action="Edit" method="post">
+                                        <input type="hidden" name="id" value="@candidate.CandidateId" />
+                                        <button type="submit" class="btn btn-warning btn-sm">تعديل البيانات</button>
+                                    </form>
+                                </li>
+                                <li>
+                                    <form class="dropdown-item" asp-action="Delete" method="post">
+                                        <input type="hidden" name="id" value="@candidate.CandidateId" />
+                                        <button type="submit" class="btn btn-danger btn-sm">حذف المرشح</button>
+                                    </form>
+                                </li>
+                                <li>
+                                    <form class="dropdown-item" asp-action="ScheduleExam" asp-controller="CandidateExamSchedule" method="post">
+                                        <input type="hidden" name="CandidateId" value="@candidate.CandidateId" />
+                                        <button type="submit" class="btn btn-primary btn-sm">جدولة اختبار</button>
+                                    </form>
+                                </li>
+                                <li>
+                                    <form class="dropdown-item" asp-action="EvaluateExperience" asp-controller="CandidateExperience" method="post">
+                                        <input type="hidden" name="CandidateId" value="@candidate.CandidateId" />
+                                        <button type="submit" class="btn btn-primary btn-sm">تقييم خبرات</button>
+                                    </form>
+                                </li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
+        }
+    </div>
 
-
-
-            <!-- Add Candidate Modal -->
-            <div class="modal fade" id="addCandidateModal" tabindex="-1" aria-labelledby="addCandidateModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="addCandidateModalLabel">إضافة مرشح</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="addCandidateModal" aria-label="Close"></button>
+    <!-- Add Candidate Modal -->
+    <div class="modal fade" id="addCandidateModal" tabindex="-1" aria-labelledby="addCandidateModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-custom-primary text-white">
+                    <h5 class="modal-title" id="addCandidateModalLabel">إضافة مرشح</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form asp-action="Add" method="post">
+                        <!-- Add Candidate Form Fields -->
+                        <div class="mb-3">
+                            <label asp-for="AddCandidate.CandidateName" class="form-label text-custom-primary fw-bold">اسم المرشح</label>
+                            <input asp-for="AddCandidate.CandidateName" name="CandidateName" class="form-control form-control-lg border-custom-primary" placeholder="أدخل اسم المرشح" required data-val="true" data-val-required="يرجى إدخال اسم المرشح" />
+                            <span class="text-danger mt-1" asp-validation-for="AddCandidate.CandidateName"></span>
                         </div>
-                        <div class="modal-body">
-                            <form asp-action="Add" method="post">
-                                <!-- Add Candidate Form Fields -->
-                                <div class="mb-3">
-                                    <label asp-for="AddCandidate.CandidateName" class="form-label text-custom-primary fw-bold">اسم المرشح</label>
-                                    <input asp-for="AddCandidate.CandidateName" name="CandidateName" class="form-control form-control-lg border-custom-primary" placeholder="أدخل اسم المرشح" />
-                                    <span class="text-danger mt-1" asp-validation-for="AddCandidate.CandidateName"></span>
-                                </div>
 
-                                <div class="mb-3">
-                                    <label asp-for="AddCandidate.NationalId" class="form-label text-custom-primary fw-bold">رقم الهوية</label>
-                                    <input asp-for="AddCandidate.NationalId" name="NationalId"  class="form-control form-control-lg border-custom-primary" placeholder="أدخل رقم الهوية" />
-                                </div>
-
-                                <div class="mb-3">
-                                    <label asp-for="AddCandidate.DateOfBirth" class="form-label text-custom-primary fw-bold">تاريخ الميلاد</label>
-                                    <input asp-for="AddCandidate.DateOfBirth" name="DateOfBirth" type="date" class="form-control form-control-lg border-custom-primary" />
-                                </div>
-
-                                <div class="mb-3">
-                                    <label asp-for="AddCandidate.Email" class="form-label text-custom-primary fw-bold">البريد الإلكتروني</label>
-                                    <input asp-for="AddCandidate.Email" name="Email"  class="form-control form-control-lg border-custom-primary" placeholder="أدخل البريد الإلكتروني" />
-                                </div>
-
-                                <div class="mb-3">
-                                    <label asp-for="AddCandidate.PhoneNumber" class="form-label text-custom-primary fw-bold">رقم الهاتف</label>
-                                    <input asp-for="AddCandidate.PhoneNumber" name="PhoneNumber" class="form-control form-control-lg border-custom-primary" placeholder="أدخل رقم الهاتف" />
-                                </div>
-
-                                <fieldset class="mb-3">
-                                    <legend class="form-label text-custom-primary fw-bold">الجنس:</legend>
-                                    <div class="form-check form-check-inline">
-                                        <input asp-for="AddCandidate.Gender" type="radio" name="Gender" value="Male" class="form-check-input border-custom-primary " checked />
-                                        <label asp-for="AddCandidate.Gender" class="form-check-label">ذكر</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input asp-for="AddCandidate.Gender" type="radio" name="Gender" value="Female" class="form-check-input border-custom-primary" />
-                                        <label asp-for="AddCandidate.Gender" class="form-check-label">أنثى</label>
-                                    </div>
-                                </fieldset>
-
-                                <div class="mb-3">
-                                    <label asp-for="AddCandidate.MajorId" class="form-label text-custom-primary fw-bold">التخصص الجامعي</label>
-                                    <select asp-for="AddCandidate.MajorId" name="MajorId" class="form-select form-select-lg border-custom-primary" asp-items="@(new SelectList(Model.AddCandidate.Majors, "MajorId", "MajorName"))">
-                                        <option value="">اختر التخصص</option>
-                                    </select>
-                                </div>
-
-                                <div class="mb-4">
-                                    <label asp-for="AddCandidate.NationalityId" class="form-label text-custom-primary fw-bold">الجنسية</label>
-                                    <select asp-for="AddCandidate.NationalityId" name="NationalityId" class="form-select form-select-lg border-custom-primary" asp-items="@(new SelectList(Model.AddCandidate.Nationalities, "NationalityId", "NationalityName"))">
-                                        <option value="">اختر الجنسية</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label asp-for="AddCandidate.CandidateStatusId" class="form-check-label">حالة المرشح</label>
-                                    <select asp-for="AddCandidate.CandidateStatusId" name="CandidateStatusId" class="form-control form-select" asp-items="@(new SelectList(Model.AddCandidate.CandidateStatuses, "CandidateStatusId", "Status"))"></select>
-                                </div>
-
-                                <div class="d-flex justify-content-between mt-4">
-                                    <button type="submit" class="btn btn-success btn-lg shadow-sm">إضافة المرشح</button>
-                                    <button type="button" class="btn btn-secondary btn-lg shadow-sm" data-bs-dismiss="modal">إلغاء</button>
-                                </div>
-                            </form>
+                        <div class="mb-3">
+                            <label asp-for="AddCandidate.NationalId" class="form-label text-custom-primary fw-bold">رقم الهوية</label>
+                            <input asp-for="AddCandidate.NationalId" name="NationalId" class="form-control form-control-lg border-custom-primary" placeholder="أدخل رقم الهوية" required data-val="true" data-val-required="يرجى إدخال رقم الهوية" />
                         </div>
-                    </div>
+
+                        <div class="mb-3">
+                            <label asp-for="AddCandidate.DateOfBirth" class="form-label text-custom-primary fw-bold">تاريخ الميلاد</label>
+                            <input asp-for="AddCandidate.DateOfBirth" name="DateOfBirth" type="date" class="form-control form-control-lg border-custom-primary" value="@DateTime.Now.ToString("yyyy-MM-dd")" required data-val="true" data-val-required="يرجى إدخال تاريخ الميلاد" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="AddCandidate.Email" class="form-label text-custom-primary fw-bold">البريد الإلكتروني</label>
+                            <input asp-for="AddCandidate.Email" name="Email" class="form-control form-control-lg border-custom-primary" placeholder="أدخل البريد الإلكتروني" required data-val="true" data-val-required="يرجى إدخال البريد الإلكتروني" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="AddCandidate.PhoneNumber" class="form-label text-custom-primary fw-bold">رقم الهاتف</label>
+                            <input asp-for="AddCandidate.PhoneNumber" name="PhoneNumber" class="form-control form-control-lg border-custom-primary" placeholder="أدخل رقم الهاتف" required data-val="true" data-val-required="يرجى إدخال رقم الهاتف" />
+                        </div>
+
+                        <fieldset class="mb-3">
+                            <legend class="form-label text-custom-primary fw-bold">الجنس:</legend>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="AddCandidate.Gender" type="radio" name="Gender" value="Male" class="form-check-input border-custom-primary" checked required data-val="true" data-val-required="يرجى اختيار الجنس" />
+                                <label asp-for="AddCandidate.Gender" class="form-check-label">ذكر</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="AddCandidate.Gender" type="radio" name="Gender" value="Female" class="form-check-input border-custom-primary" required data-val="true" data-val-required="يرجى اختيار الجنس" />
+                                <label asp-for="AddCandidate.Gender" class="form-check-label">أنثى</label>
+                            </div>
+                        </fieldset>
+
+                        <div class="mb-3">
+                            <label asp-for="AddCandidate.MajorId" class="form-label text-custom-primary fw-bold">التخصص الجامعي</label>
+                            <select asp-for="AddCandidate.MajorId" name="MajorId" class="form-select form-select-lg border-custom-primary" asp-items="@(new SelectList(Model.AddCandidate.Majors, "MajorId", "MajorName"))" required data-val="true" data-val-required="يرجى اختيار التخصص">
+                                <option value="">اختر التخصص</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="AddCandidate.NationalityId" class="form-label text-custom-primary fw-bold">الجنسية</label>
+                            <select asp-for="AddCandidate.NationalityId" name="NationalityId" class="form-select form-select-lg border-custom-primary" asp-items="@(new SelectList(Model.AddCandidate.Nationalities, "NationalityId", "NationalityName"))" required data-val="true" data-val-required="يرجى اختيار الجنسية">
+                                <option value="">اختر الجنسية</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="AddCandidate.CandidateStatusId" class="form-check-label text-custom-primary fw-bold">حالة المرشح</label>
+                            <select asp-for="AddCandidate.CandidateStatusId" name="CandidateStatusId" class="form-control form-select border-custom-primary" asp-items="@(new SelectList(Model.AddCandidate.CandidateStatuses, "CandidateStatusId", "Status"))" required data-val="true" data-val-required="يرجى اختيار حالة المرشح"></select>
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <button type="submit" class="btn btn-success btn-lg shadow-sm">إضافة المرشح</button>
+                            <button type="button" class="btn btn-secondary btn-lg shadow-sm" data-bs-dismiss="modal">إلغاء</button>
+                        </div>
+                    </form>
                 </div>
             </div>
+        </div>
+    </div>
+    >
 
 
-        }
-        @section scripts {
-            <script>
+@section scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Search functionality
+            var searchInput = document.getElementById('searchInput');
+            var cards = Array.from(document.querySelectorAll('.card'));
 
-            document.addEventListener('DOMContentLoaded', function () {
-                // Search functionality
-                var searchInput = document.getElementById('searchInput');
-                var cards = Array.from(document.querySelectorAll('.card'));
+            searchInput.addEventListener('input', function () {
+                var filter = this.value.toLowerCase();
 
-                searchInput.addEventListener('input', function () {
-                    var filter = this.value.toLowerCase();
-
-                    cards.forEach(function (card) {
-                        var candidateName = card.querySelector('.card-title').innerText.toLowerCase();
-                        var isVisible = candidateName.includes(filter);
-                        card.style.display = isVisible ? '' : 'none';
-                    });
-                });
-
-                // Add Candidate Modal
-                var addCandidateModal = new bootstrap.Modal(document.getElementById('addCandidateModal'));
-                document.getElementById('openAddCandidateModal').addEventListener('click', function () {
-                    addCandidateModal.show();
-                });
-
-                // Edit Candidate Modal
-                document.querySelectorAll('.btn-warning').forEach(button => {
-                    button.addEventListener('click', function () {
-                        var modalId = this.dataset.bsTarget; // Ensure your button has data-bs-target attribute
-                        var updateCandidateModal = new bootstrap.Modal(document.getElementById(modalId));
-                        updateCandidateModal.show();
-                    });
-                });
-
-
-                // Delete Candidate Modal
-                document.querySelectorAll('.btn-danger').forEach(button => {
-                    button.addEventListener('click', function () {
-                        var modalId = this.dataset.bsTarget; // Ensure your button has data-bs-target attribute
-                        var deleteCandidateModal = new bootstrap.Modal(document.getElementById(modalId));
-                        deleteCandidateModal.show();
-                    });
+                cards.forEach(function (card) {
+                    var candidateName = card.querySelector('.card-title').innerText.toLowerCase();
+                    var isVisible = candidateName.includes(filter);
+                    card.style.display = isVisible ? '' : 'none';
                 });
             });
 
-            
-            </script>
-        }
-        <style>
-            .rtl {
-                direction: rtl;
-                text-align: right;
-            }
-
-                <!-- Include jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- Include Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
-        </style>
+            // Add Candidate Modal
+            var addCandidateModal = new bootstrap.Modal(document.getElementById('addCandidateModal'));
+            document.getElementById('openAddCandidateModal').addEventListener('click', function () {
+                addCandidateModal.show();
+            });
+        });
+    </script>
+}

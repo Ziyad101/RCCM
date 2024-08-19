@@ -34,8 +34,7 @@ namespace Infrastructure.Repositories
         public void DeleteInterview(DeleteInterviewViewModel interviewModel)
         {
             var interview = _mapper.Map<Interview>(interviewModel);
-            interview.IsActive = false;
-            _context.Interview.Update(interview);
+            _context.Interview.Remove(interview);
             _context.SaveChanges();
         }
 
