@@ -1,24 +1,43 @@
 ﻿@model DeleteInterviewViewModel
-<h2>Delete interview</h2>
 
-<form asp-action="DeleteInterview" method="post">
+@{
+    ViewData["Title"] = "حذف المقابلة";
+    Layout = "_AdminLayout";
+}
 
-    <div class="form-group">
-        <label asp-for="Candidate" class="form-check-label"> Candidate</label>
-        <label asp-for="Candidate.CandidateName" class="form-control">@Model.Candidate.CandidateName</label>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow custom-card border-danger">
+                <div class="card-header bg-custom-primary text-white text-center">
+                    <h2>حذف المقابلة</h2>
+                </div>
+                <div class="card-body custom-card-body">
+                    <form asp-action="DeleteInterview" method="post">
+                        <!-- Candidate Information -->
+                        <div class="mb-3">
+                            <label asp-for="Candidate.CandidateName" class="form-label custom-form-label">المرشح</label>
+                            <label class="form-control custom-form-control">@Model.Candidate.CandidateName</label>
+                        </div>
+
+                        <!-- Interview Date -->
+                        <div class="mb-3">
+                            <label asp-for="InterviewDate" class="form-label custom-form-label">تاريخ المقابلة</label>
+                            <label class="form-control custom-form-control">@Model.InterviewDate.ToString("yyyy-MM-dd")</label>
+                        </div>
+
+                        <!-- Hidden Fields -->
+                        <input type="hidden" asp-for="InterviewId" />
+                        <input type="hidden" asp-for="CandidateId" />
+
+                        <!-- Buttons -->
+                        <div class="d-flex justify-content-between mt-4">
+                            <button type="submit" class="btn btn-danger">حذف المقابلة</button>
+                            <a class="btn btn-primary" asp-action="Index">العودة لقائمة المقابلات</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label asp-for="InterviewDate"></label>
-        <label asp-for="InterviewDate" class="form-control" >@Model.InterviewDate</label>
-    </div>
-
-    <input hidden asp-for="InterviewId" />
-    <input hidden asp-for="CandidateId" />
-
-    <div class="d-flex justify-content-evenly mt-5">
-        <button type="submit" class="btn btn-success">Delete Interview </button>
-        <a class="text-decoration-none btn btn-primary" asp-action="Index">العودة لقائمة التخصصات</a>
-    </div>
-</form>
-
-
+</div>

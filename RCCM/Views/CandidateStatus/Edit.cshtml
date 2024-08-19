@@ -1,19 +1,33 @@
 ﻿@{
     ViewData["Title"] = "Edit Role";
+    Layout = "_AdminLayout";
 }
+
 @model UpdateCandidateStatusViewModel
 
-<h2>تحديث الصلاحيات</h2>
+<div class="container my-4">
+    <h2 class="text-center mb-4">تحديث الصلاحيات</h2>
 
-<form class=" " asp-action="EditCandidateStatus" method="post">
-    <div class="form-group">
-        <label asp-for="Status">اسم الحالة</label>
-        <input asp-for="Status" class="form-control form-text" value="@Model.Status" />
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow custom-card border-success">
+                <div class="card-header bg-custom-primary text-white text-center">
+                    <h3>تحديث الصلاحية</h3>
+                </div>
+                <div class="card-body custom-card-body">
+                    <form asp-action="EditCandidateStatus" method="post">
+                        <div class="mb-3">
+                            <label asp-for="Status" class="form-label">اسم الحالة</label>
+                            <input asp-for="Status" class="form-control" value="@Model.Status" />
+                        </div>
+                        <input type="hidden" asp-for="CandidateStatusId" />
+                        <div class="d-flex justify-content-between mt-4">
+                            <button type="submit" class="btn btn-success">تحديث بيانات الصلاحية</button>
+                            <a class="btn btn-primary" asp-action="Index">العودة لقائمة الصلاحيات</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-   
-    <input hidden asp-for="CandidateStatusId" />
-    <div class="d-flex justify-content-evenly mt-5">
-        <button type="submit" class="btn btn-success">تحديث بيانات الصلاحية</button>
-        <a class="text-decoration-none btn btn-primary" asp-action="Index">العودة لقائمة الصلاحيات</a>
-    </div>
-</form>
+</div>

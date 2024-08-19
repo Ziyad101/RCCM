@@ -35,6 +35,7 @@ namespace RCCM.Controllers.Web
             GeneralCandidateViewModel.AllNationalities =nations;
             GeneralCandidateViewModel.AllCandidateStatuses =candidateStatuses;
             model.AllCandidate = viewModels;
+            model.PupulateModels();
             return View(model);
         }
 

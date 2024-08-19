@@ -37,7 +37,7 @@
                             <input type="text" class="form-control" id="candidateName" required>
                         </div>
                         <div class="form-group">
-                            <label for="candidateNationalId">الرقم الوطني:</label>
+                            <label for="candidateNationalId">الرقم الهوية:</label>
                             <input type="text" class="form-control" id="candidateNationalId" required>
                         </div>
                         <div class="form-group">
@@ -51,10 +51,6 @@
                         <div class="form-group">
                             <label for="candidateDateOfBirth">تاريخ الميلاد:</label>
                             <input type="date" class="form-control" id="candidateDateOfBirth">
-                        </div>
-                        <div class="form-group">
-                            <label for="candidateQualification">المؤهل:</label>
-                            <input type="text" class="form-control" id="candidateQualification">
                         </div>
                         <div class="form-group">
                             <label for="candidateEmail">البريد الإلكتروني:</label>
@@ -93,6 +89,8 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
                     <a asp-action="RecruitIndex" asp-controller="Recruitment" class="btn btn-primary">تعيين المرشح</a>
+                    <a asp-action="RecruitIndex" asp-controller="Recruitment" class="btn btn-primary">تقييم خبرات</a>
+
                 </div>
             </div>
         </div>
@@ -121,7 +119,6 @@
                                                 data-specialization="${specialization}"
                                                 data-nationality="${nationality}"
                                                 data-date-of-birth="${dateOfBirth}"
-                                                data-qualification="${qualification}"
                                                 data-email="${email}"
                                                 data-mobile="${mobile}"
                                                 data-job="${job}">تفاصيل المرشح</button>
@@ -141,13 +138,12 @@
             var specialization = $('#candidateSpecialization').val().trim();
             var nationality = $('#candidateNationality').val().trim();
             var dateOfBirth = $('#candidateDateOfBirth').val().trim();
-            var qualification = $('#candidateQualification').val().trim();
             var email = $('#candidateEmail').val().trim();
             var mobile = $('#candidateMobile').val().trim();
             var job = $('#candidateJob').val().trim();
 
             if (name && nationalId && specialization) {
-                addCandidate(name, nationalId, specialization, nationality, dateOfBirth, qualification, email, mobile, job);
+                addCandidate(name, nationalId, specialization, nationality, dateOfBirth, email, mobile, job);
                 $('#addCandidateModal').modal('hide');
                 // Clear form inputs after adding candidate
                 $('#candidateName').val('');
@@ -155,7 +151,6 @@
                 $('#candidateSpecialization').val('');
                 $('#candidateNationality').val('');
                 $('#candidateDateOfBirth').val('');
-                $('#candidateQualification').val('');
                 $('#candidateEmail').val('');
                 $('#candidateMobile').val('');
                 $('#candidateJob').val('');
@@ -171,7 +166,6 @@
             var specialization = $(this).data('specialization');
             var nationality = $(this).data('nationality');
             var dateOfBirth = $(this).data('date-of-birth');
-            var qualification = $(this).data('qualification');
             var email = $(this).data('email');
             var mobile = $(this).data('mobile');
             var job = $(this).data('job');
@@ -182,7 +176,6 @@
                                 <p><strong>التخصص:</strong> ${specialization}</p>
                                 <p><strong>الجنسية:</strong> ${nationality}</p>
                                 <p><strong>تاريخ الميلاد:</strong> ${dateOfBirth}</p>
-                                <p><strong>المؤهل:</strong> ${qualification}</p>
                                 <p><strong>البريد الإلكتروني:</strong> ${email}</p>
                                 <p><strong>رقم الجوال:</strong> ${mobile}</p>
                                 <p><strong>الوظيفة المرشح لها:</strong> ${job}</p>

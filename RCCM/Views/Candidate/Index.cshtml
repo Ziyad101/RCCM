@@ -1,8 +1,6 @@
 ﻿@model GeneralCandidateViewModel
 
-@{
-    Layout = "_AdminLayout";
-}
+
 
 <h1 class="text-center mb-4">قائمة المرشحين (@Model.AllCandidate.Count())</h1>
 
@@ -16,7 +14,7 @@
 
     <!-- Add Candidate Button -->
     <div class="text-center mb-4">
-        <button id="openAddCandidateModal" class="btn btn-primary">إضافة مرشح</button>
+        <button id="openAddCandidateModal" class="btn btn-primary col-12">إضافة مرشح</button>
     </div>
 
     <div class="row">
@@ -40,10 +38,15 @@
                             <li><strong>التخصص:</strong> @candidate.Major.MajorName</li>
                             <li><strong>الجنسية:</strong> @candidate.Nationality.NationalityName</li>
                             <li><strong>تاريخ الميلاد:</strong> @DateOnly.FromDateTime(candidate.DateOfBirth)</li>
-                            <li><strong>رقم الهوية:</strong> @candidate.NationalId</li>
                         </ul>
-                        <button class="btn btn-warning btn-sm mt-2" data-bs-target="#updateCandidateModal" data-bs-toggle="modal">تعديل البيانات</button>
-                        <button class="btn btn-danger btn-sm mt-2" data-bs-target="#deleteCandidateModal" data-bs-toggle="modal">حذف المرشح</button>
+                        <form asp-action="Edit" method="post">
+                            <input type="hidden" name="id" value="@candidate.CandidateId" />
+                            <button class="btn btn-warning btn-sm mt-2" type="submit">تعديل البيانات</button>
+                        </form>
+                        <form asp-action="Delete" method="post" class="mt-2">
+                            <input type="hidden" name="id" value="@candidate.CandidateId" />
+                            <button class="btn btn-danger btn-sm" type="submit">حذف المرشح</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -69,7 +72,7 @@
 
                                 <div class="mb-3">
                                     <label asp-for="AddCandidate.NationalId" class="form-label text-custom-primary fw-bold">رقم الهوية</label>
-                                    <input asp-for="AddCandidate.NationalId" name="NationalId" type="number" class="form-control form-control-lg border-custom-primary" placeholder="أدخل رقم الهوية" />
+                                    <input asp-for="AddCandidate.NationalId" name="NationalId"  class="form-control form-control-lg border-custom-primary" placeholder="أدخل رقم الهوية" />
                                 </div>
 
                                 <div class="mb-3">
@@ -79,18 +82,18 @@
 
                                 <div class="mb-3">
                                     <label asp-for="AddCandidate.Email" class="form-label text-custom-primary fw-bold">البريد الإلكتروني</label>
-                                    <input asp-for="AddCandidate.Email" name="Email" type="email" class="form-control form-control-lg border-custom-primary" placeholder="أدخل البريد الإلكتروني" />
+                                    <input asp-for="AddCandidate.Email" name="Email"  class="form-control form-control-lg border-custom-primary" placeholder="أدخل البريد الإلكتروني" />
                                 </div>
 
                                 <div class="mb-3">
                                     <label asp-for="AddCandidate.PhoneNumber" class="form-label text-custom-primary fw-bold">رقم الهاتف</label>
-                                    <input asp-for="AddCandidate.PhoneNumber" name="PhoneNumber" type="number" class="form-control form-control-lg border-custom-primary" placeholder="أدخل رقم الهاتف" />
+                                    <input asp-for="AddCandidate.PhoneNumber" name="PhoneNumber" class="form-control form-control-lg border-custom-primary" placeholder="أدخل رقم الهاتف" />
                                 </div>
 
                                 <fieldset class="mb-3">
                                     <legend class="form-label text-custom-primary fw-bold">الجنس:</legend>
                                     <div class="form-check form-check-inline">
-                                        <input asp-for="AddCandidate.Gender" type="radio" name="Gender" value="Male" class="form-check-input border-custom-primary" />
+                                        <input asp-for="AddCandidate.Gender" type="radio" name="Gender" value="Male" class="form-check-input border-custom-primary " checked />
                                         <label asp-for="AddCandidate.Gender" class="form-check-label">ذكر</label>
                                     </div>
                                     <div class="form-check form-check-inline">
@@ -128,196 +131,66 @@
                 </div>
             </div>
 
-            <!-- Update Candidate Modal -->
-            <div class="modal fade" id="updateCandidateModal" tabindex="-1" aria-labelledby="updateCandidateModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="updateCandidateModalLabel">تحديث معلومات مرشح</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        
-                        <div class="modal-body">
-                            <form asp-action="EditCandidate" method="post">
-                                <!-- Update Candidate Form Fields -->
-                                <div class="mb-3">
-                                    <label asp-for="UpdateCandidate.CandidateName" class="form-label custom-form-label">اسم المرشح</label>
-                                    <input asp-for="UpdateCandidate.CandidateName" name="CandidateName" value="@candidate.CandidateName" class="form-control custom-form-control" />
-                                </div>
-
-                                <div class="mb-3">
-                                    <label asp-for="UpdateCandidate.NationalId" class="form-label custom-form-label">رقم الهوية</label>
-                                    <input asp-for="UpdateCandidate.NationalId" name="NationalId" value="@candidate.NationalId" class="form-control custom-form-control" />
-                                </div>
-
-                                <div class="mb-3">
-                                    <label asp-for="UpdateCandidate.DateOfBirth" class="form-label custom-form-label">تاريخ الميلاد</label>
-                                    <input asp-for="UpdateCandidate.DateOfBirth" name="DateOfBirth" value="@candidate.DateOfBirth" type="date" class="form-control custom-form-control" />
-                                </div>
-
-                                <div class="mb-3">
-                                    <label asp-for="UpdateCandidate.Email" class="form-label custom-form-label">البريد الإلكتروني</label>
-                                    <input asp-for="UpdateCandidate.Email" name="Email" value="@candidate.Email" type="email" class="form-control custom-form-control" />
-                                </div>
-
-                                <div class="mb-3">
-                                    <label asp-for="UpdateCandidate.PhoneNumber" class="form-label custom-form-label">رقم الهاتف</label>
-                                    <input asp-for="UpdateCandidate.PhoneNumber" name="PhoneNumber" value="@candidate.PhoneNumber" class="form-control custom-form-control" />
-                                </div>
-
-                                <div class="mb-3">
-                                    <label asp-for="UpdateCandidate.Gender" class="form-label custom-form-label">الجنس:</label>
-                                    <div class="form-check form-check-inline">
-                                        <input asp-for="UpdateCandidate.Gender" type="radio" name="Gender" value="@candidate.Gender" class="form-check-input" checked />
-                                        <label asp-for="UpdateCandidate.Gender" name="Gender" class="form-check-label">ذكر</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input asp-for="UpdateCandidate.Gender" type="radio" name="Gender" value="@candidate.Gender" class="form-check-input" />
-                                        <label asp-for="UpdateCandidate.Gender" name="Gender" class="form-check-label">أنثى</label>
-                                    </div>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label asp-for="UpdateCandidate.Major.MajorId" class="form-label custom-form-label">التخصص الجامعي</label>
-                                    <select asp-for="UpdateCandidate.Major.MajorId" name="Major.MajorId" class="form-control form-select custom-form-select" asp-items="@(new SelectList(Model.UpdateCandidate.Majors, "MajorId", "MajorName", Model.UpdateCandidate.Major.MajorId))"></select>
-                                </div>
-
-                                <div class="mb-4">
-                                    <label asp-for="UpdateCandidate.Nationality.NationalityId" class="form-label custom-form-label">الجنسية</label>
-                                    <select asp-for="UpdateCandidate.Nationality.NationalityId" name="Nationality.NationalityId" value="@candidate.Nationality.NationalityId" class="form-control form-select custom-form-select" asp-items="@(new SelectList(Model.UpdateCandidate.Nationalities, "NationalityId", "NationalityName", Model.UpdateCandidate.Nationality.NationalityId))"></select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label asp-for="AddCandidate.CandidateStatusId" class="form-check-label">حالة المرشح</label>
-                                    <select asp-for="AddCandidate.CandidateStatusId" name="CandidateStatus.CandidateStatusId" class="form-control form-select" asp-items="@(new SelectList(Model.AddCandidate.CandidateStatuses, "CandidateStatusId", "Status"))"></select>
-                                </div>
-
-                                <input type="hidden" asp-for="UpdateCandidate.CandidateId" name="UpdateCandidate.CandidateId" value="@candidate.CandidateId" />
-
-                                <div class="d-flex justify-content-between mt-4">
-                                    <button type="submit" class="btn btn-success">تحديث المرشح</button>
-                                    <a class="btn btn-primary" asp-action="Index">العودة لقائمة المرشحين</a>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Delete Candidate Modal -->
-            <div class="modal fade" id="deleteCandidateModal" tabindex="-1" aria-labelledby="deleteCandidateModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="deleteCandidateModalLabel">حذف مرشح</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form asp-action="DeleteCandidate" method="post">
-                                <div class="mb-3">
-                                    <label asp-for="DeleteCandidate.CandidateName" class="form-label custom-form-label">اسم المرشح</label>
-                                    <input asp-for="DeleteCandidate.CandidateName" name="CandidateName" value="@candidate.CandidateName" class="form-control custom-form-control" readonly />
-                                </div>
-
-                                <div class="mb-3">
-                                    <label asp-for="DeleteCandidate.NationalId" class="form-label custom-form-label">رقم الهوية</label>
-                                    <input asp-for="DeleteCandidate.NationalId" name="NationalId" value="@candidate.NationalId" class="form-control custom-form-control" readonly />
-                                </div>
-
-                                <div class="mb-3">
-                                    <label asp-for="DeleteCandidate.DateOfBirth" class="form-label custom-form-label">تاريخ الميلاد</label>
-                                    <input asp-for="DeleteCandidate.DateOfBirth" name="DateOfBirth" value="@candidate.DateOfBirth" class="form-control custom-form-control" readonly />
-                                </div>
-
-                                <div class="mb-3">
-                                    <label asp-for="DeleteCandidate.Email" class="form-label custom-form-label">البريد الإلكتروني</label>
-                                    <input asp-for="DeleteCandidate.Email" name="Email" value="@candidate.Email" class="form-control custom-form-control" readonly />
-                                </div>
-
-                                <div class="mb-3">
-                                    <label asp-for="DeleteCandidate.PhoneNumber" class="form-label custom-form-label">رقم الهاتف</label>
-                                    <input asp-for="DeleteCandidate.PhoneNumber" name="PhoneNumber" value="@candidate.PhoneNumber" class="form-control custom-form-control" readonly />
-                                </div>
-
-                                <div class="mb-3">
-                                    <label asp-for="DeleteCandidate.Gender" class="form-label custom-form-label">الجنس</label>
-                                    <input asp-for="DeleteCandidate.Gender" name="Gender" value="@candidate.Gender" class="form-control custom-form-control" readonly />
-                                </div>
-
-                                <div class="mb-3">
-                                    <label asp-for="DeleteCandidate.Major" class="form-label custom-form-label">التخصص الجامعي</label>
-                                    <input asp-for="DeleteCandidate.Major.MajorName" name="Major.MajorName" class="form-control custom-form-control" readonly />
-                                </div>
-
-                                <div class="mb-4">
-                                    <label asp-for="DeleteCandidate.Nationality" class="form-label custom-form-label">الجنسية</label>
-                                    <input asp-for="DeleteCandidate.Nationality.NationalityName" name="Nationality.NationalityName" class="form-control custom-form-control" readonly />
-                                </div>
-
-                                <input type="hidden" asp-for="DeleteCandidate.CandidateId" value="@candidate.CandidateId" name="DeleteCandidate.CandidateId " />
-
-                                <div class="d-flex justify-content-between mt-4">
-                                    <button type="submit" class="btn btn-danger">حذف المرشح</button>
-                                    <a class="btn btn-primary" asp-action="Index">العودة لقائمة المرشحين</a>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
         }
-
         @section scripts {
             <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                    // Search functionality
-                    var searchInput = document.getElementById('searchInput');
-                    var cards = Array.from(document.querySelectorAll('.card'));
 
-                    searchInput.addEventListener('input', function () {
-                        var filter = this.value.toLowerCase();
+            document.addEventListener('DOMContentLoaded', function () {
+                // Search functionality
+                var searchInput = document.getElementById('searchInput');
+                var cards = Array.from(document.querySelectorAll('.card'));
 
-                        cards.forEach(function (card) {
-                            var candidateName = card.querySelector('.card-title').innerText.toLowerCase();
-                            var isVisible = candidateName.includes(filter);
-                            card.style.display = isVisible ? '' : 'none';
-                        });
-                    });
+                searchInput.addEventListener('input', function () {
+                    var filter = this.value.toLowerCase();
 
-                    // Add Candidate Modal
-                    var openAddModalButton = document.getElementById('openAddCandidateModal');
-                    var addCandidateModal = new bootstrap.Modal(document.getElementById('addCandidateModal'));
-                    openAddModalButton.addEventListener('click', function () {
-                        addCandidateModal.show();
-                    });
-
-                    // Edit Candidate Modal
-                    document.querySelectorAll('.btn-warning').forEach(button => {
-                        button.addEventListener('click', function () {
-                            var modalId = this.dataset.target; // Ensure your button has data-target attribute
-                            var updateCandidateModal = new bootstrap.Modal(document.getElementById(modalId));
-                            updateCandidateModal.show();
-                        });
-                    });
-
-                    // Delete Candidate Modal
-                    document.querySelectorAll('.btn-danger').forEach(button => {
-                        button.addEventListener('click', function () {
-                            var modalId = this.dataset.target; // Ensure your button has data-target attribute
-                            var deleteCandidateModal = new bootstrap.Modal(document.getElementById(modalId));
-                            deleteCandidateModal.show();
-                        });
+                    cards.forEach(function (card) {
+                        var candidateName = card.querySelector('.card-title').innerText.toLowerCase();
+                        var isVisible = candidateName.includes(filter);
+                        card.style.display = isVisible ? '' : 'none';
                     });
                 });
 
+                // Add Candidate Modal
+                var addCandidateModal = new bootstrap.Modal(document.getElementById('addCandidateModal'));
+                document.getElementById('openAddCandidateModal').addEventListener('click', function () {
+                    addCandidateModal.show();
+                });
+
+                // Edit Candidate Modal
+                document.querySelectorAll('.btn-warning').forEach(button => {
+                    button.addEventListener('click', function () {
+                        var modalId = this.dataset.bsTarget; // Ensure your button has data-bs-target attribute
+                        var updateCandidateModal = new bootstrap.Modal(document.getElementById(modalId));
+                        updateCandidateModal.show();
+                    });
+                });
+
+
+                // Delete Candidate Modal
+                document.querySelectorAll('.btn-danger').forEach(button => {
+                    button.addEventListener('click', function () {
+                        var modalId = this.dataset.bsTarget; // Ensure your button has data-bs-target attribute
+                        var deleteCandidateModal = new bootstrap.Modal(document.getElementById(modalId));
+                        deleteCandidateModal.show();
+                    });
+                });
+            });
+
+            
             </script>
         }
-
         <style>
             .rtl {
                 direction: rtl;
                 text-align: right;
             }
+
+                <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Include Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 
         </style>

@@ -57,5 +57,15 @@ namespace RCCM.Controllers.Web
             return RedirectToAction("Index");
         }
 
+        public IActionResult InterviewIndex()
+        {
+            return View();
+        }
+
+        public IActionResult InterviewTable()
+        {
+            return View();
+        }
+
     }
 }

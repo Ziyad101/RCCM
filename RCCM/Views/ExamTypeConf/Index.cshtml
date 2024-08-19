@@ -1,47 +1,115 @@
 ﻿@model List<ExamTypeConfViewModel>
+@{
+    Layout = "_AdminLayout";
+}
 
+<div class="container my-4">
+    <h1 class="text-center mb-4">قائمة الاختبارات (@Model.Count())</h1>
 
-<h1 class="text-center mb-4">قائمة الاختبارات (@Model.Count())</h1>
+    <!-- Search Input for Exam Types -->
+    <div class="row mb-3">
+        <div class="col-md-6 offset-md-3">
+            <input id="searchInput" class="form-control" type="text" placeholder="ابحث عن اختبار...">
+        </div>
+    </div>
 
+    <!-- Add Exam Type Button -->
+    <div class="text-center mb-4">
+        <a class="nav-link text-decoration-none text-white btn btn-primary" asp-controller="ExamTypeConf" asp-action="Add">إضافة نوع اختبار</a>
+        <!-- Border Line Under Button -->
+        <div class="row">
+            <div class="col">
+                <hr class="my-4" style="border-color: #072e6e;">
+            </div>
+        </div>
+    </div>
 
+    <!-- Exam Type Cards -->
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var exam in Model)
+        {
+            <div class="col exam-type-card">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title custom-bg-primary text-white p-3">@exam.Title</h5>
+                        <p class="card-text">
+                            <strong>تاريخ البداية:</strong> @DateOnly.FromDateTime(exam.StartDate).ToString("yyyy-MM-dd")<br />
+                            <strong>تاريخ النهاية:</strong> @DateOnly.FromDateTime(exam.EndDate).ToString("yyyy-MM-dd")
+                        </p>
+                        <div class="d-flex justify-content-between mt-3">
+                            <form asp-action="Edit" method="post" class="d-inline">
+                                <input type="hidden" name="id" value="@exam.ExamTypeConfId" />
+                                <button class="btn btn-warning btn-sm" type="submit">تعديل</button>
+                            </form>
+                            <form asp-action="Delete" method="post" class="d-inline">
+                                <input type="hidden" name="id" value="@exam.ExamTypeConfId" />
+                                <button class="btn btn-danger btn-sm" type="submit">حذف</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
 
-<div class="container">
-    <table class="table table-hover table-striped">
-        <thead class="bg-primary bg-opacity-75 text-black">
-            <tr>
-                <th>اسم الاختبار</th>
-                <th>تاريخ البداية</th>
-                <th>تاريخ النهاية</th>
-                <th></th>
-                <th></th>
+@section scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var searchInput = document.getElementById('searchInput');
+            var container = document.querySelector('.row.row-cols-1.row-cols-md-3.g-4');
+            var cards = Array.from(document.querySelectorAll('.exam-type-card'));
 
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var role in Model)
-            {
-                <tr>
-                    <td>@role.Title</td>
-                    <td>@DateOnly.FromDateTime(role.StartDate)</td>
-                    <td>@DateOnly.FromDateTime(role.EndDate)</td>
+            // Store initial display state
+            var initialDisplay = {};
+            cards.forEach(function (card) {
+                initialDisplay[card.dataset.id] = card.style.display;
+            });
 
-                    <td>
-                        <form asp-action="Edit" method="post">
-                            <input hidden name="id" asp-for="@role.ExamTypeConfId" />
-                            <button class="btn btn-warning" type="submit">تعديل البيانات</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form asp-action="Delete" method="post">
-                            <input hidden name="id" asp-for="@role.ExamTypeConfId" />
-                            <button class="btn btn-danger" type="submit">حذف الحالة</button>
-                        </form>
-                    </td>
-                </tr>
+            searchInput.addEventListener('input', function () {
+                var filter = this.value.toLowerCase();
+
+                // Filter cards
+                var visibleCards = [];
+                var hiddenCards = [];
+
+                cards.forEach(function (card) {
+                    var title = card.querySelector('.card-title').innerText.toLowerCase();
+                    if (title.includes(filter)) {
+                        visibleCards.push(card);
+                    } else {
+                        hiddenCards.push(card);
+                    }
+                });
+
+                // Clear container and append cards in new order
+                container.innerHTML = '';
+                appendCards(visibleCards);
+                appendCards(hiddenCards);
+
+                // Update display property based on search filter
+                cards.forEach(function (card) {
+                    if (filter === '') {
+                        // Restore initial display state when filter is empty
+                        card.style.display = initialDisplay[card.dataset.id] || '';
+                    } else {
+                        // Ensure cards are shown or hidden based on the filter
+                        card.style.display = visibleCards.includes(card) ? '' : 'none';
+                    }
+                });
+            });
+
+            // Append function to avoid duplication
+            function appendCards(cards) {
+                cards.forEach(function (card) {
+                    container.appendChild(card);
+                });
             }
 
-        </tbody>
-    </table>
-
-    <a class="nav-link text-decoration-none text-white btn btn-primary" asp-controller="ExamTypeConf" asp-action="Add"> Add Exam Type</a>
-</div>
+            // Set data-id attribute for initial state storage
+            cards.forEach(function (card, index) {
+                card.dataset.id = index;
+            });
+        });
+    </script>
+}

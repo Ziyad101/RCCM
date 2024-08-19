@@ -73,12 +73,7 @@ namespace Infrastructure.Repositories
         public void UpdateCandidate(UpdateCandidateViewModel candidateModel)
         {
             var candidate = _mapper.Map<Candidate>(candidateModel);
-            var major = _context.Major.AsNoTracking().Where(m => m.MajorId == candidateModel.Major.MajorId).FirstOrDefault();
-            var status = _context.CandidateStatus.AsNoTracking().Where(c=>c.CandidateStatusId == candidateModel.CandidateStatus.CandidateStatusId).FirstOrDefault();
-            var nationality = _context.Nationality.AsNoTracking().Where(n=>n.NationalityId == candidate.Nationality.NationalityId).FirstOrDefault();
-            candidate.Major = major;
-            candidate.CandidateStatus = status;
-            candidate.Nationality = nationality;     
+            
             _context.Candidate.Update(candidate);
             _context.SaveChanges();
         }

@@ -1,24 +1,89 @@
-﻿
+﻿@model AddInterviewViewModel
 
-@model AddInterviewViewModel
-<h2>Add interview</h2>
 
-<form asp-action="AddInterview" method="post">
+<div class="container my-4">
+    <h2 class="text-center mb-4"> مقابلة الشخصية</h2>
 
-    <div class="form-group">
-        <label asp-for="Candidates" class="form-check-label"> Candidate</label>
-        <select asp-for="CandidateId" class="form-control form-select" asp-items="@(new SelectList(Model.Candidates, "CandidateId", "CandidateName"))"></select>
+
+
+<div class="container mt-4">
+    <div class="row">
+
+        <!-- interview Scheduling Section -->
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header" style="background-color: #072e6e; color: white;">
+                     جدولة مقابلات 
+                </div>
+                <div class="card-body">
+                    <form asp-action="AddInterview" method="post">
+                        <div class="mb-3">
+                            <label asp-for="CandidateId" class="form-label">المرشح</label>
+                            <select asp-for="CandidateId" class="form-select" asp-items="@(new SelectList(Model.Candidates, "CandidateId", "CandidateName"))">
+                                <option value="">اختر مرشحاً</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="InterviewDate" class="form-label">تاريخ المقابلة</label>
+                            <input asp-for="InterviewDate" class="form-control" />
+                        </div>
+                        <div class="d-flex justify-content-between mt-4">
+                            <button type="submit" class="btn bg-custom-primary text-white">إضافة المقابلة</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-header" style="background-color: #072e6e; color: white;">
+                        معلومات المرشحين
+                    </div>
+
+                    <!-- TO DISPLAY THE CANDIDATE CARDS -->
+
+                    <div class="card-body" style="max-height: 500px; overflow-y: auto;">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">اسم المرشح</h5>
+                                <p class="card-text">الرقم الوطني: 123456789</p>
+                                <p class="card-text">الجنسية: سعودي</p>
+                                <p class="card-text">المؤهل: بكالوريوس</p>
+                                <p class="card-text">التخصص: هندسة</p>
+                                <p class="card-text">البريد الإلكتروني: candidate1@example.com</p>
+                                <p class="card-text">رقم الجوال: +1234567890</p>
+                                <p class="card-text">الوظيفة المرشح لها: مهندس</p>
+                                <button type="button" class="btn btn-primary btn-block mt-3">اختيار المرشح</button>
+
+                            </div>
+                        </div>
+
+                        <!-- TO DISPLAY THE CANDIDATE CARDS -->
+
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">اسم المرشح</h5>
+                                <p class="card-text">الرقم الوطني: 987654321</p>
+                                <p class="card-text">الجنسية: سعودي</p>
+                                <p class="card-text">المؤهل: بكالوريوس</p>
+                                <p class="card-text">التخصص: علوم الحاسوب</p>
+                                <p class="card-text">البريد الإلكتروني: candidate2@example.com</p>
+                                <p class="card-text">رقم الجوال: +9876543210</p>
+                                <p class="card-text">الوظيفة المرشح لها: مبرمج</p>
+                                <button type="button" class="btn btn-primary btn-block mt-3">اختيار المرشح</button>
+
+                            </div>
+       
+
+                    </div>
+                </div>
+            </div>
+        </div>
+<div class="row mt-4">
+    <div class="col-md-12 text-center">
+        <a asp-area="" asp-controller="Interview" asp-action="InterviewTable" class="btn btn-primary btn-lg">انقر هنا لعرض جدول مقابلات للمرشحين</a>
     </div>
-    <div class="form-group">
-        <label asp-for="InterviewDate"></label>
-        <input asp-for="InterviewDate" class="form-control" />
+</div>
     </div>
-
-
-    <div class="d-flex justify-content-evenly mt-5">
-        <button type="submit" class="btn btn-success">إضافة التخصص</button>
-        <a class="text-decoration-none btn btn-primary" asp-action="Index">العودة لقائمة التخصصات</a>
-    </div>
-</form>
-
 

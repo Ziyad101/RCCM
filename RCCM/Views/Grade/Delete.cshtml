@@ -1,13 +1,62 @@
 ﻿@model DeleteGradeViewModel
 
-<h2>حذف المستخدم</h2>
+@{
+    Layout = "_AdminLayout";
+}
 
-<form asp-action="DeleteGrade" method="post">
-    <p><strong>اسم المستخدم:</strong> @Model.GradeValue</p>
-    
-    <input type="hidden"  asp-for="GradeId" />
-    <div class="d-flex justify-content-evenly mt-5">
-        <button type="submit" class="btn btn-danger">حذف المستخدم</button>
-        <a class="text-decoration-none btn btn-primary" asp-action="Index">العودة لقائمة المستخدمين</a>
+<div class="container my-4">
+
+    <!-- Display Success Alert -->
+    <div id="successAlert" class="alert alert-danger alert-dismissible fade show d-none" role="alert">
+        <span id="alertMessage"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-</form>
+
+    <h2 class="text-center mb-4">حذف درجة الاختبار</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow border-danger">
+                <div class="card-header bg-custom-primary text-white text-center">
+                    <h3>تأكيد حذف درجة الاختبار</h3>
+                </div>
+                <div class="card-body">
+                    <p><strong>درجة الاختبار:</strong> @Model.GradeValue</p>
+                    <form id="deleteGradeForm" asp-action="DeleteGrade" method="post">
+                        <input type="hidden" asp-for="GradeId" />
+                        <div class="d-flex justify-content-evenly mt-5">
+                            <button type="submit" class="btn btn-danger">حذف درجة الاختبار</button>
+                            <a class="text-decoration-none btn btn-primary" asp-action="Index">العودة لقائمة الدرجات</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#deleteGradeForm').on('submit', function (event) {
+                event.preventDefault(); // Prevent default form submission
+
+                var form = $(this);
+                var successAlert = $('#successAlert');
+                var alertMessage = $('#alertMessage');
+
+                // Show success alert
+                alertMessage.text('درجة الاختبار تم حذفها بنجاح!');
+                successAlert.removeClass('d-none');
+
+                // Simulate a delay before redirecting
+                setTimeout(function () {
+                    form.off('submit').submit(); // Unbind event handler and submit form programmatically after delay
+                }, 2000); // 2 seconds delay
+            });
+        });
+    </script>
+}

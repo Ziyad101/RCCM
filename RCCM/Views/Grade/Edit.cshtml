@@ -1,19 +1,67 @@
 ﻿@model UpdateGradeViewModel
+
 @{
     ViewData["Title"] = "Edit Grade Data";
+    Layout = "_AdminLayout";
 }
 
-<h2>تحديث مستخدم</h2>
+<div class="container my-4">
 
-<form class=" " asp-action="EditGrade" method="post">
-    <div class="form-group">
-        <label asp-for="GradeValue">درجة الاختبار</label>
-        <input asp-for="GradeValue" class="form-control form-text" value="@Model.GradeValue" />
+    <!-- Display Success Alert -->
+    <div id="successAlert" class="alert alert-warning alert-dismissible fade show d-none" role="alert">
+        <span id="alertMessage"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-  
-    <input hidden asp-for="GradeId" />
-    <div class="d-flex justify-content-evenly mt-5">
-        <button type="submit" class="btn btn-success">تحديث بيانات دؤجة الاختبار</button>
-        <a class="text-decoration-none btn btn-primary" asp-action="Index">العودة لقائمة الدرجات</a>
+
+    <h2 class="text-center mb-4">تحديث درجة الاختبار</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow border-success">
+                <div class="card-header bg-custom-primary text-white text-center">
+                    <h3>تحديث درجة الاختبار</h3>
+                </div>
+                <div class="card-body">
+                    <form id="editGradeForm" asp-action="EditGrade" method="post">
+                        <div class="mb-3">
+                            <label asp-for="GradeValue" class="form-label">درجة الاختبار</label>
+                            <input asp-for="GradeValue" class="form-control" type="text" />
+                            <span asp-validation-for="GradeValue" class="text-danger"></span>
+                        </div>
+                        <input type="hidden" asp-for="GradeId" />
+                        <div class="d-flex justify-content-between mt-4">
+                            <button type="submit" class="btn btn-success">تحديث بيانات درجة الاختبار</button>
+                            <a class="btn btn-primary" asp-action="Index">العودة لقائمة الدرجات</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-</form>
+</div>
+
+@section scripts {
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#editGradeForm').on('submit', function (event) {
+                event.preventDefault(); // Prevent default form submission
+
+                var form = $(this);
+                var successAlert = $('#successAlert');
+                var alertMessage = $('#alertMessage');
+
+                // Show success alert
+                alertMessage.text('تم تحديث بيانات درجة الاختبار بنجاح!');
+                successAlert.removeClass('d-none');
+
+                // Simulate a delay before redirecting
+                setTimeout(function () {
+                    form.off('submit').submit(); // Unbind event handler and submit form programmatically after delay
+                }, 2000); // 2 seconds delay
+            });
+        });
+    </script>
+}
