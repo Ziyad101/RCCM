@@ -1,0 +1,32 @@
+﻿@model AddCandidateStatusViewModel
+
+@{
+    ViewData["Title"] = "Add Status";
+    Layout = "_AdminLayout";
+}
+
+<div class="container my-4">
+    <h2 class="text-center mb-4">إضافة حالة</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow custom-card border-primary">
+                <div class="card-header bg-custom-primary text-white text-center">
+                    <h3>إضافة حالة جديدة</h3>
+                </div>
+                <div class="card-body custom-card-body">
+                    <form asp-action="AddCandidateStatus" method="post">
+                        <div class="mb-3">
+                            <label asp-for="Status" class="form-label">اسم الصلاحية</label>
+                            <input asp-for="Status" class="form-control" />
+                        </div>
+                        <div class="d-flex justify-content-between mt-4">
+                            <button type="submit" class="btn btn-success">إضافة صلاحيات</button>
+                            <a class="btn btn-primary" asp-action="Index">العودة لقائمة الصلاحيات</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

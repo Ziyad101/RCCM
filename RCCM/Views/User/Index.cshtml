@@ -1,0 +1,72 @@
+﻿@model List<UserViewModel>
+@{
+    Layout = "_AdminLayout";
+}
+
+<h1 class="text-center mb-4">قائمة المستخدمين (@Model.Count())</h1>
+
+<div class="container">
+    <!-- Search Input -->
+    <div class="row mb-3">
+        <div class="col-md-6 offset-md-3">
+            <input id="searchInput" class="form-control" type="text" placeholder="ابحث عن مستخدم...">
+        </div>
+    </div>
+
+    <!-- Add User Button -->
+    <div class="text-center mt-4 mb-4">
+        <a class="nav-link text-decoration-none text-white btn btn-primary" asp-controller="User" asp-action="Add"> إضافة مستخدم</a>
+    </div>
+
+    <!-- Header Line -->
+    <div class="row">
+        <div class="col">
+            <hr class="my-4" style="border-color: #072e6e;">
+        </div>
+    </div>
+
+    <!-- Cards Section -->
+    <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+        @foreach (var user in Model)
+        {
+            <div class="col">
+                <div class="card shadow" style="direction: rtl;">
+                    <div class="card-body">
+                        <h5 class="card-title text-white custom-bg-primary p-3">@user.UserName</h5>
+                        <p class="card-text">صلاحيات المستخدم: @user.RoleName</p>
+                        <div class="mt-3">
+                            <form asp-action="Edit" method="post">
+                                <input type="hidden" name="id" value="@user.UserId" />
+                                <button class="btn btn-warning btn-sm" type="submit">تعديل البيانات</button>
+                            </form>
+                            <form asp-action="Delete" method="post" class="mt-2">
+                                <input type="hidden" name="id" value="@user.UserId" />
+                                <button class="btn btn-danger btn-sm" type="submit">حذف المستخدم</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        // Function to handle search input change
+        document.getElementById('searchInput').addEventListener('input', function () {
+            var filter = this.value.toLowerCase();
+            var cards = document.querySelectorAll('.card');
+
+            cards.forEach(function (card) {
+                var userName = card.querySelector('.card-title').innerText.toLowerCase();
+                var roleName = card.querySelector('.card-text').innerText.toLowerCase();
+                if (userName.includes(filter) || roleName.includes(filter)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+}

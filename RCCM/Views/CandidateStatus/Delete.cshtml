@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Delete Candidate Status";
+    Layout = "_AdminLayout";
+}
+
+@model DeleteCandidateStatusViewModel
+
+<div class="container my-4">
+    <h2 class="text-center mb-4">حذف الحالة</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow custom-card border-danger">
+                <div class="card-header bg-custom-primary text-white text-center">
+                    <h3>تأكيد الحذف</h3>
+                </div>
+                <div class="card-body custom-card-body">
+                    <form asp-action="DeleteCandidateStatus" method="post">
+                        <p><strong>اسم الحالة:</strong> @Model.Status</p>
+                        <input type="hidden" asp-for="CandidateStatusId" />
+                        <input type="hidden" asp-for="Status" />
+                        <div class="d-flex justify-content-between mt-4">
+                            <button type="submit" class="btn btn-danger">حذف الصلاحية</button>
+                            <a class="btn btn-primary" asp-action="Index">العودة لقائمة الصلاحية</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

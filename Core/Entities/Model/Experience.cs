@@ -13,15 +13,12 @@ namespace Core.Entities.Model
     {
         [Key]
         public int ExperienceId { get; set; }
-
-       
         public string CompanyName { get; set; }
         public string JobTitle { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime StartDate { get; set; } 
+        public DateTime EndDate { get; set; } 
         public bool ExperienceMatch { get; set; }
         public decimal Salary { get; set; }
-
         public decimal Benefits { get; set; }
         public bool IsActive { get; set; }
         public DateTime CreatedAt { get; set; }
@@ -30,5 +27,9 @@ namespace Core.Entities.Model
         [ForeignKey("Candidate")]
         public int CandidateId { get; set; }
         public Candidate Candidate { get; set; }
+
+        [ForeignKey("Grade")]
+        public int GradeId { get; set; }
+        public Grade Grade { get; set; }
     }
 }

@@ -1,0 +1,92 @@
+﻿
+    <div class="container mt-4">
+        <div class="row">
+
+            <!-- Test Search Section -->
+
+        <h2 class="text-center mb-4"> الاختبارات</h2>
+
+
+            <!-- Test Scheduling Section -->
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                <div class="card-header" style="background-color: #072e6e; color: white;">
+                        جدولة الاختبار
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label>المرشح الأول:</label>
+                                    <input type="text" class="form-control" value="اسم المرشح 1" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="testTypeSelect">اختر نوع الاختبار</label>
+                                <select class="form-control" id="testTypeSelect">
+                                    <option value="englishTest">اختبار اللغة الإنجليزية</option>
+                                    <option value="computerizedTest">اختبار الحاسوب</option>
+                                    <option value="physicalTest">اختبار القدرات البدنية</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="dateTimePicker">اختر التاريخ والوقت</label>
+                                <input type="datetime-local" class="form-control" id="dateTimePicker">
+                            </div>
+                            <button type="submit" class="btn btn-primary">جدولة الاختبار</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header" style="background-color: #072e6e; color: white;">
+                    معلومات المرشحين
+                </div>
+
+                <!-- TO DISPLAY THE CANDIDATE CARDS -->
+
+                <div class="card-body" style="max-height: 500px; overflow-y: auto;">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">اسم المرشح</h5>
+                            <p class="card-text">الرقم الوطني: 123456789</p>
+                            <p class="card-text">الجنسية: سعودي</p>
+                            <p class="card-text">المؤهل: بكالوريوس</p>
+                            <p class="card-text">التخصص: هندسة</p>
+                            <p class="card-text">البريد الإلكتروني: candidate1@example.com</p>
+                            <p class="card-text">رقم الجوال: +1234567890</p>
+                            <p class="card-text">الوظيفة المرشح لها: مهندس</p>
+                            <button type="button" class="btn btn-primary btn-block mt-3">اختيار المرشح</button>
+
+                        </div>
+                    </div>
+
+                    <!-- TO DISPLAY THE CANDIDATE CARDS -->
+
+
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">اسم المرشح</h5>
+                            <p class="card-text">الرقم الوطني: 987654321</p>
+                            <p class="card-text">الجنسية: سعودي</p>
+                            <p class="card-text">المؤهل: بكالوريوس</p>
+                            <p class="card-text">التخصص: علوم الحاسوب</p>
+                            <p class="card-text">البريد الإلكتروني: candidate2@example.com</p>
+                            <p class="card-text">رقم الجوال: +9876543210</p>
+                            <p class="card-text">الوظيفة المرشح لها: مبرمج</p>
+                            <button type="button" class="btn btn-primary btn-block mt-3">اختيار المرشح</button>
+
+                        </div>
+  
+
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="row mt-4">
+            <div class="col-md-12 text-center">
+                <a asp-area="" asp-controller="Recruitment" asp-action="RecruitTable" class="btn btn-primary btn-lg">انقر هنا لعرض جدول الاختبارات للمرشحين</a>
+            </div>
+        </div>

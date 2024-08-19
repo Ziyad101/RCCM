@@ -12,8 +12,6 @@ namespace Core.Entities.Model
     {
         [Key]
         public int RequestId { get; set; }
-
-
         public int RequestStatus { get; set; }
         public bool IsActive { get; set; }
         public DateTime CreatedAt { get; set; }

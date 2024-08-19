@@ -1,0 +1,70 @@
+﻿@model List<GradeViewModel>
+
+@{
+    Layout = "_AdminLayout";
+}
+
+<div class="container my-4">
+    <h1 class="text-center mb-4">قائمة الدرجات (@Model.Count)</h1>
+
+    <!-- Search Input for Grades -->
+    <div class="row mb-3">
+        <div class="col-md-6 offset-md-3">
+            <input id="searchInput" class="form-control" type="text" placeholder="ابحث عن الدرجات...">
+        </div>
+    </div>
+
+    <!-- Add Grade Button -->
+    <div class="text-center mb-4">
+        <a class="nav-link text-decoration-none text-white btn-custom-primary" asp-controller="Grade" asp-action="Add">إضافة درجة الاختبار</a>
+        <!-- Border Line Under Button -->
+        <div class="row">
+            <div class="col">
+                <hr class="my-4" style="border-color: #072e6e;">
+            </div>
+        </div>
+    </div>
+
+    <!-- Grades Cards -->
+    <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+        @foreach (var grade in Model)
+        {
+            <div class="col grade-card">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title custom-bg-primary text-white p-3">درجة الاختبار: @grade.GradeValue</h5>
+                        <div class="d-flex justify-content-between mt-3">
+                            <form asp-action="Edit" method="post" class="d-inline">
+                                <input type="hidden" name="id" value="@grade.GradeId" />
+                                <button class="btn btn-warning btn-sm" type="submit">تعديل البيانات</button>
+                            </form>
+                            <form asp-action="Delete" method="post" class="d-inline">
+                                <input type="hidden" name="id" value="@grade.GradeId" />
+                                <button class="btn btn-danger btn-sm" type="submit">حذف درجة الاختبار</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var searchInput = document.getElementById('searchInput');
+            var container = document.querySelector('.row.row-cols-1.row-cols-md-3.g-4');
+            var cards = Array.from(document.querySelectorAll('.grade-card'));
+
+            searchInput.addEventListener('input', function () {
+                var filter = this.value.toLowerCase();
+
+                cards.forEach(function (card) {
+                    var gradeValue = card.querySelector('.card-title').innerText.toLowerCase();
+                    card.style.display = gradeValue.includes(filter) ? '' : 'none';
+                });
+            });
+        });
+    </script>
+}

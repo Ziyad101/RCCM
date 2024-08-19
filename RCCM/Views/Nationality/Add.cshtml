@@ -1,0 +1,30 @@
+﻿@model AddNationalityViewModel
+@{
+    ViewData["Title"] = "Add Nationality";
+    Layout = "_AdminLayout";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow custom-card border-success">
+                <div class="card-header bg-custom-primary text-white text-center">
+                    <h2>إضافة جنسية</h2>
+                </div>
+                <div class="card-body custom-card-body">
+                    <form asp-action="Add" method="post">
+                        <div class="mb-3">
+                            <label asp-for="NationalityName" class="form-label custom-form-label">اسم الجنسية</label>
+                            <input asp-for="NationalityName" class="form-control custom-form-control" />
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-5">
+                            <button type="submit" class="btn btn-success">إضافة جنسية</button>
+                            <a class="btn btn-primary" asp-action="Index">العودة لقائمة الجنسيات</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

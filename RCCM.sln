@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RCCM", "RCCM\RCCM.csproj", "{639DC8A5-3606-4667-87C3-AF7581CE9BC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RCCM", "RCCM\RCCM.csproj", "{639DC8A5-3606-4667-87C3-AF7581CE9BC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{38276C64-009E-4603-9A26-0F82F8E2E14F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{38276C64-009E-4603-9A26-0F82F8E2E14F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{7B704392-A70E-45B0-A157-B1D59DFA73CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{7B704392-A70E-45B0-A157-B1D59DFA73CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

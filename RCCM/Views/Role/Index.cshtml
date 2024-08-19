@@ -1,0 +1,70 @@
+﻿@model List<RoleViewModel>
+
+@{
+    Layout = "_AdminLayout";
+}
+
+<h1 class="text-center mb-4">قائمة الصلاحيات (@Model.Count())</h1>
+
+<div class="container">
+    <!-- Search Input -->
+    <div class="row mb-3">
+        <div class="col-md-6 offset-md-3">
+            <input id="searchInput" class="form-control" type="text" placeholder="ابحث عن صلاحية...">
+        </div>
+    </div>
+
+    <!-- Back to Table Button -->
+    <div class="text-center mt-4">
+        <a class="nav-link text-decoration-none text-white btn btn-primary" asp-controller="Role" asp-action="Add"> إضافة صلاحية</a>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <hr class="my-4" style="border-color: #072e6e;">
+        </div>
+    </div>
+
+    <!-- Cards Section -->
+    <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+        @foreach (var role in Model)
+        {
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title text-white custom-bg-primary p-3">@role.RoleName</h5>
+                        <form asp-action="Edit" method="post">
+                            <input type="hidden" name="RoleId" value="@role.RoleId" />
+                            <button class="btn btn-warning btn-sm" type="submit">تعديل البيانات</button>
+                        </form>
+                        <form asp-action="Delete" method="post" class="mt-2">
+                            <input type="hidden" name="roleId" value="@role.RoleId" />
+                            <button class="btn btn-danger btn-sm" type="submit">حذف الصلاحية</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+ 
+</div>
+
+@section scripts {
+    <script>
+        // Function to handle search input change
+        document.getElementById('searchInput').addEventListener('input', function () {
+            var filter = this.value.toLowerCase();
+            var cards = document.querySelectorAll('.card');
+
+            cards.forEach(function (card) {
+                var roleName = card.querySelector('.card-title').innerText.toLowerCase();
+                if (roleName.includes(filter)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+}

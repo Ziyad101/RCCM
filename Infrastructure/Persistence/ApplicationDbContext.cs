@@ -13,7 +13,9 @@ namespace Infrastructure.Persistence
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
+            
         }
+       
         public DbSet<Candidate> Candidate { get; set; }
         public DbSet<CandidateStatus> CandidateStatus { get; set; }
         public DbSet<ExamResult> ExamResult { get; set; }
@@ -28,8 +30,8 @@ namespace Infrastructure.Persistence
         public DbSet<Request> Request { get; set; }
         public DbSet<Role> Role { get; set; }
         public DbSet<User> User { get; set; }
-
         public DbSet<CreatorExamTypeConf> CreatorExamTypeConf { get; set; }
+        public DbSet<CandidateExamSchedule> candidateExamSchedule { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
