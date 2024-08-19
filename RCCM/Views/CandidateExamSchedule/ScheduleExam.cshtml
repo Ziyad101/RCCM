@@ -28,7 +28,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="dateTimePicker">اختر التاريخ والوقت</label>
-                                <input asp-for="ExamDate" type="datetime-local" class="form-control" id="dateTimePicker">
+                                <input asp-for="ExamDate" class="form-control" id="dateTimePicker" value="@DateTime.Now.ToString("yyyy-MM-dd")">
                             </div>
                             <button type="submit" class="btn btn-primary">جدولة الاختبار</button>
                         </form>
@@ -57,7 +57,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="dateTimePicker">اختر التاريخ والوقت</label>
-                                <input asp-for="ExamDate" type="datetime-local" class="form-control" id="dateTimePicker">
+                                <input asp-for="ExamDate" type="datetime-local" class="form-control" id="dateTimePicker" value="@DateTime.Now.ToString("yyyy-MM-dd")">
                             </div>
                             <button type="submit" class="btn btn-primary">جدولة الاختبار</button>
                         </form>

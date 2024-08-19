@@ -35,7 +35,7 @@
 
                         <div class="mb-3">
                             <label asp-for="DateOfBirth" class="form-label text-custom-primary fw-bold">تاريخ الميلاد</label>
-                            <input asp-for="DateOfBirth" type="date" class="form-control form-control-lg border-custom-primary" />
+                            <input asp-for="DateOfBirth" type="date" class="form-control form-control-lg border-custom-primary" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
                         </div>
 
                         <div class="mb-3">
