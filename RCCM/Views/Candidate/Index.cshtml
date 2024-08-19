@@ -40,14 +40,14 @@
                             if (candidate.Request?.RequestStatus == 0)
                             {
                                 <form class="form-control" method="post" asp-controller="Experience" asp-action="Add">
-                                    <input hidden asp-for="@candidate.CandidateId" />
+                                    <input hidden asp-for="@candidate.CandidateId" name="CandidateId" />
                                     <button type="submit" class="btn btn-primary">Exp</button>
                                 </form>
                             }
                             if (candidate.Request?.RequestStatus == 1)
                             {
                                 <form asp-action="Add" class="form-control" method="post" asp-controller="ExamTypeConf">
-                                    <input hidden asp-for="@candidate.CandidateId" />
+                                    <input hidden asp-for="@candidate.CandidateId"  />
                                     <button type="submit" class="btn btn-primary">Exam</button>
                                 </form>
                             }

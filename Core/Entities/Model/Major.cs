@@ -15,7 +15,6 @@ namespace Core.Entities.Model
         public bool IsActive { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-
         public List<Candidate> Candidates { get; set; }
     }
 }

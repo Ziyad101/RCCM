@@ -16,7 +16,7 @@ namespace Infrastructure.Services
 
         public ExperienceService(ICandidateRepo candidateRepo,IExperienceRepo experienceRepo,IGradeRepo gradeRepo)
         {
-            candidateRepo = _candidateRepo;
+            _candidateRepo = candidateRepo;
             _experienceRepo = experienceRepo;
             _gradeRepo = gradeRepo;
         }

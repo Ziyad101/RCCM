@@ -20,9 +20,9 @@ namespace RCCM.Controllers.Web
         }
 
         [HttpPost]
-        public IActionResult Add(int candidateId)
+        public IActionResult Add(int CandidateId)
         {
-            var model = _experienceService.GetAddModel(candidateId);
+            var model = _experienceService.GetAddModel(CandidateId);
             return View(model);
         }
         [HttpPost]

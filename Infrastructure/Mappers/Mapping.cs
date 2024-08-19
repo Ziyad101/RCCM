@@ -18,6 +18,7 @@ using Core.Entities.ViewModel.ExamResult;
 using Core.Entities.ViewModel.Interview;
 using Core.Entities.ViewModel.CreatorExamTypeConf;
 using Core.Entities.ViewModel.Experience;
+using Core.Entities.ViewModel.CandidateExamSchedule;
 
 namespace Infrastructure.Mappers
 {
@@ -150,12 +151,23 @@ namespace Infrastructure.Mappers
 
             CreateMap<Experience, ExperienceViewModel>().IncludeMembers(e => e.Candidate).IncludeMembers(e => e.Grade).ReverseMap();
             CreateMap<Grade, ExperienceViewModel>().ReverseMap();
-            CreateMap<Experience, AddCandidateViewModel>().ReverseMap();
-            CreateMap<Experience, UpdateCandidateViewModel>().ReverseMap();
-            CreateMap<Experience, DeleteCandidateViewModel>().ReverseMap();
-            CreateMap<ExperienceViewModel, AddCandidateViewModel>().ReverseMap();
-            CreateMap<ExperienceViewModel, UpdateCandidateViewModel>().ReverseMap();
-            CreateMap<ExperienceViewModel, DeleteCandidateViewModel>().ReverseMap();
+            CreateMap<Experience, AddExperienceViewModel>().ReverseMap();
+            CreateMap<Experience, UpdateExperienceViewModel>().ReverseMap();
+            CreateMap<Experience, DeleteExperienceViewModel>().ReverseMap();
+            CreateMap<ExperienceViewModel, AddExperienceViewModel>().ReverseMap();
+            CreateMap<ExperienceViewModel, UpdateExperienceViewModel>().ReverseMap();
+            CreateMap<ExperienceViewModel, DeleteExperienceViewModel>().ReverseMap();
+
+            //CandidateExamSchedule Mappers
+            CreateMap<CandidateExamSchedule, CandidateExamScheduleViewModel>().IncludeMembers(x=>x.Candidate).IncludeMembers(x=>x.ExamTypeConf).ReverseMap();
+            CreateMap<Candidate, CandidateExamScheduleViewModel>().ReverseMap();
+            CreateMap<ExamTypeConf, CandidateExamScheduleViewModel>().ReverseMap();
+            CreateMap<CandidateExamScheduleViewModel, AddCandidateExamScheduleViewModel>().ReverseMap();
+            CreateMap<CandidateExamScheduleViewModel, UpdateCandidateExamScheduleViewModel>().ReverseMap();
+            CreateMap<CandidateExamScheduleViewModel, DeleteCandidateExamScheduleViewModel>().ReverseMap();
+            CreateMap<CandidateExamSchedule, AddCandidateExamScheduleViewModel>().ReverseMap();
+            CreateMap<CandidateExamSchedule, UpdateCandidateExamScheduleViewModel>().ReverseMap();
+            CreateMap<CandidateExamSchedule, DeleteCandidateExamScheduleViewModel>().ReverseMap();
 
         }
     }
