@@ -9,6 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Entities.ViewModel.Request;
+using Core.Entities.ViewModel.Experience;
+using Core.Entities.ViewModel.CandidateExamSchedule;
+using Core.Entities.ViewModel.Interview;
 
 namespace Core.Entities.ViewModel.Candidate
 {
@@ -28,6 +31,9 @@ namespace Core.Entities.ViewModel.Candidate
         public MajorViewModel Major {get; set;}
         public CandidateStatusViewModel CandidateStatus {get; set;}
         public RequestViewModel Request {get; set;}
+        public InterviewViewModel Interview { get; set; }
+        public List<ExperienceViewModel>? Experience { get; set;}
+        public List<CandidateExamScheduleViewModel>? CandidateExamSchedule { get; set;}
 
 
     }

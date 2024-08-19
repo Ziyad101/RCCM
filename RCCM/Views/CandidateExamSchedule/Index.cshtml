@@ -1,0 +1,14 @@
+﻿@model List<CandidateExamScheduleViewModel>
+
+@foreach(var a in Model)
+{
+    <h1>@a.Candidate.CandidateName</h1>
+    <h1>@a.Candidate.Email</h1>
+    <h1>@a.Candidate.NationalId</h1>
+    <h1>@a.Candidate.PhoneNumber</h1>
+    <h1>@a.Candidate.Gender</h1>
+    <h1>@a.ExamTypeConf.Title</h1>
+    <h1>@a.ExamDate</h1>
+    
+
+}

@@ -23,16 +23,7 @@ namespace Infrastructure.Services
             _candidateStatusRepo = candidateStatus;
         }
 
-        public GeneralCandidateViewModel GetGeneralModel()
-        {
-            var model = new GeneralCandidateViewModel();
-            model.AllCandidate = _candidateRepo.GetAllCandidate();
-            model.AllMajor = _majorRepo.GetAllMajors();
-            model.Allnationality = _nationalityRepo.GetAllNationalitys();
-            model.AllStatus = _candidateStatusRepo.GetAllCandidateStatus();
-            return model;
-
-        }
+       
 
     }
 }

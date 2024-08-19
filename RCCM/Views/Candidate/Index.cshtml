@@ -47,6 +47,20 @@
                             <input type="hidden" name="id" value="@candidate.CandidateId" />
                             <button class="btn btn-danger btn-sm" type="submit">حذف المرشح</button>
                         </form>
+
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Dropdown button
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li> <form class="dropdown-item" asp-action="ScheduleExam" asp-controller="CandidateExamSchedule" method="post">
+                                        <input hidden asp-for="@candidate.CandidateId" name="CandidateId">
+                                    <button type="submit" class="btn btn-danger dropdown-item">Exam</button>
+                                </form> </li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -21,14 +21,34 @@ namespace Infrastructure.Services
             _examTypeConfRepo = examTypeConfRepo;
         }
 
-        public AddCandidateExamScheduleViewModel GetAddModel()
+        public AddCandidateExamScheduleViewModel GetAddModel(int id = 0)
         {
             var model = new AddCandidateExamScheduleViewModel();
+            if (id > 0)
+            {
+                var candidate = _candidateRepo.GetCandidateById(id);
+                model.Candidate = candidate;
+                model.Candidates = _candidateRepo.GetAllCandidate();
+                model.ExamTypes = _examTypeConfRepo.GetAllExamTypeConf();
+                return model;
+            }
 
             model.Candidates = _candidateRepo.GetAllCandidate();
             model.ExamTypes = _examTypeConfRepo.GetAllExamTypeConf();
 
             return model;
+        }
+
+        public void AddExam(AddCandidateExamScheduleViewModel model)
+        {
+            _scheduleRepo.AddScheduledExam(model);
+        }
+
+        public List<CandidateExamScheduleViewModel> GetSchedules()
+        {
+            var models = _scheduleRepo.GetAllScheduledExams();
+            
+            return models;
         }
     }
 }

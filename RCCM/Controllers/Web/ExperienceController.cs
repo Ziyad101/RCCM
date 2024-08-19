@@ -19,7 +19,6 @@ namespace RCCM.Controllers.Web
             return View(models);
         }
 
-        [HttpPost]
         public IActionResult Add(int CandidateId)
         {
             var model = _experienceService.GetAddModel(CandidateId);

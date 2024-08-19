@@ -23,19 +23,19 @@ namespace RCCM.Controllers.Web
             _candidateStatus = candidateStatus;
         }
 
- 
+
 
         public IActionResult Index()
         {
 
             var viewModels = _candidateRepo.GetAllCandidate();
             var majors = _majorRepo.GetAllMajors();
-            var nations= _nationalityRepo.GetAllNationalitys();
-            var candidateStatuses = _candidateStatusRepo.GetAllCandidateStatus();
+            var nations = _nationalityRepo.GetAllNationalitys();
+            var candidateStatuses = _candidateStatus.GetAllCandidateStatus();
             var model = new GeneralCandidateViewModel();
-            GeneralCandidateViewModel.AllMajors=majors;
-            GeneralCandidateViewModel.AllNationalities =nations;
-            GeneralCandidateViewModel.AllCandidateStatuses =candidateStatuses;
+            GeneralCandidateViewModel.AllMajors = majors;
+            GeneralCandidateViewModel.AllNationalities = nations;
+            GeneralCandidateViewModel.AllCandidateStatuses = candidateStatuses;
             model.AllCandidate = viewModels;
             model.PupulateModels();
             return View(model);
@@ -43,16 +43,14 @@ namespace RCCM.Controllers.Web
 
         public IActionResult Add()
         {
-            try
-        {
-                var candidateModel = new AddCandidateViewModel();
-                candidateModel.Majors = _majorRepo.GetAllMajors();
-                candidateModel.Nationalities = _nationalityRepo.GetAllNationalitys();
-                candidateModel.CandidateStatuses = _candidateStatusRepo.GetAllCandidateStatus();
-                return View(candidateModel);
-            }
-            catch (Exception)
-            {
+
+            var candidateModel = new AddCandidateViewModel();
+            candidateModel.Majors = _majorRepo.GetAllMajors();
+            candidateModel.Nationalities = _nationalityRepo.GetAllNationalitys();
+            candidateModel.CandidateStatuses = _candidateStatus.GetAllCandidateStatus();
+            return View(candidateModel);
+        }
+
 
 
         [HttpPost]
@@ -74,8 +72,8 @@ namespace RCCM.Controllers.Web
         }
 
         [HttpPost]
-        public IActionResult Delete(int id) 
-        { 
+        public IActionResult Delete(int id)
+        {
             var model = _candidateRepo.GetDeleteModel(id);
             return View(model);
         }

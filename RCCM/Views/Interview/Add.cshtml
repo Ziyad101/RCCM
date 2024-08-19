@@ -17,12 +17,12 @@
                 </div>
                 <div class="card-body">
                     <form asp-action="AddInterview" method="post">
-                        <div class="mb-3">
-                            <label asp-for="CandidateId" class="form-label">المرشح</label>
-                            <select asp-for="CandidateId" class="form-select" asp-items="@(new SelectList(Model.Candidates, "CandidateId", "CandidateName"))">
-                                <option value="">اختر مرشحاً</option>
-                            </select>
-                        </div>
+                            <div class="form-group">
+                                <label>المرشح:</label>
+                                <!-- Combined name and National ID field -->
+                                <input type="text" class="form-control" id="candidateNameWithId" readonly>
+                                <input type="hidden" asp-for="CandidateId" id="candi-id" value="" />
+                            </div>
                         <div class="mb-3">
                             <label asp-for="InterviewDate" class="form-label">تاريخ المقابلة</label>
                             <input asp-for="InterviewDate" class="form-control" />
@@ -40,42 +40,26 @@
                     <div class="card-header" style="background-color: #072e6e; color: white;">
                         معلومات المرشحين
                     </div>
-
-                    <!-- TO DISPLAY THE CANDIDATE CARDS -->
-
                     <div class="card-body" style="max-height: 500px; overflow-y: auto;">
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <h5 class="card-title">اسم المرشح</h5>
-                                <p class="card-text">الرقم الوطني: 123456789</p>
-                                <p class="card-text">الجنسية: سعودي</p>
-                                <p class="card-text">المؤهل: بكالوريوس</p>
-                                <p class="card-text">التخصص: هندسة</p>
-                                <p class="card-text">البريد الإلكتروني: candidate1@example.com</p>
-                                <p class="card-text">رقم الجوال: +1234567890</p>
-                                <p class="card-text">الوظيفة المرشح لها: مهندس</p>
-                                <button type="button" class="btn btn-primary btn-block mt-3">اختيار المرشح</button>
+                        @foreach (var candidate in Model.Candidates.Where(c=>c.Interview ==null))
+                        {
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">@candidate.CandidateName</h5>
+                                    <p class="card-text">الرقم الهوية: @candidate.NationalId</p>
+                                    <p class="card-text">الجنسية: @candidate.Nationality.NationalityName</p>
+                                    <p class="card-text">التخصص: @candidate.Major.MajorName</p>
+                                    <p class="card-text">@candidate.Gender</p>
+                                    <p class="card-text">البريد الإلكتروني: @candidate.Email</p>
+                                    <p class="card-text">رقم الجوال: @candidate.PhoneNumber</p>
 
+                                    <button type="button" class="btn btn-primary btn-block mt-3"
+                                            onclick="selectCandidate('@candidate.CandidateName', '@candidate.NationalId', '@candidate.CandidateId')">
+                                        اختيار المرشح
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-
-                        <!-- TO DISPLAY THE CANDIDATE CARDS -->
-
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <h5 class="card-title">اسم المرشح</h5>
-                                <p class="card-text">الرقم الوطني: 987654321</p>
-                                <p class="card-text">الجنسية: سعودي</p>
-                                <p class="card-text">المؤهل: بكالوريوس</p>
-                                <p class="card-text">التخصص: علوم الحاسوب</p>
-                                <p class="card-text">البريد الإلكتروني: candidate2@example.com</p>
-                                <p class="card-text">رقم الجوال: +9876543210</p>
-                                <p class="card-text">الوظيفة المرشح لها: مبرمج</p>
-                                <button type="button" class="btn btn-primary btn-block mt-3">اختيار المرشح</button>
-
-                            </div>
-       
-
+                        }
                     </div>
                 </div>
             </div>
@@ -87,3 +71,11 @@
 </div>
     </div>
 
+<script>
+    function selectCandidate(name, nationalId, candid) {
+        // Set the candidate name and National ID in the combined field
+        document.getElementById('candidateNameWithId').value = `${name} (رقم الهوية: ${nationalId})`;
+        // Set the Candidate ID in the hidden field
+        document.getElementById('candi-id').value = candid;
+    }
+</script>

@@ -15,8 +15,8 @@ namespace Core.Entities.Model
         public int ExperienceId { get; set; }
         public string CompanyName { get; set; }
         public string JobTitle { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime StartDate { get; set; } 
+        public DateTime EndDate { get; set; } 
         public bool ExperienceMatch { get; set; }
         public decimal Salary { get; set; }
         public decimal Benefits { get; set; }

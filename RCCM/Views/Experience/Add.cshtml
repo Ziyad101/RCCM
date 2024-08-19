@@ -1,20 +1,87 @@
 ﻿@model AddExperienceViewModel
 
-<form asp-action="AddExp" method="post">
-    <div>
-        <label asp-for="Candidate.CandidateName"> </label>
-        @Model.Candidate.CandidateName
-    </div>
+<div class="container mt-5 mb-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card border-custom-primary shadow-lg">
+                <div class="card-header bg-custom-primary text-white text-center">
+                    <h2>إضافة خبرة</h2>
+                </div>
+                <div class="card-body bg-light">
+                    <form asp-action="AddExp method="post">
+                        <div class="form-group row mb-3">
+                            <label asp-for="CompanyName" class="col-sm-4 col-form-label text-custom-primary fw-bold">اسم الشركة</label>
+                            <div class="col-sm-8">
+                                <input asp-for="CompanyName" class="form-control form-control-lg border-custom-primary" placeholder="أدخل اسم الشركة" />
+                                <span class="text-danger mt-1" asp-validation-for="CompanyName"></span>
+                            </div>
+                        </div>
 
-     <div>
-        <label asp-for="CompanyName">Company name</label>
-        <input asp-for="CompanyName">
-    </div>
+                        <div class="form-group row mb-3">
+                            <label asp-for="JobTitle" class="col-sm-4 col-form-label text-custom-primary fw-bold">المسمى الوظيفي</label>
+                            <div class="col-sm-8">
+                                <input asp-for="JobTitle" class="form-control form-control-lg border-custom-primary" placeholder="أدخل المسمى الوظيفي" />
+                                <span class="text-danger mt-1" asp-validation-for="JobTitle"></span>
+                            </div>
+                        </div>
 
-    <div>
-        <label asp-for="GradeId"> Grade </label>
-        <select asp-for="GradeId" asp-items="@(new SelectList(Model.Grades,"GradeId","GradeValue"))"></select>
-    </div>
+                        <div class="form-group row mb-3">
+                            <label asp-for="StartDate" class="col-sm-4 col-form-label text-custom-primary fw-bold">تاريخ البدء</label>
+                            <div class="col-sm-8">
+                                <input asp-for="StartDate" type="date" value="" class="form-control form-control-lg border-custom-primary" />
+                                <span class="text-danger mt-1" asp-validation-for="StartDate"></span>
+                            </div>
+                        </div>
 
-    <button type="submit">Submit</button>
-</form>
+                        <div class="form-group row mb-3">
+                            <label asp-for="EndDate" class="col-sm-4 col-form-label text-custom-primary fw-bold">تاريخ الانتهاء</label>
+                            <div class="col-sm-8">
+                                <input asp-for="EndDate" type="date" value="" class="form-control form-control-lg border-custom-primary" />
+                                <span class="text-danger mt-1" asp-validation-for="EndDate"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-3">
+                            <label asp-for="Salary" class="col-sm-4 col-form-label text-custom-primary fw-bold">الراتب</label>
+                            <div class="col-sm-8">
+                                <input asp-for="Salary" value="" step="0.01" class="form-control form-control-lg border-custom-primary" placeholder="أدخل الراتب" />
+                                <span class="text-danger mt-1" asp-validation-for="Salary"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-3">
+                            <label asp-for="Benefits" class="col-sm-4 col-form-label text-custom-primary fw-bold">المزايا</label>
+                            <div class="col-sm-8">
+                                <input asp-for="Benefits" value="" step="0.01" class="form-control form-control-lg border-custom-primary" placeholder="أدخل المزايا" />
+                                <span class="text-danger mt-1" asp-validation-for="Benefits"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-3">
+                            <div class="col-sm-4">
+                                <label asp-for="ExperienceMatch" class="form-check-label text-custom-primary fw-bold">توافق الخبرة</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input asp-for="ExperienceMatch" type="checkbox" class="form-check-input border-custom-primary" />
+                                <span class="text-danger mt-1" asp-validation-for="ExperienceMatch"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-3">
+                            <label asp-for="CandidateId" class="col-sm-4 col-form-label text-custom-primary fw-bold">معرف المرشح</label>
+                            <div class="col-sm-8">
+                                <input asp-for="CandidateId" type="number" class="form-control form-control-lg border-custom-primary" placeholder="أدخل معرف المرشح" />
+                                <span class="text-danger mt-1" asp-validation-for="CandidateId"></span>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <button type="submit" class="btn btn-success btn-lg shadow-sm">إضافة خبرة</button>
+                            <a class="btn btn-danger btn-lg shadow-sm" asp-action="Index">العودة لقائمة التجارب</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
