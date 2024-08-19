@@ -4,6 +4,7 @@ using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace RCCM.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240819052021_ExamSchedule")]
+    partial class ExamSchedule
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,16 +104,13 @@ namespace RCCM.Migrations
                     b.Property<int>("ExamTypeConfId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.HasKey("CandidateExamScheduleId");
 
                     b.HasIndex("CandidateId");
 
                     b.HasIndex("ExamTypeConfId");
 
-                    b.ToTable("candidateExamSchedule");
+                    b.ToTable("CandidateExamSchedule");
                 });
 
             modelBuilder.Entity("Core.Entities.Model.CandidateStatus", b =>

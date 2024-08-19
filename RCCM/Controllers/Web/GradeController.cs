@@ -46,7 +46,6 @@ namespace RCCM.Controllers.Web
         }
 
 
-
         [HttpPost]
         public IActionResult Delete(int id)
         {
@@ -59,9 +58,6 @@ namespace RCCM.Controllers.Web
             {
                 throw;
             }
-
-
-
 
         }
 

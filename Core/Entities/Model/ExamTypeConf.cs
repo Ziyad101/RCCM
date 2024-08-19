@@ -22,7 +22,8 @@ namespace Core.Entities.Model
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public List<ExamResult> ExamResults { get; set; }
-        public List<CreatorExamTypeConf> CreatorExamTypeConf { get; set; }
+        public List<CreatorExamTypeConf> CreatorExamTypeConfs { get; set; }
+        public List<CandidateExamSchedule> CandidateExamSchedules  { get; set; }
 
     }
     

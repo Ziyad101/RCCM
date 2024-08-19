@@ -1,0 +1,20 @@
+﻿@model AddExperienceViewModel
+
+<form asp-action="AddExp" method="post">
+    <div>
+        <label asp-for="Candidate.CandidateName"> </label>
+        @Model.Candidate.CandidateName
+    </div>
+
+     <div>
+        <label asp-for="CompanyName">Company name</label>
+        <input asp-for="CompanyName">
+    </div>
+
+    <div>
+        <label asp-for="GradeId"> Grade </label>
+        <select asp-for="GradeId" asp-items="@(new SelectList(Model.Grades,"GradeId","GradeValue"))"></select>
+    </div>
+
+    <button type="submit">Submit</button>
+</form>

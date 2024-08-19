@@ -1,0 +1,40 @@
+﻿@model List<ExperienceViewModel>
+
+
+<h1 class="text-center mb-4">قائمة الدرجات (@Model.Count)</h1>
+
+<div class="container">
+    <table class="table table-hover table-striped">
+        <thead class="bg-primary bg-opacity-75 text-black">
+            <tr>
+                <th>Company Name</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var grade in Model)
+            {
+                <tr>
+                    <td>@grade.CompanyName</td>
+
+                    <td>
+                        <form asp-action="Edit" method="post">
+                            <input hidden asp-for="@grade.GradeId" name="id" />
+                            <button class="btn btn-warning" type="submit">تعديل البيانات</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form asp-action="Delete" method="post">
+                            <input hidden asp-for="@grade.GradeId" name="id" />
+                            <button class="btn btn-danger" type="submit">حذف درجة الاختبار</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a class="nav-link text-decoration-none text-white btn btn-success" asp-controller="Experience" asp-action="Add"> Add Exp</a>
+</div>
