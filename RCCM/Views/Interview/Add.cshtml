@@ -41,7 +41,7 @@
                         معلومات المرشحين
                     </div>
                     <div class="card-body" style="max-height: 500px; overflow-y: auto;">
-                        @foreach (var candidate in Model.Candidates.Where(c=>c.Interview ==null))
+                        @foreach (var candidate in Model.Candidates.Where(c=>c.Interview == null))
                         {
                             <div class="card mb-3">
                                 <div class="card-body">
