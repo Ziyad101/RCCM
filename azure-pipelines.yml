@@ -48,6 +48,6 @@ jobs:
           azureSubscription: 'Azure subscription 1(1)(649567db-77d3-4ca6-8270-ba5e46e50914)'
           appType: 'webApp'
           appName: 'RCCM'
-          package: '$(build.ArtifcatStagingDirectory)/**/*.zip'
+          package: '$(build.artifactstagingdirectory)/**/*.zip'
           deploymentMethod: 'auto'
   #========================== End of Building ========================== 
