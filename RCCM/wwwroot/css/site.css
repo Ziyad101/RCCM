@@ -132,6 +132,12 @@ footer {
 
 
 #sidebar .nav-link:hover {
-    color: #f8f9fa; /* Change to the desired hover color */
-    background-color: #184080; /* Change to the desired hover background color */
+    color: #f8f9fa; 
+    background-color: #184080; 
+}
+
+.alert-message {
+    text-align: center;
+    display: block; 
+    width: 100%; 
 }

@@ -91,10 +91,27 @@ namespace RCCM.Controllers.Web
             return RedirectToAction("Index");
         }
 
-        public IActionResult CandidateIndex()
+        [HttpPost]
+        public IActionResult AddExp(int candidateId, string candidateName)
         {
-            return View();
+            try
+            {
+                var viewModel = new UpdateCandidateViewModel
+                {
+                    CandidateId = candidateId,
+                    CandidateName = candidateName
+                };
+                return View("UpdateCandidatePage", viewModel);
+            }
+            catch (Exception ex)
+            {
+                // Log the error (consider using a logging framework)
+                Console.WriteLine($"Error: {ex.Message}");
+                return View("Error"); // Ensure you have an Error view
+            }
         }
+
+
     }
 
 

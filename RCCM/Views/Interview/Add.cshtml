@@ -11,12 +11,19 @@
 
         <!-- interview Scheduling Section -->
         <div class="col-md-6 mb-4">
+
+                <!-- successful alert -->
+                <div id="successAlert" class="alert alert-success d-none">
+                    <span class="alert-message"></span>
+                </div>
+
+
             <div class="card">
                 <div class="card-header" style="background-color: #072e6e; color: white;">
                      جدولة مقابلات 
                 </div>
                 <div class="card-body">
-                    <form asp-action="AddInterview" method="post">
+                    <form id="addUserForm" asp-action="AddInterview" method="post">
                             <div class="form-group">
                                 <label>المرشح:</label>
                                 <!-- Combined name and National ID field -->
@@ -25,7 +32,7 @@
                             </div>
                         <div class="mb-3">
                             <label asp-for="InterviewDate" class="form-label">تاريخ المقابلة</label>
-                                <input asp-for="InterviewDate" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                                <input asp-for="InterviewDate" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")" required />
                         </div>
                         <div class="d-flex justify-content-between mt-4">
                             <button type="submit" class="btn bg-custom-primary text-white">إضافة المقابلة</button>
@@ -66,7 +73,7 @@
         </div>
 <div class="row mt-4">
     <div class="col-md-12 text-center">
-        <a asp-area="" asp-controller="Interview" asp-action="InterviewTable" class="btn btn-primary btn-lg">انقر هنا لعرض جدول مقابلات للمرشحين</a>
+        <a asp-area="" asp-controller="Interview" asp-action="index" class="btn btn-primary btn-lg">انقر هنا لعرض جدول مقابلات للمرشحين</a>
     </div>
 </div>
     </div>

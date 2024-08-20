@@ -5,7 +5,11 @@
 }
 
 <div class="container my-4">
-    <h2 class="text-center mb-4">إضافة اختبار</h2>
+
+    <!-- successful alert -->
+    <div id="successAlert" class="alert alert-success d-none">
+        <span class="alert-message"></span>
+    </div>
 
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -14,7 +18,7 @@
                     <h3>إضافة اختبار جديد</h3>
                 </div>
                 <div class="card-body custom-card-body">
-                    <form asp-action="AddExamTypeConf" method="post">
+                    <form id="addUserForm" asp-action="AddExamTypeConf" method="post">
                         <div class="mb-3">
                             <label asp-for="Title" class="form-label">عنوان الاختبار</label>
                             <input asp-for="Title" class="form-control" />

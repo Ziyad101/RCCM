@@ -15,7 +15,8 @@ namespace Core.Entities.Model
         public int CandidateId { get; set; }
         [Required(ErrorMessage ="اسم المرشح مطلوب")]
         [MinLength(3)]
-        
+
+
         public string CandidateName { get; set; }
         public string NationalId { get; set; }
         public string Gender { get; set; }

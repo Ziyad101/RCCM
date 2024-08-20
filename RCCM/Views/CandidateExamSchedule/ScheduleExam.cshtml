@@ -9,12 +9,19 @@
         @if (Model.Candidate != null)
         {
             <div class="col-md-6 mb-4">
+
+                <!-- successful alert -->
+                <div id="successAlert" class="alert alert-success d-none">
+                    <span class="alert-message"></span>
+                </div>
+
+
                 <div class="card">
                     <div class="card-header" style="background-color: #072e6e; color: white;">
                         جدولة الاختبار
                     </div>
                     <div class="card-body">
-                        <form asp-controller="CandidateExamSchedule" asp-action="Add" method="get">
+                        <form id="addUserForm" asp-controller="CandidateExamSchedule" asp-action="Add" method="get">
                             <div class="form-group">
                                 <label>المرشح:</label>
                                 <!-- Combined name and National ID field -->
@@ -28,7 +35,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="dateTimePicker">اختر التاريخ والوقت</label>
-                                <input asp-for="ExamDate" class="form-control" id="dateTimePicker" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+                                <input asp-for="ExamDate" class="form-control" id="dateTimePicker" value="@DateTime.Now.ToString("yyyy-MM-dd")" required>
                             </div>
                             <button type="submit" class="btn btn-primary">جدولة الاختبار</button>
                         </form>
@@ -39,16 +46,22 @@
         else
         {
             <div class="col-md-6 mb-4">
+
+                <!-- successful alert -->
+                <div id="successAlert" class="alert alert-success d-none">
+                    <span class="alert-message"></span>
+                </div>
+
                 <div class="card">
                     <div class="card-header" style="background-color: #072e6e; color: white;">
                         جدولة الاختبار
                     </div>
                     <div class="card-body">
-                        <form asp-controller="CandidateExamSchedule" asp-action="Add" method="get">
+                        <form id="addUserForm" asp-controller="CandidateExamSchedule" asp-action="Add" method="get">
                             <div class="form-group">
                                 <label>المرشح:</label>
                                 <!-- Combined name and National ID field -->
-                                <input type="text" class="form-control" id="candidateNameWithId" readonly>
+                                <input type="text" class="form-control" id="candidateNameWithId" readonly required>
                                 <input type="hidden" asp-for="CandidateId" id="candi-id" value="" />
                             </div>
                             <div class="form-group">
@@ -57,7 +70,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="dateTimePicker">اختر التاريخ والوقت</label>
-                                <input asp-for="ExamDate" type="datetime-local" class="form-control" id="dateTimePicker" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+                                <input asp-for="ExamDate" type="datetime-local" class="form-control" id="dateTimePicker" value="@DateTime.Now.ToString("yyyy-MM-dd")" required>
                             </div>
                             <button type="submit" class="btn btn-primary">جدولة الاختبار</button>
                         </form>
@@ -98,7 +111,7 @@
 
         <div class="row mt-4">
             <div class="col-md-12 text-center">
-                <a asp-area="" asp-controller="Recruitment" asp-action="RecruitTable" class="btn btn-primary btn-lg">انقر هنا لعرض جدول الاختبارات للمرشحين</a>
+                <a asp-area="" asp-controller="CandidateExamSchedule" asp-action="index" class="btn btn-primary btn-lg">انقر هنا لعرض جدول الاختبارات للمرشحين</a>
             </div>
         </div>
     </div>

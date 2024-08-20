@@ -1,11 +1,12 @@
 ﻿// myAlert.js
 $(document).ready(function () {
     class FormAlertHandler {
-        constructor(formId, alertId, message) {
+        constructor(formId, alertId, alertClass, message) {
             this.form = $(formId);
             this.successAlert = $(alertId);
             this.alertMessage = this.successAlert.find('.alert-message');
             this.message = message;
+            this.alertClass = alertClass;
 
             this.init();
         }
@@ -15,8 +16,8 @@ $(document).ready(function () {
                 event.preventDefault(); // Prevent default form submission
 
                 // Show success alert
+                this.successAlert.removeClass('d-none').addClass(this.alertClass);
                 this.alertMessage.text(this.message);
-                this.successAlert.removeClass('d-none');
 
                 // Simulate a delay before redirecting
                 setTimeout(() => {
@@ -26,8 +27,8 @@ $(document).ready(function () {
         }
     }
 
-    // Initialize FormAlertHandler for each form
-    new FormAlertHandler('#addGradeForm', '#successAlert', ' تم إضافتها بنجاح!');
-    new FormAlertHandler('#editGradeForm', '#successAlert', 'تم تحديث بيانات  بنجاح!');
-    new FormAlertHandler('#deleteGradeForm', '#successAlert', ' تم حذفها بنجاح!');
+    // Initialize FormAlertHandler for different forms
+    new FormAlertHandler('#addUserForm', '#successAlert', 'alert-success', 'تم إضافتها بنجاح!');
+    new FormAlertHandler('#editUserForm', '#successAlert', 'alert-warning', 'تم تحديث بيانات بنجاح!');
+    new FormAlertHandler('#deleteUserForm', '#successAlert', 'alert-danger', 'تم حذفها بنجاح!');
 });

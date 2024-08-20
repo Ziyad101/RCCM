@@ -1,112 +1,67 @@
 ﻿@model List<InterviewViewModel>
-@{
-    Layout = "_AdminLayout";
-}
 
-<div class="container my-4">
-    <h1 class="text-center mb-4">المقابلات (@Model.Count())</h1>
+<div class="container mt-4">
+    <div class="row">
+        <h2 class="text-center mb-4">المقابلات</h2>
 
-    <!-- Search Input for Interviews -->
-    <div class="row mb-3">
-        <div class="col-md-6 offset-md-3">
-            <input id="searchInput" class="form-control" type="text" placeholder="ابحث عن مقابلات...">
-        </div>
-    </div>
-
-    <!-- Add Interview Button -->
-    <div class="text-center mb-4">
-        <a class="nav-link text-decoration-none text-white btn btn-primary"
-           asp-controller="Interview" asp-action="Add">إضافة مقابلة</a>
-        <!-- Border Line Under Button -->
-        <div class="row">
-            <div class="col">
-                <hr class="my-4" style="border-color: #072e6e;">
-            </div>
-        </div>
-    </div>
-
-    <!-- Interviews Cards -->
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        @foreach (var interview in Model)
-        {
-            <div class="col interview-card">
-                <div class="card shadow">
-                    <div class="card-body">
-                        <h5 class="card-title custom-bg-primary text-white p-3">@interview.Candidate.CandidateName</h5>
-                        <p class="card-text">
-                            <strong>تاريخ المقابلة:</strong> @interview.InterviewDate.ToString("yyyy-MM-dd")
-                        </p>
-                        <div class="d-flex justify-content-between mt-3">
-                            <form asp-action="Edit" method="post" class="d-inline">
-                                <input type="hidden" name="id" value="@interview.InterviewId" />
-                                <button class="btn btn-warning btn-sm" type="submit">تعديل</button>
-                            </form>
-                            <form asp-action="Delete" method="post" class="d-inline">
-                                <input type="hidden" name="id" value="@interview.InterviewId" />
-                                <button class="btn btn-danger btn-sm" type="submit">حذف</button>
-                            </form>
-                        </div>
+        <!-- Interviews Table -->
+        <div class="col-md-12">
+            <div class="card shadow">
+                <div class="card-header" style="background-color: #072e6e; color: white;">
+                    جدول المقابلات
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>اسم المرشح</th>
+                                    <th>الرقم الهوية</th>
+                                    <th>الجنسية</th>
+                                    <th>رقم الجوال</th>
+                                    <th>تاريخ المقابلة</th>
+                                    <th>تفاصيل</th>
+                                    <th>حضور</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var interview in Model)
+                                {
+                                    <tr>
+                                        <td>@interview.Candidate.CandidateName</td>
+                                        <td>@interview.Candidate.NationalId</td>
+                                        <td>@interview.Candidate.Gender</td>
+                                        <td>@interview.Candidate.PhoneNumber</td>
+                                        <td>@interview.InterviewDate.ToString("yyyy-MM-dd")</td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    خيارات
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <li>
+                                                        <form asp-action="Edit" method="post" class="d-inline">
+                                                            <input type="hidden" name="id" value="@interview.InterviewId" />
+                                                            <button class="dropdown-item" type="submit">تعديل</button>
+                                                        </form>
+                                                    </li>
+                                                    <li>
+                                                        <form asp-action="Delete" method="post" class="d-inline">
+                                                            <input type="hidden" name="id" value="@interview.InterviewId" />
+                                                            <button class="dropdown-item text-danger" type="submit">حذف</button>
+                                                        </form>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge badge-secondary">قيد الانتظار</span></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-        }
+        </div>
     </div>
 </div>
-
-@section scripts {
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var searchInput = document.getElementById('searchInput');
-            var container = document.querySelector('.row.row-cols-1.row-cols-md-3.g-4');
-            var cards = Array.from(document.querySelectorAll('.interview-card'));
-
-            // Store initial display state
-            var initialDisplay = {};
-            cards.forEach(function (card, index) {
-                initialDisplay[index] = card.style.display;
-                card.dataset.id = index; // Set data-id attribute
-            });
-
-            searchInput.addEventListener('input', function () {
-                var filter = this.value.toLowerCase();
-
-                // Filter cards
-                var visibleCards = [];
-                var hiddenCards = [];
-
-                cards.forEach(function (card) {
-                    var candidateName = card.querySelector('.card-title').innerText.toLowerCase();
-                    var interviewDate = card.querySelector('.card-text').innerText.toLowerCase();
-                    if (candidateName.includes(filter) || interviewDate.includes(filter)) {
-                        visibleCards.push(card);
-                    } else {
-                        hiddenCards.push(card);
-                    }
-                });
-
-                // Clear container and append cards in new order
-                container.innerHTML = '';
-                appendCards(visibleCards);
-                appendCards(hiddenCards);
-
-                // Update display property based on search filter
-                cards.forEach(function (card) {
-                    if (filter === '') {
-                        // Restore initial display state when filter is empty
-                        card.style.display = initialDisplay[card.dataset.id] || '';
-                    } else {
-                        // Ensure cards are shown or hidden based on the filter
-                        card.style.display = visibleCards.includes(card) ? '' : 'none';
-                    }
-                });
-            });
-
-            // Append function to avoid duplication
-            function appendCards(cards) {
-                cards.forEach(function (card) {
-                    container.appendChild(card);
-                });
-            }
-        });
-    </script>
-}

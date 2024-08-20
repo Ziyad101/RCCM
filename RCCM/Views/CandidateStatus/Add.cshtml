@@ -8,6 +8,11 @@
 <div class="container my-4">
     <h2 class="text-center mb-4">إضافة حالة</h2>
 
+    <!-- successful alert -->
+    <div id="successAlert" class="alert alert-success d-none">
+        <span class="alert-message"></span>
+    </div>
+
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card shadow custom-card border-primary">
@@ -15,7 +20,7 @@
                     <h3>إضافة حالة جديدة</h3>
                 </div>
                 <div class="card-body custom-card-body">
-                    <form asp-action="AddCandidateStatus" method="post">
+                    <form id="addUserForm" asp-action="AddCandidateStatus" method="post">
                         <div class="mb-3">
                             <label asp-for="Status" class="form-label">اسم الصلاحية</label>
                             <input asp-for="Status" class="form-control" />

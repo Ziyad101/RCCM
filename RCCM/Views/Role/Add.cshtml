@@ -4,9 +4,14 @@
     Layout = "_AdminLayout";
 }
 
-<h2>إضافة مستخدم</h2>
 
 <div class="container mt-5 mb-5">
+    <!-- successful alert -->
+    <div id="successAlert" class="alert alert-success d-none">
+        <span class="alert-message"></span>
+    </div>
+    
+
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow custom-card border-primary">
@@ -14,7 +19,7 @@
                     <h2>إضافة صلاحية</h2>
                 </div>
                 <div class="card-body custom-card-body">
-                    <form asp-action="Add" method="post">
+                    <form id="addUserForm" asp-action="Add" method="post">
                         <div class="mb-3">
                             <label asp-for="RoleName" class="form-label custom-form-label">اسم الصلاحية</label>
                             <input asp-for="RoleName" class="form-control custom-form-control" />

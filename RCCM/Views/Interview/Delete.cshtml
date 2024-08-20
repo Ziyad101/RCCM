@@ -2,10 +2,14 @@
 
 @{
     ViewData["Title"] = "حذف المقابلة";
-    Layout = "_AdminLayout";
 }
 
 <div class="container mt-5 mb-5">
+
+    <!-- Display delete Alert -->
+    <div id="successAlert" class="alert alert-danger d-none">
+        <span class="alert-message"></span>
+    </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow custom-card border-danger">
@@ -13,7 +17,7 @@
                     <h2>حذف المقابلة</h2>
                 </div>
                 <div class="card-body custom-card-body">
-                    <form asp-action="DeleteInterview" method="post">
+                    <form id="deleteUserForm" asp-action="DeleteInterview" method="post">
                         <!-- Candidate Information -->
                         <div class="mb-3">
                             <label asp-for="Candidate.CandidateName" class="form-label custom-form-label">المرشح</label>

@@ -14,23 +14,16 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var grade in Model)
+            @foreach (var Exp in Model)
             {
                 <tr>
-                    <td>@grade.CompanyName</td>
-
-                    <td>
-                        <form asp-action="Edit" method="post">
-                            <input hidden asp-for="@grade.GradeId" name="id" />
-                            <button class="btn btn-warning" type="submit">تعديل البيانات</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form asp-action="Delete" method="post">
-                            <input hidden asp-for="@grade.GradeId" name="id" />
-                            <button class="btn btn-danger" type="submit">حذف درجة الاختبار</button>
-                        </form>
-                    </td>
+                    <td>@Exp.Candidate.CandidateName</td>
+                    <td>@Exp.Candidate.NationalId</td>
+                    <td>@Exp.CompanyName</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><span class="badge badge-secondary">قيد الانتظار</span></td>
                 </tr>
             }
         </tbody>

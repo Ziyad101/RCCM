@@ -2,10 +2,16 @@
 
 @{
     ViewData["Title"] = "تحديث المقابلة";
-    Layout = "_AdminLayout";
 }
 
 <div class="container mt-5 mb-5">
+
+    <!-- Display edit Alert -->
+    <div id="successAlert" class="alert alert-warning d-none">
+        <span class="alert-message"></span>
+    </div>
+
+
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow custom-card border-primary">
@@ -13,7 +19,7 @@
                     <h2>تحديث المقابلة</h2>
                 </div>
                 <div class="card-body custom-card-body">
-                    <form asp-action="EditInterview" method="post">
+                    <form id="editUserForm" asp-action="EditInterview" method="post">
                         <!-- Candidate Selection -->
                         <div class="mb-3">
                             <label asp-for="CandidateId" class="form-label custom-form-label">المرشح</label>

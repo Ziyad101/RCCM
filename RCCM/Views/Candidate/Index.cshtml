@@ -62,7 +62,7 @@
                                     </form>
                                 </li>
                                 <li>
-                                    <form class="dropdown-item" asp-action="EvaluateExperience" asp-controller="CandidateExperience" method="post">
+                                    <form class="dropdown-item" asp-action="Add" asp-controller="Experience" method="post">
                                         <input type="hidden" name="CandidateId" value="@candidate.CandidateId" />
                                         <button type="submit" class="btn btn-primary btn-sm">تقييم خبرات</button>
                                     </form>
@@ -81,10 +81,18 @@
             <div class="modal-content">
                 <div class="modal-header bg-custom-primary text-white">
                     <h5 class="modal-title" id="addCandidateModalLabel">إضافة مرشح</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>   
+                    
+               
+                    </div>
+
+                    <!-- successful alert -->
+                    <div id="successAlert" class="alert alert-success d-none">
+                        <span class="alert-message"></span>
+
                 </div>
                 <div class="modal-body">
-                    <form asp-action="Add" method="post">
+                    <form id="addUserForm" asp-action="Add" method="post">
                         <!-- Add Candidate Form Fields -->
                         <div class="mb-3">
                             <label asp-for="AddCandidate.CandidateName" class="form-label text-custom-primary fw-bold">اسم المرشح</label>
