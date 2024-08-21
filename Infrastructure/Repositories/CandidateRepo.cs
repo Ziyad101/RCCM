@@ -48,20 +48,20 @@ namespace Infrastructure.Repositories
         public List<CandidateViewModel> GetAllCandidate()
         {
             var allCandidates = _context.Candidate.Where(c => c.IsActive).Include(c => c.Nationality).Include(c => c.Major)
-                .Include(c=>c.Interviews).Include(c=>c.Request)
-                .Include(c=>c.CandidateStatus).Include(x=>x.Experiences)
-                .Include(x=>x.CandidateExamSchedules).AsNoTracking().ToList();
+                .Include(c => c.Interviews).Include(c => c.Request)
+                .Include(c => c.CandidateStatus).Include(x => x.Experiences)
+                .Include(x => x.CandidateExamSchedules).AsNoTracking().ToList();
             var candidateModels = _mapper.Map<List<CandidateViewModel>>(allCandidates);
             return candidateModels;
         }
 
         public CandidateViewModel GetCandidateById(int id)
         {
-            var candidate = _context.Candidate.Where(c => c.CandidateId == id).Include(c=>c.Major)
-                .Include(c=>c.Nationality).Include(c=>c.CandidateStatus)
-                .Include(c=>c.Interviews).Include(c=>c.Experiences)
-                .Include(c=>c.CandidateExamSchedules)
-                .Include(c =>c.Request).AsNoTracking().FirstOrDefault();
+            var candidate = _context.Candidate.Where(c => c.CandidateId == id).Include(c => c.Major)
+                .Include(c => c.Nationality).Include(c => c.CandidateStatus)
+                .Include(c => c.Interviews).Include(c => c.Experiences)
+                .Include(c => c.CandidateExamSchedules)
+                .Include(c => c.Request).AsNoTracking().FirstOrDefault();
             var candidateModel = _mapper.Map<CandidateViewModel>(candidate);
             return candidateModel;
         }
@@ -85,11 +85,18 @@ namespace Infrastructure.Repositories
         public void UpdateCandidate(UpdateCandidateViewModel candidateModel)
         {
             var candidate = _mapper.Map<Candidate>(candidateModel);
-            
+
             _context.Candidate.Update(candidate);
             _context.SaveChanges();
         }
 
+        public void UpdateCandidateRequestStatus(int CandidateId, int RequestStatus)
+        {
+            var candidate = _context.Candidate.Where(c => c.CandidateId == CandidateId).Include(c => c.Request).AsNoTracking().FirstOrDefault();
+            candidate.Request.RequestStatus = RequestStatus;
+            _context.Candidate.Update(candidate);
+            _context.SaveChanges();
 
+        }
     }
 }

@@ -17,6 +17,7 @@ namespace Core.Interfaces
         void DeleteCandidate(DeleteCandidateViewModel candidateModel);
         UpdateCandidateViewModel GetEditModel(int id);
         DeleteCandidateViewModel GetDeleteModel(int id);
+        void UpdateCandidateRequestStatus(int CandidateId, int RequestStatus);
 
     }
 }

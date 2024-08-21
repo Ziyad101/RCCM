@@ -38,8 +38,6 @@ namespace Infrastructure.Extensions.builder
             services.AddScoped<CandidateService>();
             services.AddScoped<CandidateExamScheduleService>();
 
-            //Constents DI
-            //services.AddSingleton<DemoConst>();
 
             return services;
         }

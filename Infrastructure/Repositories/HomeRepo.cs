@@ -19,13 +19,7 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public DemoViewModel getViewModeltest()
-        {
-            var viewModel = new DemoViewModel();
-            viewModel.test = "ayman";
-
-            return viewModel;
-        }
+       
 
     }
 }

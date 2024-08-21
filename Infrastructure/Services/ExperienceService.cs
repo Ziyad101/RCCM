@@ -36,10 +36,24 @@ namespace Infrastructure.Services
             model.Candidate = _candidateRepo.GetCandidateById(candidateId);
             return model;
         }
+        public UpdateExperienceViewModel GetUpdateModel(int ExperienceId,int candidateId)
+        {
+            var model = _experienceRepo.GetEditModel(ExperienceId);
+            model.Grades = _gradeRepo.GetAllGrades();
+            model.Candidate = _candidateRepo.GetCandidateById(candidateId);
+            return model;
+        }
         public void AddExperience(AddExperienceViewModel model)
         {
             _experienceRepo.AddExperience(model);
+            _candidateRepo.UpdateCandidateRequestStatus(model.CandidateId, 1);
         }
 
+        public DeleteExperienceViewModel GetDeleteModel(int ExperienceId, int candidateId)
+        {
+            var model = _experienceRepo.GetDeleteModel(ExperienceId);
+            model.Candidate = _candidateRepo.GetCandidateById(candidateId);
+            return model;
+        }
     }
 }

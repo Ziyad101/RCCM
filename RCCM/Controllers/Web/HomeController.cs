@@ -6,36 +6,18 @@ namespace RCCM.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IHomeRepo _homeRepo;
 
-        public HomeController(IHomeRepo homeRepo)
+        public HomeController()
         {
-            _homeRepo = homeRepo;
+            
         }
 
         public IActionResult Index()
         {
             try
             {
-                var DemoViewModel = _homeRepo.getViewModeltest();
-
-                return View(DemoViewModel);
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
-        }
-
-        [HttpPost]
-        public IActionResult settest(DemoViewModel viewModel)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Details), "Home");
+               
+                return View();
 
             }
             catch (Exception)
@@ -45,6 +27,8 @@ namespace RCCM.Controllers
             }
 
         }
+
+       
 
 
         public IActionResult Details()
