@@ -41,7 +41,7 @@ namespace Core.Entities.Model
         public List<Experience>? Experiences { get; set; }
         public List<ExamResult>? ExamResults { get; set; }
         public Request? Request { get; set; }
-        public Interview? Interview { get; set; }
+        public List<Interview> Interviews { get; set; }
         public JobOffer? JobOffer { get; set; }
         public List<CandidateExamSchedule>? CandidateExamSchedules { get; set; }
     }

@@ -31,8 +31,8 @@ namespace Core.Entities.ViewModel.Candidate
         public MajorViewModel Major {get; set;}
         public CandidateStatusViewModel CandidateStatus {get; set;}
         public RequestViewModel Request {get; set;}
-        public InterviewViewModel? Interview { get; set; }
-        public List<ExperienceViewModel>? Experience { get; set;}
+        public List<InterviewViewModel>? Interviews { get; set; }
+        public List<ExperienceViewModel>? Experiences { get; set;}
         public List<CandidateExamScheduleViewModel>? CandidateExamSchedule { get; set;}
 
 
