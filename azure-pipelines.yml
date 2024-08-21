@@ -1,0 +1,53 @@
+
+trigger:
+- main
+
+jobs:
+  #============================ Building ============================= 
+  - job: "Build"
+    pool: "Azure Pipelines"
+    variables:
+      BuildConfiguration: "Release"
+      BuildProject: "**/*.csproj"
+      TestProject: "**/*[Tt]ests/*.csproj"
+      system.debug: false
+      ASPNETCORE_ENVIRONMENT: 'Production'
+
+    steps:
+      - task: DotNetCoreCLI@2
+        displayName: "Restore"
+        inputs:
+          command: restore
+          projects: "$(BuildProject)"
+      - task: DotNetCoreCLI@2
+        displayName: "Build"
+        inputs:
+          command: build
+          projects: "$(BuildProject)"
+          arguments: "--configuration $(BuildConfiguration)"
+      - task: DotNetCoreCLI@2
+        displayName: "Test"
+        inputs:
+          command: test
+          projects: "$(TestProjects)"
+          arguments: "--configuration $(BuildConfiguration)"
+      - task: DotNetCoreCLI@2
+        displayName: "Publish"
+        inputs:
+          command: publish
+          publishWebProjects: True
+          arguments: "--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory) /p:EnvironmentName=$(ASPNETCORE_ENVIRONMENT)"
+          zipAfterPublish: True
+      - task: PublishBuildArtifacts@1
+        displayName: "Publish Artifact"
+        inputs:
+          PathtoPublish: "$(build.artifactstagingdirectory)"
+        condition: succeededOrFailed()
+      - task: AzureWebApp@1
+        inputs:
+          azureSubscription: 'Azure subscription 1(1)(649567db-77d3-4ca6-8270-ba5e46e50914)'
+          appType: 'webApp'
+          appName: 'RCCM'
+          package: '$(build.artifactstagingdirectory)/**/*.zip'
+          deploymentMethod: 'auto'
+  #========================== End of Building ========================== 
