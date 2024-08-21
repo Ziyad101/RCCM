@@ -1,0 +1,67 @@
+﻿@model List<MajorViewModel>
+
+@{
+    Layout = "_AdminLayout";
+}
+
+<div class="container my-4">
+    <h1 class="text-center mb-4">قائمة التخصصات (@Model.Count)</h1>
+
+    <!-- Search Input for Majors -->
+    <div class="row mb-3">
+        <div class="col-md-6 offset-md-3">
+            <input id="searchInput" class="form-control" type="text" placeholder="ابحث عن تخصص...">
+        </div>
+    </div>
+
+    <!-- Add Major Button -->
+    <div class="text-center mb-4">
+        <a class="nav-link text-decoration-none text-white btn btn-primary" asp-controller="Major" asp-action="Add">إضافة تخصص</a>
+        <!-- Border Line Under Button -->
+        <div class="row">
+            <div class="col">
+                <hr class="my-4" style="border-color: #072e6e;">
+            </div>
+        </div>
+    </div>
+
+    <!-- Majors Cards -->
+    <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+        @foreach (var major in Model)
+        {
+            <div class="col major-card">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title text-white custom-bg-primary p-3">@major.MajorName</h5>
+                        <form asp-action="Edit" method="post" class="d-inline">
+                            <input type="hidden" name="id" value="@major.MajorId" />
+                            <button class="btn btn-warning btn-sm" type="submit">تعديل البيانات</button>
+                        </form>
+                        <form asp-action="Delete" method="post" class="d-inline mt-2">
+                            <input type="hidden" name="id" value="@major.MajorId" />
+                            <button class="btn btn-danger btn-sm" type="submit">حذف التخصص</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var searchInput = document.getElementById('searchInput');
+            var cards = Array.from(document.querySelectorAll('.major-card'));
+
+            searchInput.addEventListener('input', function () {
+                var filter = this.value.toLowerCase();
+
+                cards.forEach(function (card) {
+                    var majorName = card.querySelector('.card-title').innerText.toLowerCase();
+                    card.style.display = majorName.includes(filter) ? '' : 'none';
+                });
+            });
+        });
+    </script>
+}

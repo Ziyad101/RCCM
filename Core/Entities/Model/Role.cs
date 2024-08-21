@@ -12,6 +12,9 @@ namespace Core.Entities.Model
         [Key]
         public int RoleId { get; set; }
         public string RoleName { get; set; }
-        public List<User> Users { get; set; }
+        public bool IsActive { get; set; }
+
+        //  public List<User> Users { get; set; }
+
     }
 }

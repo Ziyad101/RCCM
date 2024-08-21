@@ -1,0 +1,46 @@
+﻿@model AddExamTypeConfViewModel
+@{
+    ViewData["Title"] = "Add Exam";
+    Layout = "_AdminLayout";
+}
+
+<div class="container my-4">
+
+    <!-- successful alert -->
+    <div id="successAlert" class="alert alert-success d-none">
+        <span class="alert-message"></span>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow custom-card border-primary">
+                <div class="card-header bg-custom-primary text-white text-center">
+                    <h3>إضافة اختبار جديد</h3>
+                </div>
+                <div class="card-body custom-card-body">
+                    <form id="addUserForm" asp-action="AddExamTypeConf" method="post">
+                        <div class="mb-3">
+                            <label asp-for="Title" class="form-label">عنوان الاختبار</label>
+                            <input asp-for="Title" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="StartDate" class="form-label">بداية فترة الاختبار</label>
+                            <input asp-for="StartDate" type="date" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="EndDate" class="form-label">نهاية فترة الاختبار</label>
+                            <input asp-for="EndDate" type="date" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <button type="submit" class="btn btn-success">إضافة الاختبار</button>
+                            <a class="btn btn-primary" asp-action="Index">العودة لقائمة الاختبارات</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -12,8 +12,6 @@ namespace Core.Entities.Model
     {
         [Key]
         public int JobOfferId { get; set; }
-
-       
         public string City { get; set; }
         public string Section { get; set; }
         public string Department { get; set; }

@@ -1,0 +1,50 @@
+﻿@model List<ExamResultViewModel>
+@{
+    Layout = "_AdminLayout";
+}
+
+<h1 class="text-center mb-4">قائمة نتائج الاختبارات (@Model.Count())</h1>
+
+
+
+<div class="container">
+    <table class="table table-hover table-striped">
+        <thead class="bg-primary bg-opacity-75 text-black">
+            <tr>
+                
+                <th>result</th>
+                <th>Exam Type</th>
+                <th>Candi name</th>
+                <th></th>
+                <th></th>
+                <th></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var examResult in Model)
+            {
+                <tr>
+                    <td>@examResult</td>
+                    
+
+                    <td>
+                        <form asp-action="Edit" method="post">
+                            <input hidden name="id" asp-for="@examResult.ExamResultId" />
+                            <button class="btn btn-warning" type="submit">تعديل البيانات</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form asp-action="Delete" method="post">
+                            <input hidden name="id" asp-for="@examResult.ExamResultId" />
+                            <button class="btn btn-danger" type="submit">حذف النتيجة</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+    <a class="nav-link text-decoration-none text-white btn btn-primary" asp-controller="ExamResult" asp-action="Add"> Add result</a>
+</div>

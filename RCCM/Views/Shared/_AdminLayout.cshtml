@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="ar-sa" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - RCCM</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.rtl.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/RCCM.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <nav id="sidebar" class="bg text-white p-4 d-flex flex-column" style="width: 400px;">
+            <!-- Increased width to 400px -->
+            <a class="navbar-brand d-flex align-items-center mb-3" asp-area="" asp-controller="User" asp-action="Index">
+                <img src="/LOGO.ico" width="270" height="75" alt="RCJY">
+            </a>
+            <ul class="nav flex-column flex-grow-1">
+                <li class="nav-item">
+                    <a class="nav-link text-white text-start" asp-area="" asp-controller="User" asp-action="Index">المستخدمين</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white text-start" asp-area="" asp-controller="Role" asp-action="Index">الصلاحيات</a>
+                </li
+                <li class="nav-item">
+                    <a class="nav-link text-white text-start" asp-area="" asp-controller="Major" asp-action="Index">التخصصات</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white text-start" asp-area="" asp-controller="Nationality" asp-action="Index">الجنسيات</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white text-start" asp-area="" asp-controller="Grade" asp-action="Index">الدرجات الوظيفية</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white text-start" asp-area="" asp-controller="CandidateStatus" asp-action="Index">الحالات</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white text-start" asp-area="" asp-controller="ExamTypeConf" asp-action="Index">الاختبارات</a>
+                </li>
+              
+             
+                <!-- Button container -->
+                <li class="nav-item mt-auto">
+                    <!-- Push the button up slightly from the bottom -->
+                    <a class="btn btn-light text-dark w-100" asp-controller="home" asp-action="Index">User</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="flex-fill p-3">
+            <div class="bg-tiled">
+                <div class="container-fluid">
+                    <main role="main" class="main-content">
+                        @RenderBody()
+                    </main>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="border-top footer text fixed-bottom bg text-white text-center">
+        <div class="container">
+            &copy; 2024 - RCCM
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/myalert.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
