@@ -26,6 +26,13 @@ namespace Infrastructure.Repositories
         public void AddCandidate(AddCandidateViewModel candidateModel)
         {
             var candidate = _mapper.Map<Candidate>(candidateModel);
+            candidate.Request = new Request
+            {
+                RequestStatus = 0,
+                IsActive = true,
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+            };
             _context.Candidate.Add(candidate);
             _context.SaveChanges();
         }
@@ -53,7 +60,8 @@ namespace Infrastructure.Repositories
             var candidate = _context.Candidate.Where(c => c.CandidateId == id).Include(c=>c.Major)
                 .Include(c=>c.Nationality).Include(c=>c.CandidateStatus)
                 .Include(c=>c.Interviews).Include(c=>c.Experiences)
-                .Include(c=>c.CandidateExamSchedules).AsNoTracking().FirstOrDefault();
+                .Include(c=>c.CandidateExamSchedules)
+                .Include(c =>c.Request).AsNoTracking().FirstOrDefault();
             var candidateModel = _mapper.Map<CandidateViewModel>(candidate);
             return candidateModel;
         }
@@ -81,5 +89,7 @@ namespace Infrastructure.Repositories
             _context.Candidate.Update(candidate);
             _context.SaveChanges();
         }
+
+
     }
 }

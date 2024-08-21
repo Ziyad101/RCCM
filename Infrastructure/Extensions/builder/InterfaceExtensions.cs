@@ -1,4 +1,5 @@
 ﻿using Core.Interfaces;
+using Core.Consts;
 using Infrastructure.Repositories;
 using Infrastructure.Services;
 using Microsoft.Extensions.Configuration;
@@ -15,6 +16,7 @@ namespace Infrastructure.Extensions.builder
     {
         public static IServiceCollection Interfaces(this IServiceCollection services, IConfiguration config)
         {
+            //Repo DI
             services.AddScoped<IHomeRepo, HomeRepo>();
             services.AddScoped<IUserRepo, UserRepo>();
             services.AddScoped<IRoleRepo, RoleRepo>();
@@ -30,9 +32,14 @@ namespace Infrastructure.Extensions.builder
             services.AddScoped<IExperienceRepo, ExperienceRepo>();
             services.AddScoped<IGradeRepo, GradeRepo>();
             services.AddScoped<ICandidateExamScheduleRepo,CandidateExamScheduleRepo>();
+
+            //Services DI
             services.AddScoped<ExperienceService>();
             services.AddScoped<CandidateService>();
             services.AddScoped<CandidateExamScheduleService>();
+
+            //Constents DI
+            //services.AddSingleton<DemoConst>();
 
             return services;
         }
