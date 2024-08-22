@@ -47,8 +47,29 @@ namespace Infrastructure.Services
         public List<CandidateExamScheduleViewModel> GetSchedules()
         {
             var models = _scheduleRepo.GetAllScheduledExams();
-            
             return models;
+        }
+
+        public UpdateCandidateExamScheduleViewModel GetUpdateModel(int scheduleId)
+        {
+            var model = _scheduleRepo.GetUpdateModel(scheduleId);
+            return model;
+        }
+
+        public void UpdateSchedule(UpdateCandidateExamScheduleViewModel model)
+        {
+            _scheduleRepo.UpdateScheduledExam(model);
+        }
+
+        public DeleteCandidateExamScheduleViewModel GetDeleteModel(int scheduleId)
+        {
+            var model = _scheduleRepo.GetDeleteModel(scheduleId);
+            return model;
+        }
+
+        public void DeleteSchedule(DeleteCandidateExamScheduleViewModel model)
+        {
+            _scheduleRepo.DeleteScheduledExam(model);
         }
     }
 }

@@ -37,6 +37,7 @@ namespace Infrastructure.Extensions.builder
             services.AddScoped<ExperienceService>();
             services.AddScoped<CandidateService>();
             services.AddScoped<CandidateExamScheduleService>();
+            services.AddScoped<ExamResultService>();
 
 
             return services;

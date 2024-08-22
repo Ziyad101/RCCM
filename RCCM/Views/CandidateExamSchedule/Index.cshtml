@@ -35,6 +35,15 @@
                                         <td>@a.ExamTypeConf.Title</td>
                                         <td>@a.ExamDate</td>
                                         <td><span class="badge badge-secondary">قيد الانتظار</span></td>
+                                        <td>
+
+                                            <form asp-action="Add" asp-controller="ExamResult" method="post">
+                                                <input hidden name="CandidateId" value="@a.Candidate.CandidateId" />
+                                                <input hidden name="ExamTypeConfId" value="@a.ExamTypeConf.ExamTypeConfId" />
+                                                <button type="submit" class="btn btn-success">Add result</button>
+                                            </form>
+
+                                        </td>
                                     </tr>
                                 }
                             </tbody>

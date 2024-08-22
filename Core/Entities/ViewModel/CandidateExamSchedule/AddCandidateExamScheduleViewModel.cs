@@ -16,7 +16,6 @@ namespace Core.Entities.ViewModel.CandidateExamSchedule
         public ExamTypeConfViewModel ExamTypeConf { get; set; }
         public List<CandidateViewModel> Candidates { get; set; }
         public List<ExamTypeConfViewModel> ExamTypes { get; set; }
-
         public  int CandidateId { get; set; }
         public int ExamTypeConfId { get; set; }
     }

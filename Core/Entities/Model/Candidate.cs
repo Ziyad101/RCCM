@@ -13,9 +13,6 @@ namespace Core.Entities.Model
         [Key]
         [Required]
         public int CandidateId { get; set; }
-        [Required(ErrorMessage ="اسم المرشح مطلوب")]
-        [MinLength(3)]
-        
         public string CandidateName { get; set; }
         public string NationalId { get; set; }
         public string Gender { get; set; }
@@ -29,7 +26,7 @@ namespace Core.Entities.Model
 
         [ForeignKey("Nationality")]
         public int NationalityId { get; set; }
-        public Nationality? Nationality { get; set; }
+        public Nationality Nationality { get; set; }
 
         [ForeignKey("Major")]
         public int MajorId { get; set; }
@@ -37,12 +34,12 @@ namespace Core.Entities.Model
 
         [ForeignKey("CandidateStatus")]
         public int CandidateStatusId { get; set; }
-        public CandidateStatus? CandidateStatus { get; set; }
-        public List<Experience>? Experiences { get; set; }
-        public List<ExamResult>? ExamResults { get; set; }
-        public Request? Request { get; set; }
+        public CandidateStatus CandidateStatus { get; set; }
+        public List<Experience> Experiences { get; set; }
+        public List<ExamResult> ExamResults { get; set; }
+        public Request Request { get; set; }
         public List<Interview> Interviews { get; set; }
-        public JobOffer? JobOffer { get; set; }
-        public List<CandidateExamSchedule>? CandidateExamSchedules { get; set; }
+        public JobOffer JobOffer { get; set; }
+        public List<CandidateExamSchedule> CandidateExamSchedules { get; set; }
     }
 }
