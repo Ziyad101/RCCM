@@ -1,3 +1,3 @@
 #RCCM
 
-##This project is for RCJY Candidate Monitoring. Provided for Human Resources Department.
+#This project is for RCJY Candidate Monitoring. Developed for Human Resources Department.
