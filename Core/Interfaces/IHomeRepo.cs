@@ -9,6 +9,6 @@ namespace Core.Interfaces
 {
     public interface IHomeRepo
     {
-        DemoViewModel getViewModeltest();
+
     }
 }

@@ -57,10 +57,9 @@
                             <label asp-for="NationalityId" class="form-label custom-form-label">الجنسية</label>
                             <select asp-for="NationalityId" class="form-control form-select custom-form-select" asp-items="@(new SelectList(Model.Nationalities, "NationalityId", "NationalityName", Model.Nationality.NationalityId))"></select>
                         </div>
-
-                        <div class="form-group">
-                            <label asp-for="CandidateStatusId" class="form-check-label">حالة المرشح</label>
-                            <select asp-for="CandidateStatusId" class="form-control form-select" asp-items="@(new SelectList(Model.CandidateStatuses, "CandidateStatusId", "Status",Model.CandidateStatus.CandidateStatusId))"></select>
+                        <div class="form-group mb-3">
+                            <label asp-for="CandidateStatusId" class="form-check-label text-custom-primary fw-bold">حالة المرشح</label>
+                            <select asp-for="CandidateStatusId" name="CandidateStatusId" class="form-control form-select border-custom-primary" asp-items="@(new SelectList(Model.CandidateStatuses, "CandidateStatusId", "Status"))" required data-val="true" data-val-required="يرجى اختيار حالة المرشح"></select>
                         </div>
 
                         <input type="hidden" asp-for="CandidateId" />

@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Entities.ViewModel
+namespace Infrastructure.Services
 {
-    public class DemoViewModel
+    public class InterviewService
     {
-        public string test { get; set; }
     }
 }

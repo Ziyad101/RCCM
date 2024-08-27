@@ -18,8 +18,8 @@ namespace Core.Entities.ViewModel.ExamResult
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public int ExamTypeConfId { get; set; }
-        ExamTypeConfViewModel ExamType { get; set; }
+        public ExamTypeConfViewModel ExamTypeConf { get; set; }
         public int CandidateId { get; set; }
-        CandidateViewModel Candidate { get; set; }
+        public CandidateViewModel Candidate { get; set; }
     }
 }

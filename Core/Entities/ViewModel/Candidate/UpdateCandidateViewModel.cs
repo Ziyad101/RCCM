@@ -22,9 +22,12 @@ namespace Core.Entities.ViewModel.Candidate
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
         public NationalityViewModel Nationality { get; set; }
         public MajorViewModel Major { get; set; }
+        public int MajorId { get; set; }
         public List<NationalityViewModel> Nationalities { get; set; }
+        public int NationalityId { get; set; }
         public List<MajorViewModel> Majors { get; set; }
         public List<CandidateStatusViewModel> CandidateStatuses { get; set; }
+        public int CandidateStatusId { get; set; }
         public CandidateStatusViewModel CandidateStatus { get; set; }
         public int CandidateStatusId { get; set; }
         public int MajorId { get; set; }

@@ -9,18 +9,13 @@ namespace RCCM.Controllers.Web
 {
     public class CandidateController : Controller
     {
-        private readonly ICandidateRepo _candidateRepo;
-        private readonly IMajorRepo _majorRepo;
-        private readonly INationalityRepo _nationalityRepo;
-        private readonly ICandidateStatusRepo _candidateStatus;
+        private readonly CandidateService _candidateService;
 
 
-        public CandidateController(ICandidateRepo candidateRepo, CandidateService candidateService, IMajorRepo majorRepo, INationalityRepo nationalityRepo, ICandidateStatusRepo candidateStatus)
+
+        public CandidateController(CandidateService candidateService)
         {
-            _candidateRepo = candidateRepo;
-            _majorRepo = majorRepo;
-            _nationalityRepo = nationalityRepo;
-            _candidateStatus = candidateStatus;
+            _candidateService = candidateService;
         }
 
 
@@ -28,26 +23,13 @@ namespace RCCM.Controllers.Web
         public IActionResult Index()
         {
 
-            var viewModels = _candidateRepo.GetAllCandidate();
-            var majors = _majorRepo.GetAllMajors();
-            var nations = _nationalityRepo.GetAllNationalitys();
-            var candidateStatuses = _candidateStatus.GetAllCandidateStatus();
-            var model = new GeneralCandidateViewModel();
-            GeneralCandidateViewModel.AllMajors = majors;
-            GeneralCandidateViewModel.AllNationalities = nations;
-            GeneralCandidateViewModel.AllCandidateStatuses = candidateStatuses;
-            model.AllCandidate = viewModels;
-            model.PupulateModels();
+            var model = _candidateService.GetGeneralCandidateModel();
             return View(model);
         }
 
         public IActionResult Add()
         {
-
-            var candidateModel = new AddCandidateViewModel();
-            candidateModel.Majors = _majorRepo.GetAllMajors();
-            candidateModel.Nationalities = _nationalityRepo.GetAllNationalitys();
-            candidateModel.CandidateStatuses = _candidateStatus.GetAllCandidateStatus();
+            var candidateModel = _candidateService.GetAddModel();
             return View(candidateModel);
         }
 
@@ -56,7 +38,7 @@ namespace RCCM.Controllers.Web
         [HttpPost]
         public IActionResult Add(AddCandidateViewModel model)
         {
-            _candidateRepo.AddCandidate(model);
+            _candidateService.AddCandidate(model);
             return RedirectToAction("Index");
 
         }
@@ -64,30 +46,27 @@ namespace RCCM.Controllers.Web
         [HttpPost]
         public IActionResult Edit(int id)
         {
-            var model = _candidateRepo.GetEditModel(id);
-            model.Majors = _majorRepo.GetAllMajors();
-            model.CandidateStatuses = _candidateStatus.GetAllCandidateStatus();
-            model.Nationalities = _nationalityRepo.GetAllNationalitys();
+            var model = _candidateService.GetUpdateModel(id);
             return View(model);
+        }
+
+        public IActionResult EditCandidate(UpdateCandidateViewModel updateModel)
+        {
+            _candidateService.UpdateCandidate(updateModel);
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            var model = _candidateRepo.GetDeleteModel(id);
+            var model = _candidateService.GetDeleteModel(id);
             return View(model);
         }
-        public IActionResult EditCandidate(UpdateCandidateViewModel updateModel)
-        {
-            _candidateRepo.UpdateCandidate(updateModel);
-            return RedirectToAction("Index");
-        }
-
 
         [HttpPost]
         public IActionResult DeleteCandidate(DeleteCandidateViewModel model)
         {
-            _candidateRepo.DeleteCandidate(model);
+            _candidateService.DeleteCandidate(model);
             return RedirectToAction("Index");
         }
 

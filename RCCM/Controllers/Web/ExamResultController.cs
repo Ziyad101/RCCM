@@ -2,32 +2,39 @@
 using Core.Entities.ViewModel.ExamResult;
 using Core.Interfaces;
 using Infrastructure.Repositories;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace RCCM.Controllers.Web
 {
     public class ExamResultController : Controller
     {
+        private readonly ExamResultService _examResultService;
         private readonly IExamResultRepo _examResultRepo;
 
-        public ExamResultController(IExamResultRepo examResultRepo)
+        public ExamResultController(IExamResultRepo examResultRepo,ExamResultService examResultService)
         {
             _examResultRepo = examResultRepo;
+            _examResultService = examResultService;
+
         }
         public IActionResult Index()
         {
-            var models = _examResultRepo.GetAllExamResutls();
+            var models = _examResultService.GetAllExamResults();
             return View(models);
         }
 
-        public IActionResult Add()
+        public IActionResult Add(int CandidateId,int ExamTypeConfId)
         {
-            return View(new AddCandidateStatusViewModel());
+            var model = _examResultService.GetAddModel(CandidateId,ExamTypeConfId);
+            return View(model);
         }
 
+
+        [HttpPost]
         public IActionResult AddExamResult(AddExamResultViewModel model)
         {
-            _examResultRepo.AddExamResult(model);   
+            _examResultService.AddExamResult(model);   
             return RedirectToAction("Index");
         }
 

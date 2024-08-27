@@ -21,7 +21,7 @@ namespace Core.Entities.ViewModel.Candidate
         public static List<NationalityViewModel > AllNationalities { get; set; }
         public static List<CandidateStatusViewModel > AllCandidateStatuses { get; set; }
 
-        public void PupulateModels()
+        public void PopulateModels()
         {
             AddCandidate.Majors = AllMajors;
             AddCandidate.Nationalities = AllNationalities;

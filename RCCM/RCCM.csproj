@@ -8,6 +8,13 @@
 		<PackageIcon></PackageIcon>
 	</PropertyGroup>
 
+	<ItemGroup>
+	  <Compile Remove="Views\PartialViews\**" />
+	  <Content Remove="Views\PartialViews\**" />
+	  <EmbeddedResource Remove="Views\PartialViews\**" />
+	  <None Remove="Views\PartialViews\**" />
+	</ItemGroup>
+
 
 	<ItemGroup>
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
@@ -40,6 +47,5 @@
 
 	<ItemGroup>
 		<Folder Include="Controllers\Api\" />
-		<Folder Include="Views\PartialViews\" />
 	</ItemGroup>
 </Project>

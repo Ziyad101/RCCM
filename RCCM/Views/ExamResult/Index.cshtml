@@ -12,9 +12,9 @@
         <thead class="bg-primary bg-opacity-75 text-black">
             <tr>
                 
-                <th>result</th>
+                <th>Name</th>
                 <th>Exam Type</th>
-                <th>Candi name</th>
+                <th> Exam Result</th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -25,9 +25,12 @@
             @foreach (var examResult in Model)
             {
                 <tr>
-                    <td>@examResult</td>
-                    
-
+                    <td>@examResult.Candidate.CandidateName</td>
+                    <td>@examResult.ExamTypeConf.Title</td>
+                    @{
+                        var msg = examResult.PassedExam ? "نجح" : "رسوب";
+                    }
+                    <td>@msg</td>
                     <td>
                         <form asp-action="Edit" method="post">
                             <input hidden name="id" asp-for="@examResult.ExamResultId" />

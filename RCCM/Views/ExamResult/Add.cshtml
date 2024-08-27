@@ -1,5 +1,26 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model AddExamResultViewModel
+
+<form asp-action="AddExamResult" method="post" class="form-control">
+    <div class="mb-3">
+        <label asp-for="Candidate.CandidateName" class="form-label text-custom-primary d-flex justify-content-start fw-bold">المرشح</label>
+        <input asp-for="Candidate.CandidateName" class="form-control " />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ExamTypeConfId" class="form-label text-custom-primary fw-bold">الاختبار</label>
+        <input asp-for="ExamType.Title" class="form-control" />
+    </div> 
+
+    <div class="d-flex mb-3 justify-content-start">
+        <label asp-for="PassedExam" class="form-check-label form-check-inline text-custom-primary fw-bold">هل نجح</label>
+        <input asp-for="PassedExam" type="checkbox" class="" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Notes" class="form-label text-custom-primary fw-bold">ملاحظات</label>
+        <input asp-for="Notes" type="text"  class="form-control" />
+    </div> 
+    <input hidden asp-for="CandidateId" />
+    <input hidden asp-for="ExamTypeConfId" />
+    <button type="submit" class="btn btn-primary">اضافة نتيجة</button>
+</form>

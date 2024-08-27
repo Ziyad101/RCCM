@@ -1,5 +1,4 @@
 ﻿@model GeneralCandidateViewModel
-
 <h1 class="text-center mb-4">قائمة المرشحين (@Model.AllCandidate.Count())</h1>
 
 <div class="container">
@@ -35,6 +34,7 @@
                             <li><strong>التخصص:</strong> @candidate.Major.MajorName</li>
                             <li><strong>الجنسية:</strong> @candidate.Nationality.NationalityName</li>
                             <li><strong>تاريخ الميلاد:</strong> @DateOnly.FromDateTime(candidate.DateOfBirth)</li>
+                            <li><strong>حالة الطلب:</strong> @DemoConst.GetCandidateStatus(candidate.Request.RequestStatus) </li>
                         </ul>
 
                         <!-- Dropdown Menu for Actions -->
@@ -160,7 +160,7 @@
             </div>
         </div>
     </div>
-    >
+    
 
 
 @section scripts {
